@@ -55,8 +55,8 @@ const arenas: Arena[] = [{
 }, {
   id: "2",
   name: "Executive Conference Hall",
-  location: "Maitama, Abuja",
-  address: "12 Aguiyi Ironsi Street, Maitama",
+  location: "Wuse II, Abuja",
+  address: "Plot 174, Riverplate Park, Wuse II, Abuja",
   capacity: 1000,
   rating: 4.8,
   reviews: 89,
@@ -80,8 +80,8 @@ const arenas: Arena[] = [{
 }, {
   id: "3",
   name: "Outdoor Pavilion",
-  location: "Garki, Abuja",
-  address: "Area 11, Garki District",
+  location: "Wuse II, Abuja",
+  address: "Plot 174, Riverplate Park, Wuse II, Abuja",
   capacity: 1000,
   rating: 4.7,
   reviews: 156,
@@ -105,8 +105,8 @@ const arenas: Arena[] = [{
 }, {
   id: "4",
   name: "Intimate Lounge",
-  location: "Central Area, Abuja",
-  address: "CBD, Central Business District",
+  location: "Wuse II, Abuja",
+  address: "Plot 174, Riverplate Park, Wuse II, Abuja",
   capacity: 1000,
   rating: 4.9,
   reviews: 67,
@@ -130,8 +130,8 @@ const arenas: Arena[] = [{
 }, {
   id: "5",
   name: "Rooftop Terrace",
-  location: "Jabi, Abuja",
-  address: "Jabi Lake Mall, Jabi District",
+  location: "Wuse II, Abuja",
+  address: "Plot 174, Riverplate Park, Wuse II, Abuja",
   capacity: 1000,
   rating: 4.8,
   reviews: 94,
