@@ -23,7 +23,7 @@ interface Arena {
 }
 const arenas: Arena[] = [{
   id: "1",
-  name: "Grand Ballroom",
+  name: "B.M.O Hall - Main",
   location: "Wuse II, Abuja",
   address: "Plot 174, Riverplate Park, Wuse II, Abuja",
   capacity: 1000,
@@ -79,7 +79,7 @@ const arenas: Arena[] = [{
   }]
 }, {
   id: "3",
-  name: "Outdoor Pavilion",
+  name: "B.M.O Hall - 2",
   location: "Wuse II, Abuja",
   address: "Plot 174, Riverplate Park, Wuse II, Abuja",
   capacity: 1000,
@@ -104,7 +104,7 @@ const arenas: Arena[] = [{
   }]
 }, {
   id: "4",
-  name: "Intimate Lounge",
+  name: "B.M.O Hall - 3",
   location: "Wuse II, Abuja",
   address: "Plot 174, Riverplate Park, Wuse II, Abuja",
   capacity: 1000,
@@ -129,7 +129,7 @@ const arenas: Arena[] = [{
   }]
 }, {
   id: "5",
-  name: "Rooftop Terrace",
+  name: "B.M.O Hall - 4",
   location: "Wuse II, Abuja",
   address: "Plot 174, Riverplate Park, Wuse II, Abuja",
   capacity: 1000,
