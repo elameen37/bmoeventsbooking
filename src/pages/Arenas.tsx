@@ -29,7 +29,7 @@ const arenas: Arena[] = [
     capacity: 500,
     rating: 4.9,
     reviews: 128,
-    pricePerHour: 150000,
+    pricePerHour: 2950000,
     image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800",
     status: "available",
     description: "Our flagship venue perfect for grand weddings, galas, and corporate events. Features stunning chandeliers and state-of-the-art facilities.",
