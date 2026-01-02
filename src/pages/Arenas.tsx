@@ -54,7 +54,7 @@ const arenas: Arena[] = [{
   }]
 }, {
   id: "2",
-  name: "Executive Conference Hall",
+  name: "B.M.O Hall - 1",
   location: "Wuse II, Abuja",
   address: "Plot 174, Riverplate Park, Wuse II, Abuja",
   capacity: 1000,
