@@ -26,7 +26,7 @@ const arenas: Arena[] = [{
   name: "Grand Ballroom",
   location: "Wuse II, Abuja",
   address: "Plot 174, Riverplate Park, Wuse II, Abuja",
-  capacity: 500,
+  capacity: 1000,
   rating: 4.9,
   reviews: 128,
   pricePerHour: 2950000,
