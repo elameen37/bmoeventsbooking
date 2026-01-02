@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MapPin, Users, Star, Calendar, Clock, Wifi, Car, Speaker, Wind, Film, Utensils } from "lucide-react";
-
 interface Arena {
   id: string;
   name: string;
@@ -17,112 +16,145 @@ interface Arena {
   image: string;
   status: "available" | "booked" | "maintenance";
   description: string;
-  features: { icon: React.ElementType; name: string }[];
+  features: {
+    icon: React.ElementType;
+    name: string;
+  }[];
 }
-
-const arenas: Arena[] = [
-  {
-    id: "1",
-    name: "Grand Ballroom",
-    location: "Wuse II, Abuja",
-    address: "Plot 174, Riverplate Park, Wuse II, Abuja",
-    capacity: 500,
-    rating: 4.9,
-    reviews: 128,
-    pricePerHour: 2950000,
-    image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800",
-    status: "available",
-    description: "Our flagship venue perfect for grand weddings, galas, and corporate events. Features stunning chandeliers and state-of-the-art facilities.",
-    features: [
-      { icon: Speaker, name: "Sound System" },
-      { icon: Film, name: "Stage & Lighting" },
-      { icon: Wind, name: "Central AC" },
-      { icon: Car, name: "Valet Parking" },
-      { icon: Wifi, name: "High-Speed WiFi" },
-      { icon: Utensils, name: "Catering Kitchen" },
-    ],
-  },
-  {
-    id: "2",
-    name: "Executive Conference Hall",
-    location: "Maitama, Abuja",
-    address: "12 Aguiyi Ironsi Street, Maitama",
-    capacity: 150,
-    rating: 4.8,
-    reviews: 89,
-    pricePerHour: 75000,
-    image: "https://images.unsplash.com/photo-1431540015161-0bf868a2d407?w=800",
-    status: "available",
-    description: "Professional conference space ideal for corporate meetings, seminars, and executive gatherings. Equipped with modern technology.",
-    features: [
-      { icon: Film, name: "4K Projector" },
-      { icon: Wifi, name: "Video Conferencing" },
-      { icon: Wind, name: "Climate Control" },
-      { icon: Car, name: "Free Parking" },
-    ],
-  },
-  {
-    id: "3",
-    name: "Outdoor Pavilion",
-    location: "Garki, Abuja",
-    address: "Area 11, Garki District",
-    capacity: 1000,
-    rating: 4.7,
-    reviews: 156,
-    pricePerHour: 200000,
-    image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800",
-    status: "booked",
-    description: "Spacious outdoor venue perfect for concerts, festivals, and large celebrations. Beautiful garden setting with flexible layout options.",
-    features: [
-      { icon: Speaker, name: "Concert Sound" },
-      { icon: Film, name: "Stage Ready" },
-      { icon: Car, name: "500+ Parking" },
-      { icon: Utensils, name: "Catering Area" },
-    ],
-  },
-  {
-    id: "4",
-    name: "Intimate Lounge",
-    location: "Central Area, Abuja",
-    address: "CBD, Central Business District",
-    capacity: 80,
-    rating: 4.9,
-    reviews: 67,
-    pricePerHour: 50000,
-    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800",
-    status: "available",
-    description: "Cozy and elegant space for intimate gatherings, cocktail parties, and exclusive events. Perfect for networking sessions.",
-    features: [
-      { icon: Speaker, name: "Background Music" },
-      { icon: Wind, name: "AC" },
-      { icon: Wifi, name: "WiFi" },
-      { icon: Utensils, name: "Bar Service" },
-    ],
-  },
-  {
-    id: "5",
-    name: "Rooftop Terrace",
-    location: "Jabi, Abuja",
-    address: "Jabi Lake Mall, Jabi District",
-    capacity: 200,
-    rating: 4.8,
-    reviews: 94,
-    pricePerHour: 120000,
-    image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800",
-    status: "maintenance",
-    description: "Stunning rooftop venue with panoramic city views. Ideal for sunset cocktails, engagement parties, and memorable celebrations.",
-    features: [
-      { icon: Film, name: "LED Walls" },
-      { icon: Speaker, name: "DJ Setup" },
-      { icon: Car, name: "Mall Parking" },
-      { icon: Utensils, name: "Kitchen" },
-    ],
-  },
-];
-
+const arenas: Arena[] = [{
+  id: "1",
+  name: "Grand Ballroom",
+  location: "Wuse II, Abuja",
+  address: "Plot 174, Riverplate Park, Wuse II, Abuja",
+  capacity: 500,
+  rating: 4.9,
+  reviews: 128,
+  pricePerHour: 2950000,
+  image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800",
+  status: "available",
+  description: "Our flagship venue perfect for grand weddings, galas, and corporate events. Features stunning chandeliers and state-of-the-art facilities.",
+  features: [{
+    icon: Speaker,
+    name: "Sound System"
+  }, {
+    icon: Film,
+    name: "Stage & Lighting"
+  }, {
+    icon: Wind,
+    name: "Central AC"
+  }, {
+    icon: Car,
+    name: "Valet Parking"
+  }, {
+    icon: Wifi,
+    name: "High-Speed WiFi"
+  }, {
+    icon: Utensils,
+    name: "Catering Kitchen"
+  }]
+}, {
+  id: "2",
+  name: "Executive Conference Hall",
+  location: "Maitama, Abuja",
+  address: "12 Aguiyi Ironsi Street, Maitama",
+  capacity: 150,
+  rating: 4.8,
+  reviews: 89,
+  pricePerHour: 75000,
+  image: "https://images.unsplash.com/photo-1431540015161-0bf868a2d407?w=800",
+  status: "available",
+  description: "Professional conference space ideal for corporate meetings, seminars, and executive gatherings. Equipped with modern technology.",
+  features: [{
+    icon: Film,
+    name: "4K Projector"
+  }, {
+    icon: Wifi,
+    name: "Video Conferencing"
+  }, {
+    icon: Wind,
+    name: "Climate Control"
+  }, {
+    icon: Car,
+    name: "Free Parking"
+  }]
+}, {
+  id: "3",
+  name: "Outdoor Pavilion",
+  location: "Garki, Abuja",
+  address: "Area 11, Garki District",
+  capacity: 1000,
+  rating: 4.7,
+  reviews: 156,
+  pricePerHour: 200000,
+  image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800",
+  status: "booked",
+  description: "Spacious outdoor venue perfect for concerts, festivals, and large celebrations. Beautiful garden setting with flexible layout options.",
+  features: [{
+    icon: Speaker,
+    name: "Concert Sound"
+  }, {
+    icon: Film,
+    name: "Stage Ready"
+  }, {
+    icon: Car,
+    name: "500+ Parking"
+  }, {
+    icon: Utensils,
+    name: "Catering Area"
+  }]
+}, {
+  id: "4",
+  name: "Intimate Lounge",
+  location: "Central Area, Abuja",
+  address: "CBD, Central Business District",
+  capacity: 80,
+  rating: 4.9,
+  reviews: 67,
+  pricePerHour: 50000,
+  image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800",
+  status: "available",
+  description: "Cozy and elegant space for intimate gatherings, cocktail parties, and exclusive events. Perfect for networking sessions.",
+  features: [{
+    icon: Speaker,
+    name: "Background Music"
+  }, {
+    icon: Wind,
+    name: "AC"
+  }, {
+    icon: Wifi,
+    name: "WiFi"
+  }, {
+    icon: Utensils,
+    name: "Bar Service"
+  }]
+}, {
+  id: "5",
+  name: "Rooftop Terrace",
+  location: "Jabi, Abuja",
+  address: "Jabi Lake Mall, Jabi District",
+  capacity: 200,
+  rating: 4.8,
+  reviews: 94,
+  pricePerHour: 120000,
+  image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800",
+  status: "maintenance",
+  description: "Stunning rooftop venue with panoramic city views. Ideal for sunset cocktails, engagement parties, and memorable celebrations.",
+  features: [{
+    icon: Film,
+    name: "LED Walls"
+  }, {
+    icon: Speaker,
+    name: "DJ Setup"
+  }, {
+    icon: Car,
+    name: "Mall Parking"
+  }, {
+    icon: Utensils,
+    name: "Kitchen"
+  }]
+}];
 const ArenasPage = () => {
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Navbar />
       <main className="pt-24 pb-12">
         <div className="container mx-auto px-6">
@@ -148,38 +180,32 @@ const ArenasPage = () => {
 
           {/* Arena Cards */}
           <div className="space-y-6">
-            {arenas.map((arena, index) => (
-              <ArenaDetailCard key={arena.id} arena={arena} index={index} />
-            ))}
+            {arenas.map((arena, index) => <ArenaDetailCard key={arena.id} arena={arena} index={index} />)}
           </div>
         </div>
       </main>
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
-const ArenaDetailCard = ({ arena, index }: { arena: Arena; index: number }) => {
+const ArenaDetailCard = ({
+  arena,
+  index
+}: {
+  arena: Arena;
+  index: number;
+}) => {
   const statusVariant = {
     available: "available",
     booked: "booked",
-    maintenance: "maintenance",
+    maintenance: "maintenance"
   } as const;
-
-  return (
-    <Card 
-      variant="glass" 
-      className="overflow-hidden animate-fade-in"
-      style={{ animationDelay: `${index * 0.1}s` }}
-    >
+  return <Card variant="glass" className="overflow-hidden animate-fade-in" style={{
+    animationDelay: `${index * 0.1}s`
+  }}>
       <div className="grid md:grid-cols-3 gap-0">
         {/* Image */}
         <div className="relative h-64 md:h-auto">
-          <img
-            src={arena.image}
-            alt={arena.name}
-            className="w-full h-full object-cover"
-          />
+          <img src={arena.image} alt={arena.name} className="w-full h-full object-cover" />
           <div className="absolute top-4 left-4">
             <Badge variant={statusVariant[arena.status]} className="capitalize">
               {arena.status}
@@ -212,12 +238,10 @@ const ArenaDetailCard = ({ arena, index }: { arena: Arena; index: number }) => {
 
             {/* Features */}
             <div className="flex flex-wrap gap-2 mb-4">
-              {arena.features.map((feature) => (
-                <div key={feature.name} className="flex items-center gap-1.5 px-3 py-1.5 bg-secondary rounded-lg">
+              {arena.features.map(feature => <div key={feature.name} className="flex items-center gap-1.5 px-3 py-1.5 bg-secondary rounded-lg">
                   <feature.icon className="w-4 h-4 text-primary" />
                   <span className="text-sm">{feature.name}</span>
-                </div>
-              ))}
+                </div>)}
             </div>
 
             {/* Footer */}
@@ -236,7 +260,7 @@ const ArenaDetailCard = ({ arena, index }: { arena: Arena; index: number }) => {
               <div className="flex items-center gap-4">
                 <div className="text-right">
                   <span className="text-2xl font-bold text-primary">₦{arena.pricePerHour.toLocaleString()}</span>
-                  <span className="text-muted-foreground">/hour</span>
+                  <span className="text-muted-foreground">   - 8hours</span>
                 </div>
                 <Button variant="premium" disabled={arena.status !== "available"}>
                   <Calendar className="w-4 h-4" />
@@ -247,8 +271,6 @@ const ArenaDetailCard = ({ arena, index }: { arena: Arena; index: number }) => {
           </div>
         </CardContent>
       </div>
-    </Card>
-  );
+    </Card>;
 };
-
 export default ArenasPage;

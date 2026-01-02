@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { Calendar, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
-
 const Footer = () => {
-  return (
-    <footer className="bg-secondary/30 border-t border-border">
+  return <footer className="bg-secondary/30 border-t border-border">
       <div className="container mx-auto px-6 py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
@@ -56,7 +54,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4 text-primary" />
-                Wuse II, Abuja, Nigeria
+                Plot 174, Riverplate  Park, Wuse II, Abuja, Nigeria
               </li>
               <li className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Phone className="w-4 h-4 text-primary" />
@@ -80,28 +78,26 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
-const SocialIcon = ({ Icon, href }: { Icon: React.ElementType; href: string }) => (
-  <a
-    href={href}
-    className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
-  >
+const SocialIcon = ({
+  Icon,
+  href
+}: {
+  Icon: React.ElementType;
+  href: string;
+}) => <a href={href} className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors">
     <Icon className="w-4 h-4" />
-  </a>
-);
-
-const FooterLink = ({ to, children }: { to: string; children: React.ReactNode }) => (
-  <li>
-    <Link
-      to={to}
-      className="text-sm text-muted-foreground hover:text-primary transition-colors"
-    >
+  </a>;
+const FooterLink = ({
+  to,
+  children
+}: {
+  to: string;
+  children: React.ReactNode;
+}) => <li>
+    <Link to={to} className="text-sm text-muted-foreground hover:text-primary transition-colors">
       {children}
     </Link>
-  </li>
-);
-
+  </li>;
 export default Footer;
