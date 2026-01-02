@@ -3,7 +3,7 @@ import Footer from "@/components/layout/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Users, Star, Calendar, Clock, Wifi, Car, Speaker, Wind, Film, Utensils } from "lucide-react";
+import { MapPin, Users, Star, Calendar, Clock, Car, Wind, Utensils, Shield, ShieldCheck, Armchair, Circle, Zap } from "lucide-react";
 interface Arena {
   id: string;
   name: string;
@@ -34,23 +34,29 @@ const arenas: Arena[] = [{
   status: "available",
   description: "Our flagship venue perfect for grand weddings, galas, and corporate events. Features stunning chandeliers and state-of-the-art facilities.",
   features: [{
-    icon: Speaker,
-    name: "Sound System"
+    icon: Shield,
+    name: "Security Guards"
   }, {
-    icon: Film,
-    name: "Stage & Lighting"
+    icon: ShieldCheck,
+    name: "Police Personnel"
+  }, {
+    icon: Armchair,
+    name: "Chivalry Chairs"
+  }, {
+    icon: Circle,
+    name: "Round Tables"
+  }, {
+    icon: Zap,
+    name: "8-hour Power Supply"
   }, {
     icon: Wind,
     name: "Central AC"
   }, {
     icon: Car,
-    name: "Valet Parking"
-  }, {
-    icon: Wifi,
-    name: "High-Speed WiFi"
+    name: "Free Parking"
   }, {
     icon: Utensils,
-    name: "Catering Kitchen"
+    name: "Catering Area"
   }]
 }, {
   id: "2",
@@ -65,17 +71,26 @@ const arenas: Arena[] = [{
   status: "available",
   description: "Professional conference space ideal for corporate meetings, seminars, and executive gatherings. Equipped with modern technology.",
   features: [{
-    icon: Film,
-    name: "4K Projector"
+    icon: Shield,
+    name: "Security Guards"
   }, {
-    icon: Wifi,
-    name: "Video Conferencing"
+    icon: Armchair,
+    name: "Chivalry Chairs"
+  }, {
+    icon: Circle,
+    name: "Round Tables"
+  }, {
+    icon: Zap,
+    name: "8-hour Power Supply"
   }, {
     icon: Wind,
-    name: "Climate Control"
+    name: "Central AC"
   }, {
     icon: Car,
     name: "Free Parking"
+  }, {
+    icon: Utensils,
+    name: "Catering Area"
   }]
 }, {
   id: "3",
@@ -90,14 +105,26 @@ const arenas: Arena[] = [{
   status: "booked",
   description: "Spacious outdoor venue perfect for concerts, festivals, and large celebrations. Beautiful garden setting with flexible layout options.",
   features: [{
-    icon: Speaker,
-    name: "Concert Sound"
+    icon: Shield,
+    name: "Security Guards"
   }, {
-    icon: Film,
-    name: "Stage Ready"
+    icon: ShieldCheck,
+    name: "Police Personnel"
+  }, {
+    icon: Armchair,
+    name: "Chivalry Chairs"
+  }, {
+    icon: Circle,
+    name: "Round Tables"
+  }, {
+    icon: Zap,
+    name: "8-hour Power Supply"
+  }, {
+    icon: Wind,
+    name: "Central AC"
   }, {
     icon: Car,
-    name: "500+ Parking"
+    name: "Free Parking"
   }, {
     icon: Utensils,
     name: "Catering Area"
@@ -115,17 +142,26 @@ const arenas: Arena[] = [{
   status: "available",
   description: "Cozy and elegant space for intimate gatherings, cocktail parties, and exclusive events. Perfect for networking sessions.",
   features: [{
-    icon: Speaker,
-    name: "Background Music"
+    icon: Shield,
+    name: "Security Guards"
+  }, {
+    icon: Armchair,
+    name: "Chivalry Chairs"
+  }, {
+    icon: Circle,
+    name: "Round Tables"
+  }, {
+    icon: Zap,
+    name: "8-hour Power Supply"
   }, {
     icon: Wind,
-    name: "AC"
+    name: "Central AC"
   }, {
-    icon: Wifi,
-    name: "WiFi"
+    icon: Car,
+    name: "Free Parking"
   }, {
     icon: Utensils,
-    name: "Bar Service"
+    name: "Catering Area"
   }]
 }, {
   id: "5",
@@ -140,17 +176,26 @@ const arenas: Arena[] = [{
   status: "maintenance",
   description: "Stunning rooftop venue with panoramic city views. Ideal for sunset cocktails, engagement parties, and memorable celebrations.",
   features: [{
-    icon: Film,
-    name: "LED Walls"
+    icon: Shield,
+    name: "Security Guards"
   }, {
-    icon: Speaker,
-    name: "DJ Setup"
+    icon: Armchair,
+    name: "Chivalry Chairs"
+  }, {
+    icon: Circle,
+    name: "Round Tables"
+  }, {
+    icon: Zap,
+    name: "8-hour Power Supply"
+  }, {
+    icon: Wind,
+    name: "Central AC"
   }, {
     icon: Car,
-    name: "Mall Parking"
+    name: "Free Parking"
   }, {
     icon: Utensils,
-    name: "Kitchen"
+    name: "Catering Area"
   }]
 }];
 const ArenasPage = () => {
