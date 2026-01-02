@@ -32,7 +32,7 @@ const arenas: Arena[] = [{
   pricePerHour: 2950000,
   image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800",
   status: "available",
-  description: "Our flagship venue for grand weddings, galas, and corporate events. Enjoy premium security with guards and police personnel, elegant chivalry chairs, round table setups, 8-hour uninterrupted power, central AC, free parking, and dedicated catering facilities.",
+  description: "Our flagship venue perfect for grand weddings, galas, and corporate events. Features stunning chandeliers and state-of-the-art facilities.",
   features: [{
     icon: Shield,
     name: "Security Guards"
@@ -69,7 +69,7 @@ const arenas: Arena[] = [{
   pricePerHour: 75000,
   image: "https://images.unsplash.com/photo-1431540015161-0bf868a2d407?w=800",
   status: "available",
-  description: "Versatile event space ideal for corporate meetings, birthdays, and social gatherings. Complete with security guards, chivalry chairs, round tables, 8-hour power supply, central AC, free parking, and a fully equipped catering area.",
+  description: "Professional conference space ideal for corporate meetings, seminars, and executive gatherings. Equipped with modern technology.",
   features: [{
     icon: Shield,
     name: "Security Guards"
@@ -103,7 +103,7 @@ const arenas: Arena[] = [{
   pricePerHour: 200000,
   image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800",
   status: "booked",
-  description: "Spacious hall perfect for large celebrations, conferences, and festive events. Features full security with guards and police personnel, chivalry chairs, round tables, 8-hour power, central AC, free parking, and catering facilities.",
+  description: "Spacious outdoor venue perfect for concerts, festivals, and large celebrations. Beautiful garden setting with flexible layout options.",
   features: [{
     icon: Shield,
     name: "Security Guards"
@@ -140,7 +140,7 @@ const arenas: Arena[] = [{
   pricePerHour: 50000,
   image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800",
   status: "available",
-  description: "Elegant space for intimate gatherings, cocktail parties, and exclusive events. Includes security guards, chivalry chairs, round tables, 8-hour power supply, central AC, free parking, and a dedicated catering area.",
+  description: "Cozy and elegant space for intimate gatherings, cocktail parties, and exclusive events. Perfect for networking sessions.",
   features: [{
     icon: Shield,
     name: "Security Guards"
@@ -174,7 +174,7 @@ const arenas: Arena[] = [{
   pricePerHour: 120000,
   image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800",
   status: "maintenance",
-  description: "Stunning venue ideal for engagement parties and memorable celebrations. Equipped with security guards, chivalry chairs, round tables, 8-hour power supply, central AC, free parking, and catering facilities.",
+  description: "Stunning rooftop venue with panoramic city views. Ideal for sunset cocktails, engagement parties, and memorable celebrations.",
   features: [{
     icon: Shield,
     name: "Security Guards"
