@@ -23,43 +23,6 @@ interface Arena {
 }
 const arenas: Arena[] = [{
   id: "1",
-  name: "B.M.O Hall - Main",
-  location: "Wuse II, Abuja",
-  address: "Plot 174, Riverplate Park, Wuse II, Abuja",
-  capacity: 1000,
-  rating: 4.9,
-  reviews: 128,
-  pricePerHour: 2950000,
-  image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800",
-  status: "available",
-  description: "Our flagship venue perfect for grand weddings, galas, and corporate events. Features stunning chandeliers and state-of-the-art facilities.",
-  features: [{
-    icon: Shield,
-    name: "Security Guards"
-  }, {
-    icon: ShieldCheck,
-    name: "Police Personnel"
-  }, {
-    icon: Armchair,
-    name: "Chivalry Chairs"
-  }, {
-    icon: Circle,
-    name: "Round Tables"
-  }, {
-    icon: Zap,
-    name: "8-hour Power Supply"
-  }, {
-    icon: Wind,
-    name: "Central AC"
-  }, {
-    icon: Car,
-    name: "Free Parking"
-  }, {
-    icon: Utensils,
-    name: "Catering Area"
-  }]
-}, {
-  id: "2",
   name: "B.M.O Hall - 1",
   location: "Wuse II, Abuja",
   address: "Plot 174, Riverplate Park, Wuse II, Abuja",
@@ -93,7 +56,7 @@ const arenas: Arena[] = [{
     name: "Catering Area"
   }]
 }, {
-  id: "3",
+  id: "2",
   name: "B.M.O Hall - 2",
   location: "Wuse II, Abuja",
   address: "Plot 174, Riverplate Park, Wuse II, Abuja",
@@ -130,7 +93,7 @@ const arenas: Arena[] = [{
     name: "Catering Area"
   }]
 }, {
-  id: "4",
+  id: "3",
   name: "B.M.O Hall - 3",
   location: "Wuse II, Abuja",
   address: "Plot 174, Riverplate Park, Wuse II, Abuja",
@@ -164,7 +127,7 @@ const arenas: Arena[] = [{
     name: "Catering Area"
   }]
 }, {
-  id: "5",
+  id: "4",
   name: "B.M.O Hall - 4",
   location: "Wuse II, Abuja",
   address: "Plot 174, Riverplate Park, Wuse II, Abuja",
