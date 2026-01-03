@@ -10,21 +10,21 @@ const PricingPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <main className="pt-24 pb-12">
-        <div className="container mx-auto px-6">
+      <main className="pt-20 sm:pt-24 pb-8 sm:pb-12">
+        <div className="container mx-auto px-4 sm:px-6">
           {/* Header */}
-          <div className="mb-12 text-center">
+          <div className="mb-8 sm:mb-12 text-center">
             <Badge variant="premium" className="mb-4">Transparent Pricing</Badge>
-            <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="font-display text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
               Simple & <span className="gold-text">Flexible Pricing</span>
             </h1>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-sm sm:text-lg max-w-2xl mx-auto px-2">
               Choose the perfect venue and package for your event. All prices include our standard amenities.
             </p>
           </div>
 
           {/* Pricing Cards */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-10 sm:mb-16">
             <PricingCard
               name="B.M.O Hall - 1"
               price="75,000"
@@ -96,15 +96,15 @@ const PricingPage = () => {
           </div>
 
           {/* Add-ons Section */}
-          <div className="mb-16">
-            <div className="text-center mb-8">
-              <h2 className="font-display text-3xl font-bold mb-2">
+          <div className="mb-10 sm:mb-16">
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="font-display text-xl sm:text-3xl font-bold mb-2">
                 Optional <span className="gold-text">Add-ons</span>
               </h2>
-              <p className="text-muted-foreground">Enhance your event with our premium services</p>
+              <p className="text-muted-foreground text-sm sm:text-base">Enhance your event with our premium services</p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               <AddOnCard title="Extended Hours" price="15,000" unit="/hour" />
               <AddOnCard title="Premium Decor" price="150,000" unit="flat" />
               <AddOnCard title="DJ & Lighting" price="100,000" unit="flat" />
@@ -117,22 +117,22 @@ const PricingPage = () => {
           </div>
 
           {/* CTA Section */}
-          <Card variant="glass" className="text-center p-8 md:p-12">
-            <h3 className="font-display text-2xl md:text-3xl font-bold mb-4">
+          <Card variant="glass" className="text-center p-6 sm:p-8 md:p-12">
+            <h3 className="font-display text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4">
               Need a Custom Package?
             </h3>
-            <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
+            <p className="text-muted-foreground text-sm sm:text-base mb-4 sm:mb-6 max-w-xl mx-auto px-2">
               We offer tailored packages for corporate clients, recurring events, and special occasions. 
               Contact us to discuss your specific requirements.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <Link to="/contact">
-                <Button variant="premium" size="lg">
+                <Button variant="premium" size="lg" className="w-full sm:w-auto">
                   Contact Us
                 </Button>
               </Link>
               <Link to="/book">
-                <Button variant="outline" size="lg">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto">
                   Book Now
                 </Button>
               </Link>

@@ -176,21 +176,21 @@ const arenas: Arena[] = [{
 const ArenasPage = () => {
   return <div className="min-h-screen bg-background">
       <Navbar />
-      <main className="pt-24 pb-12">
-        <div className="container mx-auto px-6">
+      <main className="pt-20 sm:pt-24 pb-8 sm:pb-12">
+        <div className="container mx-auto px-4 sm:px-6">
           {/* Header */}
-          <div className="mb-8">
+          <div className="mb-6 sm:mb-8 text-center sm:text-left">
             <Badge variant="premium" className="mb-4">Our Venues</Badge>
-            <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="font-display text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
               Explore Our <span className="gold-text">Event Arenas</span>
             </h1>
-            <p className="text-muted-foreground text-lg max-w-2xl">
+            <p className="text-muted-foreground text-sm sm:text-lg max-w-2xl mx-auto sm:mx-0">
               Discover the perfect venue for your next event. Each arena offers unique features and world-class amenities.
             </p>
           </div>
 
           {/* Filter Bar */}
-          <div className="flex flex-wrap gap-3 mb-8">
+          <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8 justify-center sm:justify-start">
             <Button variant="premium" size="sm">All Venues</Button>
             <Button variant="outline" size="sm">Available</Button>
             <Button variant="outline" size="sm">Wuse II</Button>
@@ -199,7 +199,7 @@ const ArenasPage = () => {
           </div>
 
           {/* Arena Cards */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {arenas.map((arena, index) => <ArenaDetailCard key={arena.id} arena={arena} index={index} />)}
           </div>
         </div>
@@ -225,14 +225,14 @@ const ArenaDetailCard = ({
       <div className="flex flex-col">
         {/* Marquee Images */}
         <div className="border-b border-border">
-          <ImageMarquee images={arena.marqueeImages} speed={25} className="py-3" />
+          <ImageMarquee images={arena.marqueeImages} speed={25} className="py-2 sm:py-3" />
         </div>
         
         <div className="grid md:grid-cols-3 gap-0">
           {/* Main Image */}
-          <div className="relative h-64 md:h-auto">
+          <div className="relative h-48 sm:h-64 md:h-auto">
             <img src={arena.image} alt={arena.name} className="w-full h-full object-cover" />
-            <div className="absolute top-4 left-4">
+            <div className="absolute top-3 left-3 sm:top-4 sm:left-4">
               <Badge variant={statusVariant[arena.status]} className="capitalize">
                 {arena.status}
               </Badge>
@@ -240,55 +240,55 @@ const ArenaDetailCard = ({
           </div>
 
         {/* Content */}
-        <CardContent className="md:col-span-2 p-6">
-          <div className="flex flex-col h-full">
+        <CardContent className="md:col-span-2 p-4 sm:p-6">
+          <div className="flex flex-col h-full text-center md:text-left">
             {/* Header */}
-            <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <div className="flex flex-col md:flex-row md:flex-wrap items-center md:items-start justify-between gap-3 sm:gap-4 mb-3 sm:mb-4">
               <div>
-                <h3 className="font-display text-2xl font-bold mb-1">{arena.name}</h3>
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <MapPin className="w-4 h-4" />
-                  <span>{arena.address}</span>
+                <h3 className="font-display text-xl sm:text-2xl font-bold mb-1">{arena.name}</h3>
+                <div className="flex items-center justify-center md:justify-start gap-2 text-muted-foreground text-sm">
+                  <MapPin className="w-4 h-4 flex-shrink-0" />
+                  <span className="line-clamp-1">{arena.address}</span>
                 </div>
               </div>
               
               <div className="flex items-center gap-1 bg-secondary px-3 py-1.5 rounded-full">
                 <Star className="w-4 h-4 text-primary fill-primary" />
                 <span className="font-semibold">{arena.rating}</span>
-                <span className="text-muted-foreground text-sm">({arena.reviews} reviews)</span>
+                <span className="text-muted-foreground text-xs sm:text-sm">({arena.reviews} reviews)</span>
               </div>
             </div>
 
             {/* Description */}
-            <p className="text-muted-foreground mb-4">{arena.description}</p>
+            <p className="text-muted-foreground text-sm sm:text-base mb-3 sm:mb-4">{arena.description}</p>
 
             {/* Features */}
-            <div className="flex flex-wrap gap-2 mb-4">
-              {arena.features.map(feature => <div key={feature.name} className="flex items-center gap-1.5 px-3 py-1.5 bg-secondary rounded-lg">
-                  <feature.icon className="w-4 h-4 text-primary" />
-                  <span className="text-sm">{feature.name}</span>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4 justify-center md:justify-start">
+              {arena.features.map(feature => <div key={feature.name} className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 bg-secondary rounded-lg">
+                  <feature.icon className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
+                  <span className="text-xs sm:text-sm">{feature.name}</span>
                 </div>)}
             </div>
 
             {/* Footer */}
-            <div className="mt-auto pt-4 border-t border-border flex flex-wrap items-center justify-between gap-4">
-              <div className="flex gap-6">
-                <div className="flex items-center gap-2">
-                  <Users className="w-5 h-5 text-muted-foreground" />
+            <div className="mt-auto pt-3 sm:pt-4 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+              <div className="flex flex-wrap gap-3 sm:gap-6 justify-center md:justify-start">
+                <div className="flex items-center gap-2 text-sm">
+                  <Users className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground" />
                   <span>Up to {arena.capacity} guests</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-muted-foreground" />
-                  <span>Hourly   </span>
+                <div className="flex items-center gap-2 text-sm">
+                  <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground" />
+                  <span>Hourly</span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="text-right">
-                  <span className="text-2xl font-bold text-primary">₦{arena.pricePerHour.toLocaleString()}</span>
-                  <span className="text-muted-foreground">   - 8hours</span>
+              <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto">
+                <div className="text-center sm:text-right">
+                  <span className="text-xl sm:text-2xl font-bold text-primary">₦{arena.pricePerHour.toLocaleString()}</span>
+                  <span className="text-muted-foreground text-sm"> - 8hours</span>
                 </div>
-                <Button variant="premium" disabled={arena.status !== "available"}>
+                <Button variant="premium" disabled={arena.status !== "available"} className="w-full sm:w-auto">
                   <Calendar className="w-4 h-4" />
                   Book Now
                 </Button>
