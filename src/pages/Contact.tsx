@@ -31,20 +31,20 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <main className="pt-24 pb-12">
-        <div className="container mx-auto px-6">
+      <main className="pt-20 sm:pt-24 pb-8 sm:pb-12">
+        <div className="container mx-auto px-4 sm:px-6">
           {/* Header */}
-          <div className="mb-12 text-center">
+          <div className="mb-8 sm:mb-12 text-center">
             <Badge variant="premium" className="mb-4">Get In Touch</Badge>
-            <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="font-display text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
               Contact <span className="gold-text">B.M.O Events</span>
             </h1>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-sm sm:text-lg max-w-2xl mx-auto px-2">
               Have questions about our venues or need help planning your event? We're here to help!
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
             {/* Contact Form */}
             <Card variant="glass" className="lg:col-span-2">
               <CardHeader>
@@ -182,15 +182,15 @@ const ContactPage = () => {
           </div>
 
           {/* FAQ Section */}
-          <div className="mt-16">
-            <div className="text-center mb-8">
-              <h2 className="font-display text-3xl font-bold mb-2">
+          <div className="mt-10 sm:mt-16">
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="font-display text-xl sm:text-3xl font-bold mb-2">
                 Frequently Asked <span className="gold-text">Questions</span>
               </h2>
-              <p className="text-muted-foreground">Quick answers to common questions</p>
+              <p className="text-muted-foreground text-sm sm:text-base">Quick answers to common questions</p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+            <div className="grid sm:grid-cols-2 gap-3 sm:gap-4 max-w-4xl mx-auto">
               <FAQCard
                 question="How do I make a booking?"
                 answer="You can book online through our website, call us directly, or visit our office. A 50% deposit is required to confirm your booking."

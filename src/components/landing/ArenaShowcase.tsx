@@ -54,21 +54,21 @@ const arenas: Arena[] = [
 
 const ArenaShowcase = () => {
   return (
-    <section className="py-20 bg-gradient-to-b from-background to-secondary/20">
-      <div className="container mx-auto px-6">
+    <section className="py-12 sm:py-20 bg-gradient-to-b from-background to-secondary/20">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 sm:mb-16">
           <Badge variant="premium" className="mb-4">Featured Venues</Badge>
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="font-display text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
             Our Premier <span className="gold-text">Event Arenas</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-sm sm:text-lg max-w-2xl mx-auto px-2">
             Explore our collection of world-class event spaces, each designed to make your occasion extraordinary.
           </p>
         </div>
 
         {/* Arena Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 mb-8 sm:mb-12">
           {arenas.map((arena, index) => (
             <ArenaCard key={arena.id} arena={arena} index={index} />
           ))}
@@ -77,7 +77,7 @@ const ArenaShowcase = () => {
         {/* View All Button */}
         <div className="text-center">
           <Link to="/arenas">
-            <Button variant="outline" size="lg">
+            <Button variant="outline" size="lg" className="w-full sm:w-auto">
               View All Arenas
               <ArrowRight className="w-4 h-4" />
             </Button>
@@ -124,18 +124,18 @@ const ArenaCard = ({ arena, index }: { arena: Arena; index: number }) => {
         </div>
       </div>
 
-      <CardContent className="p-5">
+      <CardContent className="p-4 sm:p-5 text-center sm:text-left">
         {/* Title & Location */}
-        <h3 className="font-display text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+        <h3 className="font-display text-lg sm:text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
           {arena.name}
         </h3>
-        <div className="flex items-center gap-1 text-muted-foreground text-sm mb-4">
+        <div className="flex items-center justify-center sm:justify-start gap-1 text-muted-foreground text-sm mb-4">
           <MapPin className="w-4 h-4" />
           {arena.location}
         </div>
 
         {/* Features */}
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-2 mb-4 justify-center sm:justify-start">
           {arena.features.slice(0, 3).map((feature) => (
             <span key={feature} className="text-xs px-2 py-1 bg-secondary rounded-md text-secondary-foreground">
               {feature}
@@ -144,12 +144,12 @@ const ArenaCard = ({ arena, index }: { arena: Arena; index: number }) => {
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between pt-4 border-t border-border">
+        <div className="flex flex-col sm:flex-row items-center justify-between pt-4 border-t border-border gap-2 sm:gap-0">
           <div className="flex items-center gap-1 text-muted-foreground">
             <Users className="w-4 h-4" />
             <span className="text-sm">Up to {arena.capacity}</span>
           </div>
-          <div className="text-right">
+          <div className="text-center sm:text-right">
             <span className="text-lg font-bold text-primary">₦{arena.pricePerHour.toLocaleString()}</span>
             <span className="text-xs text-muted-foreground">/hour</span>
           </div>

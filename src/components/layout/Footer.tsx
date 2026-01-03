@@ -2,15 +2,15 @@ import { Link } from "react-router-dom";
 import { Calendar, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 const Footer = () => {
   return <footer className="bg-secondary/30 border-t border-border">
-      <div className="container mx-auto px-6 py-12">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 text-center sm:text-left">
           {/* Brand */}
-          <div>
-            <Link to="/" className="flex items-center gap-2 mb-4">
+          <div className="sm:col-span-2 lg:col-span-1">
+            <Link to="/" className="inline-flex items-center gap-2 mb-4">
               <div className="w-10 h-10 rounded-lg gold-gradient flex items-center justify-center">
                 <Calendar className="w-6 h-6 text-primary-foreground" />
               </div>
-              <div>
+              <div className="text-left">
                 <span className="font-display text-xl font-bold">B.M.O</span>
                 <span className="text-xs block text-muted-foreground">Events Arena</span>
               </div>
@@ -18,7 +18,7 @@ const Footer = () => {
             <p className="text-muted-foreground text-sm mb-4">
               Premium event venues across Abuja. Your perfect event starts here.
             </p>
-            <div className="flex gap-3">
+            <div className="flex gap-3 justify-center sm:justify-start">
               <SocialIcon Icon={Facebook} href="#" />
               <SocialIcon Icon={Twitter} href="#" />
               <SocialIcon Icon={Instagram} href="#" />
@@ -52,16 +52,16 @@ const Footer = () => {
           <div>
             <h4 className="font-display font-semibold mb-4">Contact Us</h4>
             <ul className="space-y-3">
-              <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                <MapPin className="w-4 h-4 text-primary" />
-                Plot 174, Riverplate  Park, Wuse II, Abuja, Nigeria
+              <li className="flex items-center justify-center sm:justify-start gap-2 text-sm text-muted-foreground">
+                <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
+                <span>Plot 174, Riverplate Park, Wuse II, Abuja, Nigeria</span>
               </li>
-              <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Phone className="w-4 h-4 text-primary" />
+              <li className="flex items-center justify-center sm:justify-start gap-2 text-sm text-muted-foreground">
+                <Phone className="w-4 h-4 text-primary flex-shrink-0" />
                 +234 801 234 5678
               </li>
-              <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Mail className="w-4 h-4 text-primary" />
+              <li className="flex items-center justify-center sm:justify-start gap-2 text-sm text-muted-foreground">
+                <Mail className="w-4 h-4 text-primary flex-shrink-0" />
                 info@bmoarena.com
               </li>
             </ul>
@@ -69,11 +69,11 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
+        <div className="pt-6 sm:pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4 text-center">
+          <p className="text-xs sm:text-sm text-muted-foreground">
             © {new Date().getFullYear()} B.M.O Events Arena. All rights reserved.
           </p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs sm:text-sm text-muted-foreground">
             Designed with ❤️ in Abuja
           </p>
         </div>

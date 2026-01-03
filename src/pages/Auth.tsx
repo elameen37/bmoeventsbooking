@@ -41,7 +41,7 @@ const AuthPage = () => {
       {/* Left Side - Branding */}
       <div className="hidden lg:flex lg:w-1/2 xl:w-2/5 gold-gradient relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-transparent" />
-        <div className="relative z-10 p-12 flex flex-col justify-between h-full">
+        <div className="relative z-10 p-8 lg:p-12 flex flex-col justify-between h-full">
           <div>
             <Link to="/" className="flex items-center gap-3 mb-8">
               <div className="w-12 h-12 rounded-xl bg-background/20 backdrop-blur-sm flex items-center justify-center">
@@ -55,26 +55,26 @@ const AuthPage = () => {
           </div>
 
           <div className="space-y-6">
-            <h1 className="font-display text-4xl xl:text-5xl font-bold text-primary-foreground leading-tight">
+            <h1 className="font-display text-3xl lg:text-4xl xl:text-5xl font-bold text-primary-foreground leading-tight">
               Your Premier Event Destination in Abuja
             </h1>
-            <p className="text-primary-foreground/80 text-lg">
+            <p className="text-primary-foreground/80 text-base lg:text-lg">
               Book stunning venues, manage your events, and create unforgettable experiences with B.M.O Events Arena.
             </p>
             <div className="flex gap-4">
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary-foreground">4</div>
-                <div className="text-primary-foreground/70 text-sm">Premium Halls</div>
+                <div className="text-2xl lg:text-3xl font-bold text-primary-foreground">4</div>
+                <div className="text-primary-foreground/70 text-xs lg:text-sm">Premium Halls</div>
               </div>
               <div className="w-px bg-primary-foreground/30" />
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary-foreground">500+</div>
-                <div className="text-primary-foreground/70 text-sm">Events Hosted</div>
+                <div className="text-2xl lg:text-3xl font-bold text-primary-foreground">500+</div>
+                <div className="text-primary-foreground/70 text-xs lg:text-sm">Events Hosted</div>
               </div>
               <div className="w-px bg-primary-foreground/30" />
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary-foreground">4.8★</div>
-                <div className="text-primary-foreground/70 text-sm">Rating</div>
+                <div className="text-2xl lg:text-3xl font-bold text-primary-foreground">4.8★</div>
+                <div className="text-primary-foreground/70 text-xs lg:text-sm">Rating</div>
               </div>
             </div>
           </div>
@@ -86,7 +86,7 @@ const AuthPage = () => {
       </div>
 
       {/* Right Side - Auth Form */}
-      <div className="flex-1 flex items-center justify-center p-6 lg:p-12">
+      <div className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-12">
         <div className="w-full max-w-md">
           <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 transition-colors">
             <ArrowLeft className="w-4 h-4" />
@@ -180,7 +180,7 @@ const AuthPage = () => {
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSignup} className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="first-name">First Name</Label>
                         <div className="relative">
