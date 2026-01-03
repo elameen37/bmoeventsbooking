@@ -6,6 +6,11 @@ import { Button } from "@/components/ui/button";
 import { MapPin, Users, Star, Calendar, Clock, Car, Wind, Utensils, Shield, ShieldCheck, Armchair, Circle, Zap } from "lucide-react";
 import ImageMarquee from "@/components/ui/image-marquee";
 
+import bmoHall1 from "@/assets/bmo-hall-1.jpg";
+import bmoHall2 from "@/assets/bmo-hall-2.jpg";
+import bmoHall3 from "@/assets/bmo-hall-3.jpg";
+import bmoHall4 from "@/assets/bmo-hall-4.jpg";
+
 interface Arena {
   id: string;
   name: string;
@@ -33,14 +38,8 @@ const arenas: Arena[] = [{
   rating: 4.8,
   reviews: 89,
   pricePerHour: 75000,
-  image: "https://images.unsplash.com/photo-1431540015161-0bf868a2d407?w=800",
-  marqueeImages: [
-    "https://images.unsplash.com/photo-1431540015161-0bf868a2d407?w=400",
-    "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=400",
-    "https://images.unsplash.com/photo-1478147427282-58a87a120781?w=400",
-    "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400",
-    "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400"
-  ],
+  image: bmoHall1,
+  marqueeImages: [bmoHall1, bmoHall2, bmoHall3, bmoHall4],
   status: "available",
   description: "Professional conference space ideal for corporate meetings, seminars, and executive gatherings. Equipped with modern technology.",
   features: [{
@@ -74,14 +73,8 @@ const arenas: Arena[] = [{
   rating: 4.7,
   reviews: 156,
   pricePerHour: 200000,
-  image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800",
-  marqueeImages: [
-    "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400",
-    "https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=400",
-    "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400",
-    "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400",
-    "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400"
-  ],
+  image: bmoHall2,
+  marqueeImages: [bmoHall2, bmoHall1, bmoHall3, bmoHall4],
   status: "booked",
   description: "Spacious outdoor venue perfect for concerts, festivals, and large celebrations. Beautiful garden setting with flexible layout options.",
   features: [{
@@ -118,14 +111,8 @@ const arenas: Arena[] = [{
   rating: 4.9,
   reviews: 67,
   pricePerHour: 50000,
-  image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800",
-  marqueeImages: [
-    "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400",
-    "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=400",
-    "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=400",
-    "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=400",
-    "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=400"
-  ],
+  image: bmoHall3,
+  marqueeImages: [bmoHall3, bmoHall1, bmoHall2, bmoHall4],
   status: "available",
   description: "Cozy and elegant space for intimate gatherings, cocktail parties, and exclusive events. Perfect for networking sessions.",
   features: [{
@@ -159,14 +146,8 @@ const arenas: Arena[] = [{
   rating: 4.8,
   reviews: 94,
   pricePerHour: 120000,
-  image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800",
-  marqueeImages: [
-    "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400",
-    "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=400",
-    "https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=400",
-    "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=400",
-    "https://images.unsplash.com/photo-1496024840928-4c417adf211d?w=400"
-  ],
+  image: bmoHall4,
+  marqueeImages: [bmoHall4, bmoHall1, bmoHall2, bmoHall3],
   status: "maintenance",
   description: "Stunning rooftop venue with panoramic city views. Ideal for sunset cocktails, engagement parties, and memorable celebrations.",
   features: [{
