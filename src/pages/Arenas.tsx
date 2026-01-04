@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -5,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MapPin, Users, Star, Calendar, Clock, Car, Wind, Utensils, Shield, ShieldCheck, Armchair, Circle, Zap } from "lucide-react";
 import ImageMarquee from "@/components/ui/image-marquee";
+import ArenaCardSkeleton from "@/components/arenas/ArenaCardSkeleton";
 
 import bmoHall1 from "@/assets/bmo-hall-1.jpg";
 import bmoHall2 from "@/assets/bmo-hall-2.jpg";
@@ -174,6 +176,16 @@ const arenas: Arena[] = [{
   }]
 }];
 const ArenasPage = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading delay
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return <div className="min-h-screen bg-background">
       <Navbar />
       <main className="pt-20 sm:pt-24 pb-8 sm:pb-12">
@@ -200,7 +212,10 @@ const ArenasPage = () => {
 
           {/* Arena Cards */}
           <div className="space-y-4 sm:space-y-6">
-            {arenas.map((arena, index) => <ArenaDetailCard key={arena.id} arena={arena} index={index} />)}
+            {isLoading
+              ? [1, 2, 3, 4].map((i) => <ArenaCardSkeleton key={i} />)
+              : arenas.map((arena, index) => <ArenaDetailCard key={arena.id} arena={arena} index={index} />)
+            }
           </div>
         </div>
       </main>
