@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin, Phone, Mail, Clock, Send, MessageSquare, Calendar } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import ScrollToTop from "@/components/ui/scroll-to-top";
 
 const ContactPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -212,6 +213,7 @@ const ContactPage = () => {
         </div>
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 };

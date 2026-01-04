@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar, Mail, Lock, User, Phone, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import ScrollToTop from "@/components/ui/scroll-to-top";
 
 const AuthPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -274,6 +275,7 @@ const AuthPage = () => {
           </Tabs>
         </div>
       </div>
+      <ScrollToTop />
     </div>
   );
 };
