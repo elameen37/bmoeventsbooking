@@ -4,6 +4,7 @@ import HeroSection from "@/components/landing/HeroSection";
 import ArenaShowcase from "@/components/landing/ArenaShowcase";
 import FeaturesSection from "@/components/landing/FeaturesSection";
 import CTASection from "@/components/landing/CTASection";
+import ScrollToTop from "@/components/ui/scroll-to-top";
 
 const Index = () => {
   return (
@@ -16,6 +17,7 @@ const Index = () => {
         <CTASection />
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 };
