@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Check, Star, Sparkles, Crown } from "lucide-react";
 import { Link } from "react-router-dom";
+import ScrollToTop from "@/components/ui/scroll-to-top";
 
 const PricingPage = () => {
   return (
@@ -141,6 +142,7 @@ const PricingPage = () => {
         </div>
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 };

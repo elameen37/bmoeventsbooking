@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { MapPin, Users, Star, Calendar, Clock, Car, Wind, Utensils, Shield, ShieldCheck, Armchair, Circle, Zap } from "lucide-react";
 import ImageMarquee from "@/components/ui/image-marquee";
 import ArenaCardSkeleton from "@/components/arenas/ArenaCardSkeleton";
+import ScrollToTop from "@/components/ui/scroll-to-top";
 
 import bmoHall1 from "@/assets/bmo-hall-1.jpg";
 import bmoHall2 from "@/assets/bmo-hall-2.jpg";
@@ -220,6 +221,7 @@ const ArenasPage = () => {
         </div>
       </main>
       <Footer />
+      <ScrollToTop />
     </div>;
 };
 const ArenaDetailCard = ({
