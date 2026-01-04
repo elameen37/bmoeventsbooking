@@ -55,7 +55,7 @@ const arenas: Arena[] = [
 const ArenaShowcase = () => {
   return (
     <section className="py-12 sm:py-20 bg-gradient-to-b from-background to-secondary/20">
-      <div className="container mx-auto px-4 sm:px-6">
+      <div className="container mx-auto px-6 sm:px-8 lg:px-12">
         {/* Section Header */}
         <div className="text-center mb-10 sm:mb-16">
           <Badge variant="premium" className="mb-4">Featured Venues</Badge>
