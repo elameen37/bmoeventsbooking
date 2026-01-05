@@ -190,7 +190,7 @@ const ArenasPage = () => {
   return <div className="min-h-screen bg-background">
       <Navbar />
       <main className="pt-20 sm:pt-24 pb-8 sm:pb-12">
-        <div className="container mx-auto px-4 sm:px-6">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
           {/* Header */}
           <div className="mb-6 sm:mb-8 text-center sm:text-left">
             <Badge variant="premium" className="mb-4">Our Venues</Badge>
