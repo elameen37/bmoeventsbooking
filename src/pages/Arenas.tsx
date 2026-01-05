@@ -8,6 +8,7 @@ import { MapPin, Users, Star, Calendar, Clock, Car, Wind, Utensils, Shield, Shie
 import ImageMarquee from "@/components/ui/image-marquee";
 import ArenaCardSkeleton from "@/components/arenas/ArenaCardSkeleton";
 import ScrollToTop from "@/components/ui/scroll-to-top";
+import PageTransition from "@/components/PageTransition";
 
 import bmoHall1 from "@/assets/bmo-hall-1.jpg";
 import bmoHall2 from "@/assets/bmo-hall-2.jpg";
@@ -187,7 +188,8 @@ const ArenasPage = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  return <div className="min-h-screen bg-background">
+  return <PageTransition>
+    <div className="min-h-screen bg-background">
       <Navbar />
       <main className="pt-20 sm:pt-24 pb-8 sm:pb-12">
         <div className="container mx-auto px-6 sm:px-8 lg:px-12">
@@ -222,7 +224,8 @@ const ArenasPage = () => {
       </main>
       <Footer />
       <ScrollToTop />
-    </div>;
+    </div>
+  </PageTransition>;
 };
 const ArenaDetailCard = ({
   arena,

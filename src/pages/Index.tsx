@@ -5,10 +5,12 @@ import ArenaShowcase from "@/components/landing/ArenaShowcase";
 import FeaturesSection from "@/components/landing/FeaturesSection";
 import CTASection from "@/components/landing/CTASection";
 import ScrollToTop from "@/components/ui/scroll-to-top";
+import PageTransition from "@/components/PageTransition";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <PageTransition>
+      <div className="min-h-screen bg-background">
       <Navbar />
       <main className="pt-16">
         <HeroSection />
@@ -18,7 +20,8 @@ const Index = () => {
       </main>
       <Footer />
       <ScrollToTop />
-    </div>
+      </div>
+    </PageTransition>
   );
 };
 

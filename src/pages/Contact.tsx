@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { MapPin, Phone, Mail, Clock, Send, MessageSquare, Calendar } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import ScrollToTop from "@/components/ui/scroll-to-top";
+import PageTransition from "@/components/PageTransition";
 
 const ContactPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -30,7 +31,8 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <PageTransition>
+      <div className="min-h-screen bg-background">
       <Navbar />
       <main className="pt-20 sm:pt-24 pb-8 sm:pb-12">
         <div className="container mx-auto px-6 sm:px-8 lg:px-12">
@@ -214,7 +216,8 @@ const ContactPage = () => {
       </main>
       <Footer />
       <ScrollToTop />
-    </div>
+      </div>
+    </PageTransition>
   );
 };
 
