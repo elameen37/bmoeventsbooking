@@ -12,6 +12,7 @@ import PricingPage from "./pages/Pricing";
 import ContactPage from "./pages/Contact";
 import AuthPage from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import ScrollToTopOnNavigate from "./components/ScrollToTopOnNavigate";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTopOnNavigate />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/calendar" element={<CalendarPage />} />
