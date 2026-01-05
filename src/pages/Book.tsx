@@ -10,12 +10,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calendar, Clock, Users, MapPin, CreditCard, CheckCircle } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import PageTransition from "@/components/PageTransition";
 
 const BookPage = () => {
   const [step, setStep] = useState(1);
 
   return (
-    <div className="min-h-screen bg-background">
+    <PageTransition>
+      <div className="min-h-screen bg-background">
       <Navbar />
       <main className="pt-24 pb-12">
         <div className="container mx-auto px-6">
@@ -293,7 +295,8 @@ const BookPage = () => {
         </div>
       </main>
       <Footer />
-    </div>
+      </div>
+    </PageTransition>
   );
 };
 

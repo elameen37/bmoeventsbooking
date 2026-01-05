@@ -6,10 +6,12 @@ import { Button } from "@/components/ui/button";
 import { Check, Star, Sparkles, Crown } from "lucide-react";
 import { Link } from "react-router-dom";
 import ScrollToTop from "@/components/ui/scroll-to-top";
+import PageTransition from "@/components/PageTransition";
 
 const PricingPage = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <PageTransition>
+      <div className="min-h-screen bg-background">
       <Navbar />
       <main className="pt-20 sm:pt-24 pb-8 sm:pb-12">
         <div className="container mx-auto px-6 sm:px-8 lg:px-12">
@@ -143,7 +145,8 @@ const PricingPage = () => {
       </main>
       <Footer />
       <ScrollToTop />
-    </div>
+      </div>
+    </PageTransition>
   );
 };
 

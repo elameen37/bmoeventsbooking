@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar, Mail, Lock, User, Phone, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import ScrollToTop from "@/components/ui/scroll-to-top";
+import PageTransition from "@/components/PageTransition";
 
 const AuthPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -38,7 +39,8 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <PageTransition>
+      <div className="min-h-screen bg-background flex">
       {/* Left Side - Branding */}
       <div className="hidden lg:flex lg:w-1/2 xl:w-2/5 gold-gradient relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-transparent" />
@@ -276,7 +278,8 @@ const AuthPage = () => {
         </div>
       </div>
       <ScrollToTop />
-    </div>
+      </div>
+    </PageTransition>
   );
 };
 

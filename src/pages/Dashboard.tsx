@@ -18,10 +18,12 @@ import {
   ChevronRight
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import PageTransition from "@/components/PageTransition";
 
 const DashboardPage = () => {
   return (
-    <div className="min-h-screen bg-background flex">
+    <PageTransition>
+      <div className="min-h-screen bg-background flex">
       {/* Sidebar */}
       <aside className="w-64 border-r border-border bg-card hidden lg:block">
         <div className="p-6">
@@ -178,7 +180,8 @@ const DashboardPage = () => {
           </div>
         </div>
       </main>
-    </div>
+      </div>
+    </PageTransition>
   );
 };
 
