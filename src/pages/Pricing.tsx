@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -7,8 +8,21 @@ import { Check, Star, Sparkles, Crown } from "lucide-react";
 import { Link } from "react-router-dom";
 import ScrollToTop from "@/components/ui/scroll-to-top";
 import PageTransition from "@/components/PageTransition";
+import PageSkeleton from "@/components/skeletons/PageSkeleton";
 
 const PricingPage = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return <PageSkeleton variant="pricing" />;
+  }
   return (
     <PageTransition>
       <div className="min-h-screen bg-background">
