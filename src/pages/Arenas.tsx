@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -234,11 +235,17 @@ const ArenaDetailCard = ({
   arena: Arena;
   index: number;
 }) => {
+  const navigate = useNavigate();
   const statusVariant = {
     available: "available",
     booked: "booked",
     maintenance: "maintenance"
   } as const;
+
+  const handleBookNow = () => {
+    navigate(`/book?arena=${arena.id}`);
+  };
+
   return <Card variant="glass" className="overflow-hidden animate-fade-in" style={{
     animationDelay: `${index * 0.1}s`
   }}>
@@ -308,7 +315,12 @@ const ArenaDetailCard = ({
                   <span className="text-xl sm:text-2xl font-bold text-primary">₦{arena.pricePerHour.toLocaleString()}</span>
                   <span className="text-muted-foreground text-sm"> - 8hours</span>
                 </div>
-                <Button variant="premium" disabled={arena.status !== "available"} className="w-full sm:w-auto">
+                <Button 
+                  variant="premium" 
+                  disabled={arena.status !== "available"} 
+                  className="w-full sm:w-auto"
+                  onClick={handleBookNow}
+                >
                   <Calendar className="w-4 h-4" />
                   Book Now
                 </Button>

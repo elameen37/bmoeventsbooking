@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -12,8 +13,28 @@ import { Calendar, Clock, Users, MapPin, CreditCard, CheckCircle } from "lucide-
 import { toast } from "@/hooks/use-toast";
 import PageTransition from "@/components/PageTransition";
 
+// Arena data for selection
+const arenaOptions = [
+  { id: "1", name: "B.M.O Hall - 1", location: "Wuse II", pricePerHour: 75000 },
+  { id: "2", name: "B.M.O Hall - 2", location: "Wuse II", pricePerHour: 200000 },
+  { id: "3", name: "B.M.O Hall - 3", location: "Wuse II", pricePerHour: 50000 },
+  { id: "4", name: "B.M.O Hall - 4", location: "Wuse II", pricePerHour: 120000 },
+];
+
 const BookPage = () => {
+  const [searchParams] = useSearchParams();
   const [step, setStep] = useState(1);
+  const [selectedArena, setSelectedArena] = useState<string>("");
+
+  // Pre-select arena from URL param
+  useEffect(() => {
+    const arenaId = searchParams.get("arena");
+    if (arenaId && arenaOptions.find(a => a.id === arenaId)) {
+      setSelectedArena(arenaId);
+    }
+  }, [searchParams]);
+
+  const selectedArenaData = arenaOptions.find(a => a.id === selectedArena);
 
   return (
     <PageTransition>
@@ -68,16 +89,16 @@ const BookPage = () => {
                 <CardContent className="space-y-6">
                   <div className="space-y-2">
                     <Label>Arena Location</Label>
-                    <Select>
+                    <Select value={selectedArena} onValueChange={setSelectedArena}>
                       <SelectTrigger>
                         <SelectValue placeholder="Select an arena" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="grand">Grand Ballroom - Wuse II</SelectItem>
-                        <SelectItem value="executive">Executive Conference Hall - Maitama</SelectItem>
-                        <SelectItem value="outdoor">Outdoor Pavilion - Garki</SelectItem>
-                        <SelectItem value="lounge">Intimate Lounge - Central Area</SelectItem>
-                        <SelectItem value="rooftop">Rooftop Terrace - Jabi</SelectItem>
+                        {arenaOptions.map((arena) => (
+                          <SelectItem key={arena.id} value={arena.id}>
+                            {arena.name} - {arena.location}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>
@@ -230,7 +251,7 @@ const BookPage = () => {
                     <div className="grid gap-3 text-sm">
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Venue</span>
-                        <span>Grand Ballroom - Wuse II</span>
+                        <span>{selectedArenaData ? `${selectedArenaData.name} - ${selectedArenaData.location}` : "Not selected"}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Date</span>
@@ -253,8 +274,10 @@ const BookPage = () => {
                     
                     <div className="grid gap-2 text-sm">
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Venue (8 hours × ₦150,000)</span>
-                        <span>₦1,200,000</span>
+                        <span className="text-muted-foreground">
+                          Venue (8 hours × ₦{selectedArenaData?.pricePerHour?.toLocaleString() || "0"})
+                        </span>
+                        <span>₦{((selectedArenaData?.pricePerHour || 0)).toLocaleString()}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Service Fee</span>
@@ -262,7 +285,7 @@ const BookPage = () => {
                       </div>
                       <div className="border-t border-border pt-2 mt-2 flex justify-between font-semibold">
                         <span>Total</span>
-                        <span className="text-primary">₦1,250,000</span>
+                        <span className="text-primary">₦{((selectedArenaData?.pricePerHour || 0) + 50000).toLocaleString()}</span>
                       </div>
                     </div>
 
