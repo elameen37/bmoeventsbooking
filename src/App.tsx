@@ -13,6 +13,7 @@ import ContactPage from "./pages/Contact";
 import AuthPage from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import ScrollToTopOnNavigate from "./components/ScrollToTopOnNavigate";
+import NavigationProgress from "./components/NavigationProgress";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <NavigationProgress />
         <ScrollToTopOnNavigate />
         <Routes>
           <Route path="/" element={<Index />} />
