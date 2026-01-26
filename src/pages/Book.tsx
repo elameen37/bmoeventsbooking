@@ -17,8 +17,6 @@ import PageTransition from "@/components/PageTransition";
 const arenaOptions = [
   { id: "1", name: "B.M.O Hall - 1", location: "Wuse II", pricePerHour: 75000 },
   { id: "2", name: "B.M.O Hall - 2", location: "Wuse II", pricePerHour: 200000 },
-  { id: "3", name: "B.M.O Hall - 3", location: "Wuse II", pricePerHour: 50000 },
-  { id: "4", name: "B.M.O Hall - 4", location: "Wuse II", pricePerHour: 120000 },
 ];
 
 const BookPage = () => {

@@ -13,8 +13,6 @@ import PageTransition from "@/components/PageTransition";
 
 import bmoHall1 from "@/assets/bmo-hall-1.jpg";
 import bmoHall2 from "@/assets/bmo-hall-2.jpg";
-import bmoHall3 from "@/assets/bmo-hall-3.jpg";
-import bmoHall4 from "@/assets/bmo-hall-4.jpg";
 
 interface Arena {
   id: string;
@@ -44,7 +42,7 @@ const arenas: Arena[] = [{
   reviews: 89,
   pricePerHour: 75000,
   image: bmoHall1,
-  marqueeImages: [bmoHall1, bmoHall2, bmoHall3, bmoHall4],
+  marqueeImages: [bmoHall1, bmoHall2],
   status: "available",
   description: "Professional conference space ideal for corporate meetings, seminars, and executive gatherings. Equipped with modern technology.",
   features: [{
@@ -79,7 +77,7 @@ const arenas: Arena[] = [{
   reviews: 156,
   pricePerHour: 200000,
   image: bmoHall2,
-  marqueeImages: [bmoHall2, bmoHall1, bmoHall3, bmoHall4],
+  marqueeImages: [bmoHall2, bmoHall1],
   status: "booked",
   description: "Spacious outdoor venue perfect for concerts, festivals, and large celebrations. Beautiful garden setting with flexible layout options.",
   features: [{
@@ -88,76 +86,6 @@ const arenas: Arena[] = [{
   }, {
     icon: ShieldCheck,
     name: "Police Personnel"
-  }, {
-    icon: Armchair,
-    name: "Chivalry Chairs"
-  }, {
-    icon: Circle,
-    name: "Round Tables"
-  }, {
-    icon: Zap,
-    name: "8-hour Power Supply"
-  }, {
-    icon: Wind,
-    name: "Central AC"
-  }, {
-    icon: Car,
-    name: "Free Parking"
-  }, {
-    icon: Utensils,
-    name: "Catering Area"
-  }]
-}, {
-  id: "3",
-  name: "B.M.O Hall - 3",
-  location: "Wuse II, Abuja",
-  address: "Plot 174, Riverplate Park, Wuse II, Abuja",
-  capacity: 1000,
-  rating: 4.9,
-  reviews: 67,
-  pricePerHour: 50000,
-  image: bmoHall3,
-  marqueeImages: [bmoHall3, bmoHall1, bmoHall2, bmoHall4],
-  status: "available",
-  description: "Cozy and elegant space for intimate gatherings, cocktail parties, and exclusive events. Perfect for networking sessions.",
-  features: [{
-    icon: Shield,
-    name: "Security Guards"
-  }, {
-    icon: Armchair,
-    name: "Chivalry Chairs"
-  }, {
-    icon: Circle,
-    name: "Round Tables"
-  }, {
-    icon: Zap,
-    name: "8-hour Power Supply"
-  }, {
-    icon: Wind,
-    name: "Central AC"
-  }, {
-    icon: Car,
-    name: "Free Parking"
-  }, {
-    icon: Utensils,
-    name: "Catering Area"
-  }]
-}, {
-  id: "4",
-  name: "B.M.O Hall - 4",
-  location: "Wuse II, Abuja",
-  address: "Plot 174, Riverplate Park, Wuse II, Abuja",
-  capacity: 1000,
-  rating: 4.8,
-  reviews: 94,
-  pricePerHour: 120000,
-  image: bmoHall4,
-  marqueeImages: [bmoHall4, bmoHall1, bmoHall2, bmoHall3],
-  status: "maintenance",
-  description: "Stunning rooftop venue with panoramic city views. Ideal for sunset cocktails, engagement parties, and memorable celebrations.",
-  features: [{
-    icon: Shield,
-    name: "Security Guards"
   }, {
     icon: Armchair,
     name: "Chivalry Chairs"
@@ -217,7 +145,7 @@ const ArenasPage = () => {
           {/* Arena Cards */}
           <div className="space-y-4 sm:space-y-6">
             {isLoading
-              ? [1, 2, 3, 4].map((i) => <ArenaCardSkeleton key={i} />)
+              ? [1, 2].map((i) => <ArenaCardSkeleton key={i} />)
               : arenas.map((arena, index) => <ArenaDetailCard key={arena.id} arena={arena} index={index} />)
             }
           </div>
