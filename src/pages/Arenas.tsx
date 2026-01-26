@@ -108,6 +108,7 @@ const arenas: Arena[] = [{
 }];
 const ArenasPage = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [filter, setFilter] = useState<"all" | "available" | "booked">("all");
 
   useEffect(() => {
     // Simulate loading delay
@@ -116,6 +117,11 @@ const ArenasPage = () => {
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
+
+  const filteredArenas = arenas.filter((arena) => {
+    if (filter === "all") return true;
+    return arena.status === filter;
+  });
 
   return <PageTransition>
     <div className="min-h-screen bg-background">
@@ -135,19 +141,40 @@ const ArenasPage = () => {
 
           {/* Filter Bar */}
           <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8 justify-center sm:justify-start">
-            <Button variant="premium" size="sm">All Venues</Button>
-            <Button variant="outline" size="sm">Available</Button>
-            <Button variant="outline" size="sm">Wuse II</Button>
-            <Button variant="outline" size="sm">Maitama</Button>
-            <Button variant="outline" size="sm">Garki</Button>
+            <Button 
+              variant={filter === "all" ? "premium" : "outline"} 
+              size="sm"
+              onClick={() => setFilter("all")}
+            >
+              All Venues
+            </Button>
+            <Button 
+              variant={filter === "available" ? "premium" : "outline"} 
+              size="sm"
+              onClick={() => setFilter("available")}
+            >
+              Available
+            </Button>
+            <Button 
+              variant={filter === "booked" ? "premium" : "outline"} 
+              size="sm"
+              onClick={() => setFilter("booked")}
+            >
+              Booked
+            </Button>
           </div>
 
           {/* Arena Cards */}
           <div className="space-y-4 sm:space-y-6">
             {isLoading
               ? [1, 2].map((i) => <ArenaCardSkeleton key={i} />)
-              : arenas.map((arena, index) => <ArenaDetailCard key={arena.id} arena={arena} index={index} />)
+              : filteredArenas.map((arena, index) => <ArenaDetailCard key={arena.id} arena={arena} index={index} />)
             }
+            {!isLoading && filteredArenas.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">No venues match the selected filter.</p>
+              </div>
+            )}
           </div>
         </div>
       </main>
