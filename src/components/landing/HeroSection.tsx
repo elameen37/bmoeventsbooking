@@ -12,8 +12,8 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 sm:px-8 lg:px-12 py-12 sm:py-20">
-        <div className="max-w-3xl mx-auto lg:mx-0 text-center lg:text-left">
+      <div className="relative z-10 container mx-auto px-6 sm:px-8 lg:px-12 py-12 sm:py-20 flex items-center justify-center">
+        <div className="max-w-3xl mx-auto text-center">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 mb-6 sm:mb-8 animate-fade-in">
             <Star className="w-4 h-4 text-primary" />
@@ -29,14 +29,14 @@ const HeroSection = () => {
           </h1>
 
           {/* Description */}
-          <p className="text-base sm:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0 animate-fade-in" style={{
+          <p className="text-base sm:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-xl mx-auto animate-fade-in" style={{
           animationDelay: "0.2s"
         }}>
             Discover and book your premium events at B.M.O Events Arena, Abuja. From corporate conferences to grand celebrations, find the ideal venue for your unforgettable moments.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12 animate-fade-in justify-center lg:justify-start" style={{
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12 animate-fade-in justify-center" style={{
           animationDelay: "0.3s"
         }}>
             <Link to="/book">
