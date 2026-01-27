@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -19,8 +20,11 @@ import {
   FileText,
   ChevronRight
 } from "lucide-react";
-import { Link } from "react-router-dom";
 import PageTransition from "@/components/PageTransition";
+import { useAuth } from "@/contexts/AuthContext";
+import { useProfile } from "@/hooks/useProfile";
+import { useUserBookings, useUpcomingBookings } from "@/hooks/useBookings";
+import { useArenas } from "@/hooks/useArenas";
 
 const DashboardSkeleton = () => (
   <div className="min-h-screen bg-background flex">
@@ -101,177 +105,199 @@ const DashboardSkeleton = () => (
 );
 
 const DashboardPage = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+  const { user, signOut, loading: authLoading } = useAuth();
+  const { data: profile, isLoading: profileLoading } = useProfile();
+  const { data: userBookings, isLoading: bookingsLoading } = useUserBookings();
+  const { data: upcomingBookings } = useUpcomingBookings();
+  const { data: arenas } = useArenas();
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
+  const isLoading = authLoading || profileLoading || bookingsLoading;
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/");
+  };
 
   if (isLoading) {
     return <DashboardSkeleton />;
   }
+
+  // Calculate stats
+  const totalBookings = userBookings?.length || 0;
+  const pendingBookings = userBookings?.filter(b => b.status === "pending").length || 0;
+  const confirmedBookings = userBookings?.filter(b => b.status === "confirmed").length || 0;
+  const totalSpent = userBookings?.reduce((sum, b) => sum + (b.total_amount || 0), 0) || 0;
+
+  const initials = profile?.first_name && profile?.last_name 
+    ? `${profile.first_name[0]}${profile.last_name[0]}`.toUpperCase()
+    : user?.email?.[0]?.toUpperCase() || "U";
+
   return (
     <PageTransition>
       <div className="min-h-screen bg-background flex">
-      {/* Sidebar */}
-      <aside className="w-64 border-r border-border bg-card hidden lg:block">
-        <div className="p-6">
-          <Link to="/" className="flex items-center gap-2 mb-8">
-            <div className="w-10 h-10 rounded-lg gold-gradient flex items-center justify-center">
-              <Calendar className="w-6 h-6 text-primary-foreground" />
-            </div>
-            <div>
-              <span className="font-display text-lg font-bold">B.M.O</span>
-              <span className="text-xs block text-muted-foreground">Events Arena</span>
-            </div>
-          </Link>
+        {/* Sidebar */}
+        <aside className="w-64 border-r border-border bg-card hidden lg:block">
+          <div className="p-6">
+            <Link to="/" className="flex items-center gap-2 mb-8">
+              <div className="w-10 h-10 rounded-lg gold-gradient flex items-center justify-center">
+                <Calendar className="w-6 h-6 text-primary-foreground" />
+              </div>
+              <div>
+                <span className="font-display text-lg font-bold">B.M.O</span>
+                <span className="text-xs block text-muted-foreground">Events Arena</span>
+              </div>
+            </Link>
 
-          <nav className="space-y-1">
-            <NavItem icon={LayoutDashboard} label="Dashboard" active />
-            <NavItem icon={CalendarDays} label="Calendar" />
-            <NavItem icon={Building} label="Arenas" />
-            <NavItem icon={FileText} label="Bookings" />
-            <NavItem icon={Users} label="Customers" />
-            <NavItem icon={DollarSign} label="Payments" />
-            <NavItem icon={Bell} label="Notifications" badge={3} />
-            <NavItem icon={Settings} label="Settings" />
-          </nav>
-        </div>
-
-        <div className="absolute bottom-0 left-0 w-64 p-6 border-t border-border">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-full gold-gradient flex items-center justify-center">
-              <span className="text-primary-foreground font-semibold">AD</span>
-            </div>
-            <div>
-              <div className="font-medium text-sm">Admin User</div>
-              <div className="text-xs text-muted-foreground">Super Admin</div>
-            </div>
-          </div>
-          <Button variant="ghost" size="sm" className="w-full justify-start text-muted-foreground">
-            <LogOut className="w-4 h-4 mr-2" />
-            Sign Out
-          </Button>
-        </div>
-      </aside>
-
-      {/* Main Content */}
-      <main className="flex-1 overflow-auto">
-        <div className="p-6 lg:p-8">
-          {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-            <div>
-              <h1 className="font-display text-3xl font-bold">Dashboard</h1>
-              <p className="text-muted-foreground">Welcome back! Here's your overview.</p>
-            </div>
-            <div className="flex gap-2">
-              <Button variant="outline">
-                <Calendar className="w-4 h-4 mr-2" />
-                View Calendar
-              </Button>
-              <Button variant="premium">
-                + New Booking
-              </Button>
-            </div>
+            <nav className="space-y-1">
+              <NavItem icon={LayoutDashboard} label="Dashboard" active />
+              <NavItem icon={CalendarDays} label="Calendar" onClick={() => navigate("/calendar")} />
+              <NavItem icon={Building} label="Arenas" onClick={() => navigate("/arenas")} />
+              <NavItem icon={FileText} label="My Bookings" badge={pendingBookings > 0 ? pendingBookings : undefined} />
+              <NavItem icon={Bell} label="Notifications" />
+              <NavItem icon={Settings} label="Settings" />
+            </nav>
           </div>
 
-          {/* Stats Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            <StatCard
-              title="Total Bookings"
-              value="156"
-              change="+12%"
-              icon={Calendar}
-              trend="up"
-            />
-            <StatCard
-              title="Revenue (Jan)"
-              value="₦8.5M"
-              change="+8%"
-              icon={DollarSign}
-              trend="up"
-            />
-            <StatCard
-              title="Active Arenas"
-              value="5"
-              change="0"
-              icon={Building}
-              trend="neutral"
-            />
-            <StatCard
-              title="Pending Approvals"
-              value="8"
-              change="-2"
-              icon={Clock}
-              trend="down"
-            />
+          <div className="absolute bottom-0 left-0 w-64 p-6 border-t border-border">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full gold-gradient flex items-center justify-center">
+                <span className="text-primary-foreground font-semibold">{initials}</span>
+              </div>
+              <div>
+                <div className="font-medium text-sm">
+                  {profile?.first_name} {profile?.last_name}
+                </div>
+                <div className="text-xs text-muted-foreground">{user?.email}</div>
+              </div>
+            </div>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="w-full justify-start text-muted-foreground"
+              onClick={handleSignOut}
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign Out
+            </Button>
           </div>
+        </aside>
 
-          {/* Content Grid */}
-          <div className="grid lg:grid-cols-3 gap-6">
-            {/* Upcoming Bookings */}
-            <Card variant="glass" className="lg:col-span-2">
-              <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle className="text-lg">Upcoming Bookings</CardTitle>
-                <Button variant="ghost" size="sm">
-                  View All <ChevronRight className="w-4 h-4 ml-1" />
+        {/* Main Content */}
+        <main className="flex-1 overflow-auto">
+          <div className="p-6 lg:p-8">
+            {/* Header */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+              <div>
+                <h1 className="font-display text-3xl font-bold">Dashboard</h1>
+                <p className="text-muted-foreground">
+                  Welcome back, {profile?.first_name || "there"}! Here's your overview.
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <Button variant="outline" onClick={() => navigate("/calendar")}>
+                  <Calendar className="w-4 h-4 mr-2" />
+                  View Calendar
                 </Button>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <BookingItem
-                    title="Corporate Conference"
-                    date="Jan 5, 2026"
-                    time="9:00 AM - 5:00 PM"
-                    arena="Executive Hall"
-                    status="confirmed"
-                  />
-                  <BookingItem
-                    title="Wedding Reception"
-                    date="Jan 10, 2026"
-                    time="2:00 PM - 10:00 PM"
-                    arena="Grand Ballroom"
-                    status="confirmed"
-                  />
-                  <BookingItem
-                    title="Product Launch"
-                    date="Jan 15, 2026"
-                    time="10:00 AM - 2:00 PM"
-                    arena="Rooftop Terrace"
-                    status="pending"
-                  />
-                  <BookingItem
-                    title="Gala Dinner"
-                    date="Jan 20, 2026"
-                    time="6:00 PM - 11:00 PM"
-                    arena="Grand Ballroom"
-                    status="confirmed"
-                  />
-                </div>
-              </CardContent>
-            </Card>
+                <Button variant="premium" onClick={() => navigate("/book")}>
+                  + New Booking
+                </Button>
+              </div>
+            </div>
 
-            {/* Arena Status */}
-            <Card variant="glass">
-              <CardHeader>
-                <CardTitle className="text-lg">Arena Status</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <ArenaStatus name="Grand Ballroom" location="Wuse II" status="available" />
-                  <ArenaStatus name="Executive Hall" location="Maitama" status="booked" />
-                  <ArenaStatus name="Outdoor Pavilion" location="Garki" status="booked" />
-                  <ArenaStatus name="Intimate Lounge" location="Central" status="available" />
-                  <ArenaStatus name="Rooftop Terrace" location="Jabi" status="maintenance" />
-                </div>
-              </CardContent>
-            </Card>
+            {/* Stats Grid */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+              <StatCard
+                title="Total Bookings"
+                value={totalBookings.toString()}
+                change="All time"
+                icon={Calendar}
+                trend="neutral"
+              />
+              <StatCard
+                title="Confirmed"
+                value={confirmedBookings.toString()}
+                change="Active bookings"
+                icon={DollarSign}
+                trend="up"
+              />
+              <StatCard
+                title="Available Venues"
+                value={(arenas?.filter(a => a.status === "available").length || 0).toString()}
+                change="Ready to book"
+                icon={Building}
+                trend="up"
+              />
+              <StatCard
+                title="Pending"
+                value={pendingBookings.toString()}
+                change="Awaiting approval"
+                icon={Clock}
+                trend={pendingBookings > 0 ? "neutral" : "down"}
+              />
+            </div>
+
+            {/* Content Grid */}
+            <div className="grid lg:grid-cols-3 gap-6">
+              {/* Upcoming Bookings */}
+              <Card variant="glass" className="lg:col-span-2">
+                <CardHeader className="flex flex-row items-center justify-between">
+                  <CardTitle className="text-lg">Your Upcoming Bookings</CardTitle>
+                  <Button variant="ghost" size="sm">
+                    View All <ChevronRight className="w-4 h-4 ml-1" />
+                  </Button>
+                </CardHeader>
+                <CardContent>
+                  {upcomingBookings && upcomingBookings.length > 0 ? (
+                    <div className="space-y-4">
+                      {upcomingBookings.map((booking) => (
+                        <BookingItem
+                          key={booking.id}
+                          title={booking.event_title}
+                          date={new Date(booking.event_date).toLocaleDateString('en-NG', { month: 'short', day: 'numeric', year: 'numeric' })}
+                          time={`${booking.start_time.slice(0, 5)} - ${booking.end_time.slice(0, 5)}`}
+                          arena={(booking.arenas as any)?.name || "Unknown Venue"}
+                          status={booking.status as "confirmed" | "pending" | "cancelled"}
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-8">
+                      <Calendar className="w-12 h-12 mx-auto text-muted-foreground/50 mb-3" />
+                      <p className="text-muted-foreground mb-4">No upcoming bookings</p>
+                      <Button variant="premium" size="sm" onClick={() => navigate("/book")}>
+                        Book a Venue
+                      </Button>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+
+              {/* Arena Status */}
+              <Card variant="glass">
+                <CardHeader>
+                  <CardTitle className="text-lg">Venue Availability</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {arenas && arenas.length > 0 ? (
+                    <div className="space-y-4">
+                      {arenas.map((arena) => (
+                        <ArenaStatus 
+                          key={arena.id}
+                          name={arena.name} 
+                          location={arena.location} 
+                          status={arena.status as "available" | "booked" | "maintenance"} 
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-muted-foreground text-center py-4">No venues found</p>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
       </div>
     </PageTransition>
   );
@@ -281,14 +307,17 @@ const NavItem = ({
   icon: Icon, 
   label, 
   active = false,
-  badge
+  badge,
+  onClick
 }: { 
   icon: React.ElementType; 
   label: string; 
   active?: boolean;
   badge?: number;
+  onClick?: () => void;
 }) => (
   <button
+    onClick={onClick}
     className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors ${
       active
         ? "bg-primary/10 text-primary font-medium"
@@ -342,7 +371,7 @@ const StatCard = ({
           trend === "down" ? "text-status-booked" : 
           "text-muted-foreground"
         }`}>
-          {change} from last month
+          {change}
         </span>
       </div>
     </CardContent>
