@@ -1,61 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
 import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, Clock, MapPin } from "lucide-react";
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isToday, addMonths, subMonths, isSameDay } from "date-fns";
-
-interface BookingEvent {
-  id: string;
-  title: string;
-  date: Date;
-  startTime: string;
-  endTime: string;
-  arena: string;
-  status: "confirmed" | "pending" | "cancelled";
-}
-
-const sampleEvents: BookingEvent[] = [
-  {
-    id: "1",
-    title: "Corporate Conference",
-    date: new Date(2026, 0, 5),
-    startTime: "09:00",
-    endTime: "17:00",
-    arena: "Grand Ballroom",
-    status: "confirmed",
-  },
-  {
-    id: "2",
-    title: "Wedding Reception",
-    date: new Date(2026, 0, 10),
-    startTime: "14:00",
-    endTime: "22:00",
-    arena: "Outdoor Pavilion",
-    status: "confirmed",
-  },
-  {
-    id: "3",
-    title: "Product Launch",
-    date: new Date(2026, 0, 15),
-    startTime: "10:00",
-    endTime: "14:00",
-    arena: "Executive Hall",
-    status: "pending",
-  },
-  {
-    id: "4",
-    title: "Gala Dinner",
-    date: new Date(2026, 0, 20),
-    startTime: "18:00",
-    endTime: "23:00",
-    arena: "Grand Ballroom",
-    status: "confirmed",
-  },
-];
+import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isToday, addMonths, subMonths, isSameDay, parseISO } from "date-fns";
+import { useAllBookingsForCalendar } from "@/hooks/useBookings";
 
 const BookingCalendar = () => {
-  const [currentDate, setCurrentDate] = useState(new Date(2026, 0, 1));
+  const navigate = useNavigate();
+  const { data: bookings, isLoading } = useAllBookingsForCalendar();
+  const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [view, setView] = useState<"month" | "week" | "agenda">("month");
 
@@ -68,10 +24,29 @@ const BookingCalendar = () => {
   const emptyDays = Array(startDay).fill(null);
 
   const getEventsForDate = (date: Date) => {
-    return sampleEvents.filter((event) => isSameDay(event.date, date));
+    if (!bookings) return [];
+    return bookings.filter((booking) => {
+      const bookingDate = parseISO(booking.event_date);
+      return isSameDay(bookingDate, date);
+    });
   };
 
   const selectedDateEvents = selectedDate ? getEventsForDate(selectedDate) : [];
+
+  if (isLoading) {
+    return (
+      <div className="space-y-6">
+        <div className="flex justify-between items-center">
+          <Skeleton className="h-8 w-48" />
+          <Skeleton className="h-10 w-64" />
+        </div>
+        <div className="grid lg:grid-cols-3 gap-6">
+          <Skeleton className="lg:col-span-2 h-[500px] rounded-xl" />
+          <Skeleton className="h-[500px] rounded-xl" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -165,7 +140,7 @@ const BookingCalendar = () => {
                               : "bg-status-booked/20 text-status-booked"
                           }`}
                         >
-                          {event.title}
+                          {event.event_title}
                         </div>
                       ))}
                       {events.length > 2 && (
@@ -194,7 +169,7 @@ const BookingCalendar = () => {
                   {selectedDateEvents.map((event) => (
                     <div key={event.id} className="p-4 rounded-lg bg-secondary/50 border border-border space-y-2">
                       <div className="flex items-start justify-between">
-                        <h4 className="font-medium">{event.title}</h4>
+                        <h4 className="font-medium">{event.event_title}</h4>
                         <Badge
                           variant={
                             event.status === "confirmed"
@@ -210,12 +185,12 @@ const BookingCalendar = () => {
                       
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Clock className="w-4 h-4" />
-                        {event.startTime} - {event.endTime}
+                        {event.start_time.slice(0, 5)} - {event.end_time.slice(0, 5)}
                       </div>
                       
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <MapPin className="w-4 h-4" />
-                        {event.arena}
+                        {(event.arenas as any)?.name || "Unknown Venue"}
                       </div>
                     </div>
                   ))}
@@ -224,7 +199,12 @@ const BookingCalendar = () => {
                 <div className="text-center py-8">
                   <CalendarIcon className="w-12 h-12 mx-auto text-muted-foreground/50 mb-3" />
                   <p className="text-muted-foreground">No events scheduled</p>
-                  <Button variant="premium" size="sm" className="mt-4">
+                  <Button 
+                    variant="premium" 
+                    size="sm" 
+                    className="mt-4"
+                    onClick={() => navigate("/book")}
+                  >
                     Book This Date
                   </Button>
                 </div>

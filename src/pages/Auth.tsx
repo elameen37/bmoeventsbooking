@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,34 +9,99 @@ import { Calendar, Mail, Lock, User, Phone, Eye, EyeOff, ArrowLeft } from "lucid
 import { toast } from "@/hooks/use-toast";
 import ScrollToTop from "@/components/ui/scroll-to-top";
 import PageTransition from "@/components/PageTransition";
+import { useAuth } from "@/contexts/AuthContext";
 
 const AuthPage = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { signIn, signUp, user, loading: authLoading } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  
+  // Form state
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [signupFirstName, setSignupFirstName] = useState("");
+  const [signupLastName, setSignupLastName] = useState("");
+  const [signupEmail, setSignupEmail] = useState("");
+  const [signupPhone, setSignupPhone] = useState("");
+  const [signupPassword, setSignupPassword] = useState("");
 
-  const handleLogin = (e: React.FormEvent) => {
+  // Redirect if already logged in
+  useEffect(() => {
+    if (user && !authLoading) {
+      const from = location.state?.from?.pathname || "/dashboard";
+      navigate(from, { replace: true });
+    }
+  }, [user, authLoading, navigate, location]);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
+    
+    const { error } = await signIn(loginEmail, loginPassword);
+    
+    if (error) {
       toast({
-        title: "Welcome back!",
-        description: "Redirecting to your dashboard...",
+        title: "Login Failed",
+        description: error.message,
+        variant: "destructive",
       });
-    }, 1500);
+      setIsLoading(false);
+      return;
+    }
+    
+    toast({
+      title: "Welcome back!",
+      description: "Redirecting to your dashboard...",
+    });
+    setIsLoading(false);
   };
 
-  const handleSignup = (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
+    
+    if (signupPassword.length < 6) {
       toast({
-        title: "Account Created!",
-        description: "Please check your email to verify your account.",
+        title: "Password too short",
+        description: "Password must be at least 6 characters",
+        variant: "destructive",
       });
-    }, 1500);
+      return;
+    }
+    
+    setIsLoading(true);
+    
+    const { error } = await signUp(signupEmail, signupPassword, {
+      first_name: signupFirstName,
+      last_name: signupLastName,
+      phone: signupPhone,
+    });
+    
+    if (error) {
+      toast({
+        title: "Signup Failed",
+        description: error.message,
+        variant: "destructive",
+      });
+      setIsLoading(false);
+      return;
+    }
+    
+    toast({
+      title: "Account Created!",
+      description: "You can now sign in with your credentials.",
+    });
+    setIsLoading(false);
   };
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="animate-pulse text-muted-foreground">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <PageTransition>
@@ -66,7 +131,7 @@ const AuthPage = () => {
             </p>
             <div className="flex gap-4">
               <div className="text-center">
-                <div className="text-2xl lg:text-3xl font-bold text-primary-foreground">4</div>
+                <div className="text-2xl lg:text-3xl font-bold text-primary-foreground">2</div>
                 <div className="text-primary-foreground/70 text-xs lg:text-sm">Premium Halls</div>
               </div>
               <div className="w-px bg-primary-foreground/30" />
@@ -131,6 +196,8 @@ const AuthPage = () => {
                           placeholder="john@example.com"
                           className="pl-10"
                           required
+                          value={loginEmail}
+                          onChange={(e) => setLoginEmail(e.target.value)}
                         />
                       </div>
                     </div>
@@ -150,6 +217,8 @@ const AuthPage = () => {
                           placeholder="••••••••"
                           className="pl-10 pr-10"
                           required
+                          value={loginPassword}
+                          onChange={(e) => setLoginPassword(e.target.value)}
                         />
                         <Button
                           type="button"
@@ -193,12 +262,20 @@ const AuthPage = () => {
                             placeholder="John"
                             className="pl-10"
                             required
+                            value={signupFirstName}
+                            onChange={(e) => setSignupFirstName(e.target.value)}
                           />
                         </div>
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="last-name">Last Name</Label>
-                        <Input id="last-name" placeholder="Doe" required />
+                        <Input 
+                          id="last-name" 
+                          placeholder="Doe" 
+                          required 
+                          value={signupLastName}
+                          onChange={(e) => setSignupLastName(e.target.value)}
+                        />
                       </div>
                     </div>
 
@@ -212,6 +289,8 @@ const AuthPage = () => {
                           placeholder="john@example.com"
                           className="pl-10"
                           required
+                          value={signupEmail}
+                          onChange={(e) => setSignupEmail(e.target.value)}
                         />
                       </div>
                     </div>
@@ -226,6 +305,8 @@ const AuthPage = () => {
                           placeholder="+234 801 234 5678"
                           className="pl-10"
                           required
+                          value={signupPhone}
+                          onChange={(e) => setSignupPhone(e.target.value)}
                         />
                       </div>
                     </div>
@@ -240,6 +321,8 @@ const AuthPage = () => {
                           placeholder="••••••••"
                           className="pl-10 pr-10"
                           required
+                          value={signupPassword}
+                          onChange={(e) => setSignupPassword(e.target.value)}
                         />
                         <Button
                           type="button"
@@ -256,7 +339,7 @@ const AuthPage = () => {
                         </Button>
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        Must be at least 8 characters with a number and symbol
+                        Must be at least 6 characters
                       </p>
                     </div>
 
