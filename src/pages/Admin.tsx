@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Calendar, Building2, LayoutDashboard, Shield } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
+import { Calendar, Building2, LayoutDashboard, Shield, Users } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -11,6 +11,7 @@ import { useIsAdmin } from "@/hooks/useUserRole";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAllBookings } from "@/hooks/useAdminBookings";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
 
 const AdminPage = () => {
   const navigate = useNavigate();
@@ -67,14 +68,22 @@ const AdminPage = () => {
       <main className="pt-24 pb-16 px-6 sm:px-8 lg:px-12">
         <div className="container mx-auto max-w-7xl">
           {/* Header */}
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-xl gold-gradient flex items-center justify-center">
-              <Shield className="w-6 h-6 text-primary-foreground" />
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl gold-gradient flex items-center justify-center">
+                <Shield className="w-6 h-6 text-primary-foreground" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-display font-bold">Admin Dashboard</h1>
+                <p className="text-muted-foreground">Manage bookings and arena availability</p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-3xl font-display font-bold">Admin Dashboard</h1>
-              <p className="text-muted-foreground">Manage bookings and arena availability</p>
-            </div>
+            <Button asChild variant="outline" className="gap-2">
+              <Link to="/admin/users">
+                <Users className="w-4 h-4" />
+                Manage Users
+              </Link>
+            </Button>
           </div>
 
           {/* Stats Cards */}
