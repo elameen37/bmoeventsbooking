@@ -1,11 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Calendar, Menu, X, User, LogIn } from "lucide-react";
+import { Calendar, Menu, X, User, LogIn, Shield } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useIsAdmin } from "@/hooks/useUserRole";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { user, signOut } = useAuth();
+  const { isManager } = useIsAdmin();
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -48,18 +52,41 @@ const Navbar = () => {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center gap-2">
-            <Link to="/auth">
-              <Button variant="ghost" size="sm">
-                <LogIn className="w-4 h-4" />
-                Login
-              </Button>
-            </Link>
-            <Link to="/dashboard">
-              <Button variant="premium" size="sm">
-                <User className="w-4 h-4" />
-                Dashboard
-              </Button>
-            </Link>
+            {user ? (
+              <>
+                {isManager && (
+                  <Link to="/admin">
+                    <Button variant="ghost" size="sm" className={isActive("/admin") ? "text-primary" : ""}>
+                      <Shield className="w-4 h-4" />
+                      Admin
+                    </Button>
+                  </Link>
+                )}
+                <Link to="/dashboard">
+                  <Button variant="premium" size="sm">
+                    <User className="w-4 h-4" />
+                    Dashboard
+                  </Button>
+                </Link>
+                <Button variant="ghost" size="sm" onClick={signOut}>
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link to="/auth">
+                  <Button variant="ghost" size="sm">
+                    <LogIn className="w-4 h-4" />
+                    Login
+                  </Button>
+                </Link>
+                <Link to="/book">
+                  <Button variant="premium" size="sm">
+                    Book Now
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -87,13 +114,34 @@ const Navbar = () => {
                   </Button>
                 </Link>
               ))}
-              <div className="flex gap-2 mt-4 pt-4 border-t border-border">
-                <Link to="/auth" className="flex-1">
-                  <Button variant="outline" className="w-full">Login</Button>
-                </Link>
-                <Link to="/dashboard" className="flex-1">
-                  <Button variant="premium" className="w-full">Dashboard</Button>
-                </Link>
+              <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-border">
+                {user ? (
+                  <>
+                    {isManager && (
+                      <Link to="/admin" onClick={() => setIsOpen(false)}>
+                        <Button variant="outline" className="w-full">
+                          <Shield className="w-4 h-4 mr-2" />
+                          Admin
+                        </Button>
+                      </Link>
+                    )}
+                    <Link to="/dashboard" onClick={() => setIsOpen(false)}>
+                      <Button variant="premium" className="w-full">Dashboard</Button>
+                    </Link>
+                    <Button variant="ghost" className="w-full" onClick={() => { signOut(); setIsOpen(false); }}>
+                      Logout
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/auth" onClick={() => setIsOpen(false)}>
+                      <Button variant="outline" className="w-full">Login</Button>
+                    </Link>
+                    <Link to="/book" onClick={() => setIsOpen(false)}>
+                      <Button variant="premium" className="w-full">Book Now</Button>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>

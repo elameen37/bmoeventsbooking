@@ -10,6 +10,7 @@ import CalendarPage from "./pages/Calendar";
 import ArenasPage from "./pages/Arenas";
 import BookPage from "./pages/Book";
 import DashboardPage from "./pages/Dashboard";
+import AdminPage from "./pages/Admin";
 import PricingPage from "./pages/Pricing";
 import ContactPage from "./pages/Contact";
 import AuthPage from "./pages/Auth";
@@ -38,6 +39,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <DashboardPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <AdminPage />
                 </ProtectedRoute>
               }
             />
