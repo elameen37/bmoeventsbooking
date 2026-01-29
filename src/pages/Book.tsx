@@ -59,7 +59,7 @@ const BookPage = () => {
       return;
     }
 
-    if (!selectedArena || !eventDate || !startTime || !endTime || !eventType || !eventTitle || !guestCount) {
+    if (!selectedArena || !eventDate || !startTime || !endTime || !eventType || !eventTitle || !guestCount || !mobileNo.trim()) {
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields.",
@@ -82,6 +82,7 @@ const BookPage = () => {
         total_amount: (selectedArenaData?.price_per_hour || 0) + 50000,
         status: "pending",
         deposit_paid: false,
+        mobile_no: mobileNo.trim(),
       });
 
       toast({
