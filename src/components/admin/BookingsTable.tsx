@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { Check, X, Clock, Calendar, Users, Building2 } from "lucide-react";
+import { Check, X, Clock, Calendar, Users, Building2, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -69,6 +69,7 @@ export const BookingsTable = () => {
             <TableHead>Arena</TableHead>
             <TableHead>Date & Time</TableHead>
             <TableHead>Guests</TableHead>
+            <TableHead>Mobile</TableHead>
             <TableHead>Amount</TableHead>
             <TableHead>Status</TableHead>
             <TableHead className="text-right">Actions</TableHead>
@@ -105,6 +106,16 @@ export const BookingsTable = () => {
                   <Users className="w-4 h-4 text-muted-foreground" />
                   <span>{booking.guest_count}</span>
                 </div>
+              </TableCell>
+              <TableCell>
+                {booking.mobile_no ? (
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-sm">{booking.mobile_no}</span>
+                  </div>
+                ) : (
+                  <span className="text-muted-foreground text-sm">—</span>
+                )}
               </TableCell>
               <TableCell>
                 <span className="font-medium">₦{booking.total_amount.toLocaleString()}</span>
