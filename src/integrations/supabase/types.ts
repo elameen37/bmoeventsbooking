@@ -68,6 +68,7 @@ export type Database = {
           event_type: string
           guest_count: number
           id: string
+          mobile_no: string | null
           special_requirements: string | null
           start_time: string
           status: Database["public"]["Enums"]["booking_status"]
@@ -86,6 +87,7 @@ export type Database = {
           event_type: string
           guest_count: number
           id?: string
+          mobile_no?: string | null
           special_requirements?: string | null
           start_time: string
           status?: Database["public"]["Enums"]["booking_status"]
@@ -104,6 +106,7 @@ export type Database = {
           event_type?: string
           guest_count?: number
           id?: string
+          mobile_no?: string | null
           special_requirements?: string | null
           start_time?: string
           status?: Database["public"]["Enums"]["booking_status"]
