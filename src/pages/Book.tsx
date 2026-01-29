@@ -37,6 +37,7 @@ const BookPage = () => {
   const [eventTitle, setEventTitle] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [specialRequirements, setSpecialRequirements] = useState("");
+  const [mobileNo, setMobileNo] = useState("");
 
   // Pre-select arena from URL param
   useEffect(() => {
@@ -324,27 +325,35 @@ const BookPage = () => {
                   </CardHeader>
                   <CardContent className="space-y-6">
                     {user ? (
-                      <div className="p-4 rounded-lg bg-secondary/50 space-y-3">
-                        <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground">Name</span>
-                          <span>{profile?.first_name} {profile?.last_name}</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground">Email</span>
-                          <span>{user.email}</span>
-                        </div>
-                        {profile?.phone && (
+                      <div className="space-y-4">
+                        <div className="p-4 rounded-lg bg-secondary/50 space-y-3">
                           <div className="flex items-center justify-between">
-                            <span className="text-muted-foreground">Phone</span>
-                            <span>{profile.phone}</span>
+                            <span className="text-muted-foreground">Name</span>
+                            <span>{profile?.first_name} {profile?.last_name}</span>
                           </div>
-                        )}
-                        {profile?.company && (
                           <div className="flex items-center justify-between">
-                            <span className="text-muted-foreground">Company</span>
-                            <span>{profile.company}</span>
+                            <span className="text-muted-foreground">Email</span>
+                            <span>{user.email}</span>
                           </div>
-                        )}
+                          {profile?.company && (
+                            <div className="flex items-center justify-between">
+                              <span className="text-muted-foreground">Company</span>
+                              <span>{profile.company}</span>
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="mobileNo">Mobile Number *</Label>
+                          <Input
+                            id="mobileNo"
+                            type="tel"
+                            placeholder="e.g., +234 801 234 5678"
+                            value={mobileNo}
+                            onChange={(e) => setMobileNo(e.target.value)}
+                          />
+                          <p className="text-xs text-muted-foreground">We'll use this number to contact you about your booking</p>
+                        </div>
                       </div>
                     ) : (
                       <div className="text-center py-8">
@@ -363,7 +372,7 @@ const BookPage = () => {
                         variant="premium" 
                         className="flex-1" 
                         onClick={() => setStep(4)}
-                        disabled={!user}
+                        disabled={!user || !mobileNo.trim()}
                       >
                         Review Booking
                       </Button>
