@@ -12,6 +12,8 @@ import { useArenas } from "@/hooks/useArenas";
 import { useUpdateArenaStatus } from "@/hooks/useAdminArenas";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
+import { ArenaFormDialog } from "./ArenaFormDialog";
+import { DeleteArenaDialog } from "./DeleteArenaDialog";
 import type { Database } from "@/integrations/supabase/types";
 
 type ArenaStatus = Database["public"]["Enums"]["arena_status"];
@@ -45,67 +47,95 @@ export const ArenaManagement = () => {
 
   if (isLoading) {
     return (
-      <div className="grid gap-4 md:grid-cols-2">
-        {[...Array(2)].map((_, i) => (
-          <Skeleton key={i} className="h-48 w-full" />
-        ))}
-      </div>
-    );
-  }
-
-  if (!arenas?.length) {
-    return (
-      <div className="text-center py-12 text-muted-foreground">
-        <Building2 className="w-12 h-12 mx-auto mb-4 opacity-50" />
-        <p>No arenas found</p>
+      <div className="space-y-4">
+        <div className="flex justify-end">
+          <Skeleton className="h-10 w-32" />
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          {[...Array(2)].map((_, i) => (
+            <Skeleton key={i} className="h-48 w-full" />
+          ))}
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="grid gap-4 md:grid-cols-2">
-      {arenas.map((arena) => (
-        <Card key={arena.id} className="bg-card border-border">
-          <CardHeader className="pb-3">
-            <div className="flex items-start justify-between">
-              <CardTitle className="text-lg font-semibold">{arena.name}</CardTitle>
-              <Badge className={statusStyles[arena.status]} variant="outline">
-                {arena.status}
-              </Badge>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <div className="flex items-center gap-1">
-                <MapPin className="w-4 h-4" />
-                {arena.location}
-              </div>
-              <div className="flex items-center gap-1">
-                <Users className="w-4 h-4" />
-                {arena.capacity} guests
-              </div>
-            </div>
-            
-            <div className="flex items-center justify-between pt-2 border-t border-border">
-              <span className="text-sm text-muted-foreground">Change Status:</span>
-              <Select
-                value={arena.status}
-                onValueChange={(value) => handleStatusChange(arena.id, value as ArenaStatus)}
-                disabled={updateStatus.isPending}
-              >
-                <SelectTrigger className="w-40 bg-background">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="bg-popover border-border">
-                  <SelectItem value="available">Available</SelectItem>
-                  <SelectItem value="booked">Booked</SelectItem>
-                  <SelectItem value="maintenance">Maintenance</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
+    <div className="space-y-4">
+      {/* Add Venue Button */}
+      <div className="flex justify-end">
+        <ArenaFormDialog mode="create" />
+      </div>
+
+      {!arenas?.length ? (
+        <div className="text-center py-12 text-muted-foreground">
+          <Building2 className="w-12 h-12 mx-auto mb-4 opacity-50" />
+          <p>No venues found</p>
+          <p className="text-sm mt-2">Click "Add Venue" to create your first venue.</p>
+        </div>
+      ) : (
+        <div className="grid gap-4 md:grid-cols-2">
+          {arenas.map((arena) => (
+            <Card key={arena.id} className="bg-card border-border">
+              <CardHeader className="pb-3">
+                <div className="flex items-start justify-between">
+                  <CardTitle className="text-lg font-semibold">{arena.name}</CardTitle>
+                  <div className="flex items-center gap-2">
+                    <Badge className={statusStyles[arena.status]} variant="outline">
+                      {arena.status}
+                    </Badge>
+                    <ArenaFormDialog arena={arena} mode="edit" />
+                    <DeleteArenaDialog arena={arena} />
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-1">
+                    <MapPin className="w-4 h-4" />
+                    {arena.location}
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Users className="w-4 h-4" />
+                    {arena.capacity} guests
+                  </div>
+                </div>
+
+                {arena.description && (
+                  <p className="text-sm text-muted-foreground line-clamp-2">
+                    {arena.description}
+                  </p>
+                )}
+
+                <div className="text-sm">
+                  <span className="text-muted-foreground">Price: </span>
+                  <span className="font-medium gold-text">
+                    ₦{arena.price_per_hour.toLocaleString()}/hr
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between pt-2 border-t border-border">
+                  <span className="text-sm text-muted-foreground">Change Status:</span>
+                  <Select
+                    value={arena.status}
+                    onValueChange={(value) => handleStatusChange(arena.id, value as ArenaStatus)}
+                    disabled={updateStatus.isPending}
+                  >
+                    <SelectTrigger className="w-40 bg-background">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover border-border">
+                      <SelectItem value="available">Available</SelectItem>
+                      <SelectItem value="booked">Booked</SelectItem>
+                      <SelectItem value="maintenance">Maintenance</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
