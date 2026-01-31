@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Calendar, Clock, Users, MapPin, CreditCard, CheckCircle, LogIn } from "lucide-react";
+import { Calendar, Clock, Users, MapPin, CreditCard, CheckCircle, LogIn, Copy } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import PageTransition from "@/components/PageTransition";
 import { useAuth } from "@/contexts/AuthContext";
@@ -451,7 +451,22 @@ const BookPage = () => {
                         <div className="mt-3 p-3 rounded-md bg-primary/10 border border-primary/20">
                           <p className="font-semibold text-foreground mb-1">Bank Details</p>
                           <p>B.M.O Events Arena</p>
-                          <p>12-345-456-65</p>
+                          <div className="flex items-center gap-2">
+                            <p className="font-mono">12-345-456-65</p>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              className="h-6 px-2 text-xs"
+                              onClick={() => {
+                                navigator.clipboard.writeText("12-345-456-65")
+                                  .then(() => toast({ title: "Copied!", description: "Account number copied to clipboard" }))
+                                  .catch(() => toast({ title: "Failed to copy", variant: "destructive" }));
+                              }}
+                            >
+                              <Copy className="h-3 w-3" />
+                            </Button>
+                          </div>
                           <p>GTBank</p>
                         </div>
                       </div>
