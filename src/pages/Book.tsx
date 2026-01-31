@@ -445,9 +445,16 @@ const BookPage = () => {
                         </div>
                       </div>
 
-                      <p className="text-xs text-muted-foreground">
-                        * 50% deposit required to confirm booking. Balance due 7 days before event.
-                      </p>
+                      <div className="text-xs text-muted-foreground space-y-2">
+                        <p>* 50% deposit required to confirm booking.</p>
+                        <p>* 70% payment a week before event date.</p>
+                        <div className="mt-3 p-3 rounded-md bg-primary/10 border border-primary/20">
+                          <p className="font-semibold text-foreground mb-1">Bank Details</p>
+                          <p>B.M.O Events Arena</p>
+                          <p>12-345-456-65</p>
+                          <p>GTBank</p>
+                        </div>
+                      </div>
                     </div>
 
                     <div className="flex gap-4">
