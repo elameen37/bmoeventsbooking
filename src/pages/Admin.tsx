@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Calendar, Building2, LayoutDashboard, Shield, Users } from "lucide-react";
+import { Calendar, Building2, LayoutDashboard, Shield, Users, Star } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookingsTable } from "@/components/admin/BookingsTable";
 import { ArenaManagement } from "@/components/admin/ArenaManagement";
+import FeaturedEventsManagement from "@/components/admin/FeaturedEventsManagement";
 import { useIsAdmin } from "@/hooks/useUserRole";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAllBookings } from "@/hooks/useAdminBookings";
@@ -141,6 +142,10 @@ const AdminPage = () => {
                 <Building2 className="w-4 h-4 mr-2" />
                 Arenas
               </TabsTrigger>
+              <TabsTrigger value="featured" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                <Star className="w-4 h-4 mr-2" />
+                Featured Events
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="bookings" className="space-y-4">
@@ -155,6 +160,13 @@ const AdminPage = () => {
                 <h2 className="text-xl font-display font-semibold">Arena Management</h2>
               </div>
               <ArenaManagement />
+            </TabsContent>
+
+            <TabsContent value="featured" className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-display font-semibold">Featured Events Management</h2>
+              </div>
+              <FeaturedEventsManagement />
             </TabsContent>
           </Tabs>
         </div>

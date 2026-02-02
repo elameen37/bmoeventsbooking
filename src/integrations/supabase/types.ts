@@ -124,6 +124,51 @@ export type Database = {
           },
         ]
       }
+      featured_events: {
+        Row: {
+          attendees: number
+          created_at: string
+          display_order: number | null
+          event_date: string
+          event_name: string
+          event_type: string
+          highlights: string[] | null
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          rating: number
+          updated_at: string
+        }
+        Insert: {
+          attendees: number
+          created_at?: string
+          display_order?: number | null
+          event_date: string
+          event_name: string
+          event_type: string
+          highlights?: string[] | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          rating?: number
+          updated_at?: string
+        }
+        Update: {
+          attendees?: number
+          created_at?: string
+          display_order?: number | null
+          event_date?: string
+          event_name?: string
+          event_type?: string
+          highlights?: string[] | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          rating?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           company: string | null
