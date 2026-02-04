@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { Upload, X, Image as ImageIcon } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -20,6 +21,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useAdminFeaturedEvents, FeaturedEvent } from "@/hooks/useFeaturedEvents";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 const formSchema = z.object({
   event_name: z.string().min(1, "Event name is required"),
@@ -48,6 +51,9 @@ export const FeaturedEventFormDialog = ({
 }: FeaturedEventFormDialogProps) => {
   const { createEvent, updateEvent, isCreating, isUpdating } = useAdminFeaturedEvents();
   const isEditing = !!event;
+  const [isUploading, setIsUploading] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -64,6 +70,48 @@ export const FeaturedEventFormDialog = ({
     },
   });
 
+  const handleFileUpload = async (file: File) => {
+    if (!file.type.startsWith("image/")) {
+      toast({ title: "Invalid file type", description: "Please upload an image file", variant: "destructive" });
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast({ title: "File too large", description: "Please upload an image smaller than 5MB", variant: "destructive" });
+      return;
+    }
+
+    setIsUploading(true);
+    try {
+      const fileExt = file.name.split(".").pop();
+      const fileName = `${crypto.randomUUID()}.${fileExt}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("event-images")
+        .upload(fileName, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from("event-images")
+        .getPublicUrl(fileName);
+
+      form.setValue("image_url", publicUrl);
+      setPreviewUrl(publicUrl);
+      toast({ title: "Image uploaded successfully" });
+    } catch (error: any) {
+      toast({ title: "Upload failed", description: error.message, variant: "destructive" });
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    form.setValue("image_url", "");
+    setPreviewUrl(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
   useEffect(() => {
     if (event) {
       form.reset({
@@ -77,6 +125,7 @@ export const FeaturedEventFormDialog = ({
         display_order: event.display_order,
         is_active: event.is_active,
       });
+      setPreviewUrl(event.image_url || null);
     } else {
       form.reset({
         event_name: "",
@@ -89,6 +138,7 @@ export const FeaturedEventFormDialog = ({
         display_order: 0,
         is_active: true,
       });
+      setPreviewUrl(null);
     }
   }, [event, form]);
 
@@ -210,9 +260,65 @@ export const FeaturedEventFormDialog = ({
               name="image_url"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Image URL</FormLabel>
+                  <FormLabel>Event Image</FormLabel>
                   <FormControl>
-                    <Input placeholder="https://images.unsplash.com/..." {...field} />
+                    <div className="space-y-3">
+                      {previewUrl ? (
+                        <div className="relative w-full h-32 rounded-lg overflow-hidden border">
+                          <img
+                            src={previewUrl}
+                            alt="Event preview"
+                            className="w-full h-full object-cover"
+                          />
+                          <Button
+                            type="button"
+                            variant="destructive"
+                            size="icon"
+                            className="absolute top-2 right-2 h-6 w-6"
+                            onClick={handleRemoveImage}
+                          >
+                            <X className="h-3 w-3" />
+                          </Button>
+                        </div>
+                      ) : (
+                        <div
+                          className="border-2 border-dashed rounded-lg p-6 text-center cursor-pointer hover:border-primary/50 transition-colors"
+                          onClick={() => fileInputRef.current?.click()}
+                        >
+                          {isUploading ? (
+                            <div className="flex flex-col items-center gap-2">
+                              <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                              <span className="text-sm text-muted-foreground">Uploading...</span>
+                            </div>
+                          ) : (
+                            <div className="flex flex-col items-center gap-2">
+                              <Upload className="h-8 w-8 text-muted-foreground" />
+                              <span className="text-sm text-muted-foreground">Click to upload image</span>
+                              <span className="text-xs text-muted-foreground">Max 5MB</span>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) handleFileUpload(file);
+                        }}
+                      />
+                      <Input
+                        placeholder="Or paste image URL..."
+                        {...field}
+                        onChange={(e) => {
+                          field.onChange(e);
+                          setPreviewUrl(e.target.value || null);
+                        }}
+                        className="text-sm"
+                      />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
