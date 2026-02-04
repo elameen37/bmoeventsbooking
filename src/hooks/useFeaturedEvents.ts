@@ -122,6 +122,29 @@ export const useAdminFeaturedEvents = () => {
     },
   });
 
+  const reorderMutation = useMutation({
+    mutationFn: async (orderedEvents: { id: string; display_order: number }[]) => {
+      const updates = orderedEvents.map(({ id, display_order }) =>
+        supabase
+          .from("featured_events")
+          .update({ display_order })
+          .eq("id", id)
+      );
+      
+      const results = await Promise.all(updates);
+      const error = results.find((r) => r.error)?.error;
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-featured-events"] });
+      queryClient.invalidateQueries({ queryKey: ["featured-events"] });
+      toast.success("Event order updated");
+    },
+    onError: (error) => {
+      toast.error("Failed to reorder events: " + error.message);
+    },
+  });
+
   return {
     events: eventsQuery.data ?? [],
     isLoading: eventsQuery.isLoading,
@@ -129,8 +152,10 @@ export const useAdminFeaturedEvents = () => {
     createEvent: createMutation.mutate,
     updateEvent: updateMutation.mutate,
     deleteEvent: deleteMutation.mutate,
+    reorderEvents: reorderMutation.mutate,
     isCreating: createMutation.isPending,
     isUpdating: updateMutation.isPending,
     isDeleting: deleteMutation.isPending,
+    isReordering: reorderMutation.isPending,
   };
 };
