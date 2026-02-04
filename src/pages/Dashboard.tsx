@@ -18,13 +18,15 @@ import {
   CalendarDays,
   Building,
   FileText,
-  ChevronRight
+  ChevronRight,
+  Shield
 } from "lucide-react";
 import PageTransition from "@/components/PageTransition";
 import { useAuth } from "@/contexts/AuthContext";
 import { useProfile } from "@/hooks/useProfile";
 import { useUserBookings, useUpcomingBookings } from "@/hooks/useBookings";
 import { useArenas } from "@/hooks/useArenas";
+import { useIsAdmin } from "@/hooks/useUserRole";
 
 const DashboardSkeleton = () => (
   <div className="min-h-screen bg-background flex">
@@ -111,6 +113,7 @@ const DashboardPage = () => {
   const { data: userBookings, isLoading: bookingsLoading } = useUserBookings();
   const { data: upcomingBookings } = useUpcomingBookings();
   const { data: arenas } = useArenas();
+  const { isManager } = useIsAdmin();
 
   const isLoading = authLoading || profileLoading || bookingsLoading;
 
@@ -156,6 +159,9 @@ const DashboardPage = () => {
               <NavItem icon={FileText} label="My Bookings" badge={pendingBookings > 0 ? pendingBookings : undefined} />
               <NavItem icon={Bell} label="Notifications" />
               <NavItem icon={Settings} label="Settings" />
+              {isManager && (
+                <NavItem icon={Shield} label="Admin Panel" onClick={() => navigate("/admin")} />
+              )}
             </nav>
           </div>
 
