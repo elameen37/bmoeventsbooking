@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Calendar, Building2, LayoutDashboard, Shield, Users, Star } from "lucide-react";
+import { Calendar, Building2, LayoutDashboard, Shield, Users, Star, Menu, LogOut } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -13,12 +13,25 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useAllBookings } from "@/hooks/useAdminBookings";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const AdminPage = () => {
   const navigate = useNavigate();
-  const { user, loading: authLoading } = useAuth();
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const { user, signOut, loading: authLoading } = useAuth();
   const { isManager, isLoading: roleLoading } = useIsAdmin();
   const { data: bookings } = useAllBookings();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/");
+  };
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -69,17 +82,72 @@ const AdminPage = () => {
       <main className="pt-24 pb-16 px-6 sm:px-8 lg:px-12">
         <div className="container mx-auto max-w-7xl">
           {/* Header */}
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between gap-4 mb-8">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl gold-gradient flex items-center justify-center">
+              {/* Mobile Menu Trigger */}
+              <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
+                <SheetTrigger asChild>
+                  <Button variant="outline" size="icon" className="lg:hidden shrink-0">
+                    <Menu className="w-5 h-5" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left" className="w-72 p-0">
+                  <SheetHeader className="p-6 border-b border-border">
+                    <SheetTitle asChild>
+                      <Link to="/" className="flex items-center gap-2">
+                        <div className="w-10 h-10 rounded-lg gold-gradient flex items-center justify-center">
+                          <Calendar className="w-6 h-6 text-primary-foreground" />
+                        </div>
+                        <div>
+                          <span className="font-display text-lg font-bold">B.M.O</span>
+                          <span className="text-xs block text-muted-foreground">Events Arena</span>
+                        </div>
+                      </Link>
+                    </SheetTitle>
+                  </SheetHeader>
+                  
+                  <nav className="p-4 space-y-1">
+                    <NavItem icon={LayoutDashboard} label="Dashboard" onClick={() => { navigate("/dashboard"); setMobileNavOpen(false); }} />
+                    <NavItem icon={Shield} label="Admin Panel" active onClick={() => setMobileNavOpen(false)} />
+                    <NavItem icon={Users} label="User Management" onClick={() => { navigate("/admin/users"); setMobileNavOpen(false); }} />
+                    <NavItem icon={Calendar} label="Calendar" onClick={() => { navigate("/calendar"); setMobileNavOpen(false); }} />
+                    <NavItem icon={Building2} label="Arenas" onClick={() => { navigate("/arenas"); setMobileNavOpen(false); }} />
+                  </nav>
+
+                  <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-border">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-full gold-gradient flex items-center justify-center">
+                        <span className="text-primary-foreground font-semibold">
+                          {user?.email?.[0]?.toUpperCase() || "A"}
+                        </span>
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="font-medium text-sm">Admin</div>
+                        <div className="text-xs text-muted-foreground truncate">{user?.email}</div>
+                      </div>
+                    </div>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="w-full justify-start text-muted-foreground"
+                      onClick={() => { handleSignOut(); setMobileNavOpen(false); }}
+                    >
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Sign Out
+                    </Button>
+                  </div>
+                </SheetContent>
+              </Sheet>
+
+              <div className="w-12 h-12 rounded-xl gold-gradient flex items-center justify-center shrink-0 hidden sm:flex">
                 <Shield className="w-6 h-6 text-primary-foreground" />
               </div>
               <div>
-                <h1 className="text-3xl font-display font-bold">Admin Dashboard</h1>
-                <p className="text-muted-foreground">Manage bookings and arena availability</p>
+                <h1 className="text-2xl sm:text-3xl font-display font-bold">Admin Dashboard</h1>
+                <p className="text-muted-foreground text-sm sm:text-base">Manage bookings and arena availability</p>
               </div>
             </div>
-            <Button asChild variant="outline" className="gap-2">
+            <Button asChild variant="outline" className="gap-2 hidden sm:flex">
               <Link to="/admin/users">
                 <Users className="w-4 h-4" />
                 Manage Users
@@ -176,5 +244,29 @@ const AdminPage = () => {
     </div>
   );
 };
+
+const NavItem = ({ 
+  icon: Icon, 
+  label, 
+  active = false,
+  onClick
+}: { 
+  icon: React.ElementType; 
+  label: string; 
+  active?: boolean;
+  onClick?: () => void;
+}) => (
+  <button
+    onClick={onClick}
+    className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors ${
+      active
+        ? "bg-primary/10 text-primary font-medium"
+        : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+    }`}
+  >
+    <Icon className="w-5 h-5" />
+    {label}
+  </button>
+);
 
 export default AdminPage;
