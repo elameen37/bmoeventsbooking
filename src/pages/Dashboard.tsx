@@ -4,6 +4,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { 
   Calendar, 
   Users, 
@@ -19,7 +26,8 @@ import {
   Building,
   FileText,
   ChevronRight,
-  Shield
+  Shield,
+  Menu
 } from "lucide-react";
 import PageTransition from "@/components/PageTransition";
 import { useAuth } from "@/contexts/AuthContext";
@@ -108,6 +116,7 @@ const DashboardSkeleton = () => (
 
 const DashboardPage = () => {
   const navigate = useNavigate();
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const { user, signOut, loading: authLoading } = useAuth();
   const { data: profile, isLoading: profileLoading } = useProfile();
   const { data: userBookings, isLoading: bookingsLoading } = useUserBookings();
@@ -194,23 +203,74 @@ const DashboardPage = () => {
           <div className="p-6 lg:p-8">
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-              <div>
-                <h1 className="font-display text-3xl font-bold">Dashboard</h1>
-                <p className="text-muted-foreground">
-                  Welcome back, {profile?.first_name || "there"}! Here's your overview.
-                </p>
+              <div className="flex items-center gap-3">
+                {/* Mobile Menu Trigger */}
+                <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
+                  <SheetTrigger asChild>
+                    <Button variant="outline" size="icon" className="lg:hidden">
+                      <Menu className="w-5 h-5" />
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent side="left" className="w-72 p-0">
+                    <SheetHeader className="p-6 border-b border-border">
+                      <SheetTitle asChild>
+                        <Link to="/" className="flex items-center gap-2">
+                          <div className="w-10 h-10 rounded-lg gold-gradient flex items-center justify-center">
+                            <Calendar className="w-6 h-6 text-primary-foreground" />
+                          </div>
+                          <div>
+                            <span className="font-display text-lg font-bold">B.M.O</span>
+                            <span className="text-xs block text-muted-foreground">Events Arena</span>
+                          </div>
+                        </Link>
+                      </SheetTitle>
+                    </SheetHeader>
+                    
+                    <nav className="p-4 space-y-1">
+                      <NavItem icon={LayoutDashboard} label="Dashboard" active onClick={() => setMobileNavOpen(false)} />
+                      <NavItem icon={CalendarDays} label="Calendar" onClick={() => { navigate("/calendar"); setMobileNavOpen(false); }} />
+                      <NavItem icon={Building} label="Arenas" onClick={() => { navigate("/arenas"); setMobileNavOpen(false); }} />
+                      <NavItem icon={FileText} label="My Bookings" badge={pendingBookings > 0 ? pendingBookings : undefined} onClick={() => setMobileNavOpen(false)} />
+                      <NavItem icon={Bell} label="Notifications" onClick={() => setMobileNavOpen(false)} />
+                      <NavItem icon={Settings} label="Settings" onClick={() => setMobileNavOpen(false)} />
+                      {isManager && (
+                        <NavItem icon={Shield} label="Admin Panel" onClick={() => { navigate("/admin"); setMobileNavOpen(false); }} />
+                      )}
+                    </nav>
+
+                    <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-border">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 rounded-full gold-gradient flex items-center justify-center">
+                          <span className="text-primary-foreground font-semibold">{initials}</span>
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="font-medium text-sm truncate">
+                            {profile?.first_name} {profile?.last_name}
+                          </div>
+                          <div className="text-xs text-muted-foreground truncate">{user?.email}</div>
+                        </div>
+                      </div>
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="w-full justify-start text-muted-foreground"
+                        onClick={() => { handleSignOut(); setMobileNavOpen(false); }}
+                      >
+                        <LogOut className="w-4 h-4 mr-2" />
+                        Sign Out
+                      </Button>
+                    </div>
+                  </SheetContent>
+                </Sheet>
+                
+                <div>
+                  <h1 className="font-display text-3xl font-bold">Dashboard</h1>
+                  <p className="text-muted-foreground">
+                    Welcome back, {profile?.first_name || "there"}! Here's your overview.
+                  </p>
+                </div>
               </div>
               <div className="flex flex-wrap gap-2">
-                {isManager && (
-                  <Button 
-                    variant="outline" 
-                    onClick={() => navigate("/admin")}
-                    className="lg:hidden"
-                  >
-                    <Shield className="w-4 h-4 mr-2" />
-                    Admin Panel
-                  </Button>
-                )}
                 <Button variant="outline" onClick={() => navigate("/calendar")}>
                   <Calendar className="w-4 h-4 mr-2" />
                   View Calendar
