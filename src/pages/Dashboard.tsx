@@ -200,7 +200,17 @@ const DashboardPage = () => {
                   Welcome back, {profile?.first_name || "there"}! Here's your overview.
                 </p>
               </div>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
+                {isManager && (
+                  <Button 
+                    variant="outline" 
+                    onClick={() => navigate("/admin")}
+                    className="lg:hidden"
+                  >
+                    <Shield className="w-4 h-4 mr-2" />
+                    Admin Panel
+                  </Button>
+                )}
                 <Button variant="outline" onClick={() => navigate("/calendar")}>
                   <Calendar className="w-4 h-4 mr-2" />
                   View Calendar
