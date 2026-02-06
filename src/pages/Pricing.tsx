@@ -167,8 +167,9 @@ const AddOnCard = ({
   title: string;
 }) => (
   <Card variant="glass" className="p-4">
-    <div className="flex items-center justify-center">
+    <div className="flex flex-col items-center gap-1">
       <span className="font-medium text-center">{title}</span>
+      <span className="text-xs text-muted-foreground">Contact for pricing</span>
     </div>
   </Card>
 );
