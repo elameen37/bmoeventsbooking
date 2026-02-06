@@ -134,7 +134,7 @@ const ContactPage = () => {
                   <ContactInfo
                     icon={MapPin}
                     title="Address"
-                    details={["Plot 174, Riverplate Park", "Wuse II, Abuja, Nigeria"]}
+                    details={["Plot 174, Riverplate Park", "Ahmadu Bello Way, Wuse II, Abuja"]}
                   />
                   <ContactInfo
                     icon={Phone}
@@ -171,15 +171,19 @@ const ContactPage = () => {
                 </CardContent>
               </Card>
 
-              {/* Map placeholder */}
+              {/* Google Map */}
               <Card variant="glass" className="overflow-hidden">
-                <div className="h-48 bg-secondary flex items-center justify-center">
-                  <div className="text-center text-muted-foreground">
-                    <MapPin className="w-8 h-8 mx-auto mb-2" />
-                    <p className="text-sm">Interactive Map</p>
-                    <p className="text-xs">Wuse II, Abuja</p>
-                  </div>
-                </div>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.0!2d7.4567!3d9.0667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwMDQnMDAuMCJOIDfCsDI3JzI0LjAiRQ!5e0!3m2!1sen!2sng!4v1699000000000!5m2!1sen!2sng&q=Plot+174+Riverplate+Park+Ahmadu+Bello+Way+Wuse+II+Abuja"
+                  width="100%"
+                  height="200"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="B.M.O Events Arena Location"
+                  className="w-full"
+                />
               </Card>
             </div>
           </div>
