@@ -38,7 +38,7 @@ const featureIcons: Record<string, React.ElementType> = {
 
 // Arena images mapping (since images are stored locally)
 const arenaImages: Record<string, string> = {
-  "B.M.O Hall - 1": bmoHall1,
+  "B.M.O Hall": bmoHall1,
   "B.M.O Hall - 2": bmoHall2,
 };
 
