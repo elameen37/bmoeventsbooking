@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Calendar, Building2, LayoutDashboard, Shield, Users, Star, Menu, LogOut, Home } from "lucide-react";
+import { Calendar, Building2, LayoutDashboard, Shield, Users, Star, Menu, LogOut, Home, ImageIcon } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookingsTable } from "@/components/admin/BookingsTable";
 import { ArenaManagement } from "@/components/admin/ArenaManagement";
 import FeaturedEventsManagement from "@/components/admin/FeaturedEventsManagement";
+import GalleryManagement from "@/components/admin/GalleryManagement";
 import { useIsAdmin } from "@/hooks/useUserRole";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAllBookings } from "@/hooks/useAdminBookings";
@@ -233,7 +234,7 @@ const AdminPage = () => {
 
           {/* Tabs */}
           <Tabs defaultValue="bookings" className="space-y-6">
-            <TabsList className="bg-muted/50 p-1">
+            <TabsList className="bg-muted/50 p-1 flex-wrap h-auto">
               <TabsTrigger value="bookings" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                 <Calendar className="w-4 h-4 mr-2" />
                 Bookings
@@ -245,6 +246,10 @@ const AdminPage = () => {
               <TabsTrigger value="featured" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                 <Star className="w-4 h-4 mr-2" />
                 Featured Events
+              </TabsTrigger>
+              <TabsTrigger value="gallery" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                <ImageIcon className="w-4 h-4 mr-2" />
+                Gallery
               </TabsTrigger>
             </TabsList>
 
@@ -267,6 +272,13 @@ const AdminPage = () => {
                 <h2 className="text-xl font-display font-semibold">Featured Events Management</h2>
               </div>
               <FeaturedEventsManagement />
+            </TabsContent>
+
+            <TabsContent value="gallery" className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-display font-semibold">Gallery Management</h2>
+              </div>
+              <GalleryManagement />
             </TabsContent>
           </Tabs>
         </div>
