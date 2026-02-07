@@ -16,7 +16,7 @@ const Footer = () => {
               </div>
             </Link>
             <p className="text-muted-foreground text-sm mb-4">
-              Premium event venues across Abuja. Your perfect event starts here.
+              Premium event venue in Abuja. Your perfect event starts here.
             </p>
             <div className="flex gap-3 justify-center sm:justify-start">
               <SocialIcon Icon={Facebook} href="#" />
