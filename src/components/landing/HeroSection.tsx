@@ -1,18 +1,46 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Calendar, MapPin, Users, Clock, CheckCircle, Star, ArrowRight, Facebook, Instagram } from "lucide-react";
+import { useState, useEffect } from "react";
 import heroArena from "@/assets/hero-arena.jpg";
+
 const HeroSection = () => {
-  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0">
-        <img src={heroArena} alt="B.M.O Events Arena" className="w-full h-full object-cover" />
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Parallax multipliers for different layers
+  const bgParallax = scrollY * 0.5;
+  const contentParallax = scrollY * 0.2;
+  const floatingParallax = scrollY * 0.3;
+
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Image with Parallax */}
+      <div 
+        className="absolute inset-0 will-change-transform"
+        style={{ transform: `translateY(${bgParallax}px) scale(${1 + scrollY * 0.0002})` }}
+      >
+        <img 
+          src={heroArena} 
+          alt="B.M.O Events Arena" 
+          className="w-full h-[120%] object-cover" 
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/60" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 sm:px-8 lg:px-12 py-12 sm:py-20 flex items-center justify-center">
+      {/* Content with subtle parallax */}
+      <div 
+        className="relative z-10 container mx-auto px-6 sm:px-8 lg:px-12 py-12 sm:py-20 flex items-center justify-center will-change-transform"
+        style={{ transform: `translateY(${contentParallax}px)`, opacity: Math.max(0, 1 - scrollY * 0.002) }}
+      >
         <div className="max-w-3xl mx-auto text-center">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 mb-6 sm:mb-8 animate-fade-in">
@@ -21,24 +49,27 @@ const HeroSection = () => {
           </div>
 
           {/* Heading */}
-          <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 animate-fade-in" style={{
-          animationDelay: "0.1s"
-        }}>
+          <h1 
+            className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 animate-fade-in" 
+            style={{ animationDelay: "0.1s" }}
+          >
             Book Your
             <span className="block gold-text">Perfect Event Space</span>
           </h1>
 
           {/* Description */}
-          <p className="text-base sm:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-xl mx-auto animate-fade-in" style={{
-          animationDelay: "0.2s"
-        }}>
+          <p 
+            className="text-base sm:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-xl mx-auto animate-fade-in" 
+            style={{ animationDelay: "0.2s" }}
+          >
             Discover and book your premium events at B.M.O Events Arena, Abuja. From corporate conferences to grand celebrations, find the ideal venue for your unforgettable moments.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12 animate-fade-in justify-center" style={{
-          animationDelay: "0.3s"
-        }}>
+          <div 
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-12 animate-fade-in justify-center" 
+            style={{ animationDelay: "0.3s" }}
+          >
             <Link to="/book">
               <Button variant="hero" size="xl" className="w-full sm:w-auto">
                 <Calendar className="w-5 h-5" />
@@ -54,9 +85,10 @@ const HeroSection = () => {
           </div>
 
           {/* Social Media Buttons */}
-          <div className="flex items-center justify-center gap-4 mb-8 sm:mb-12 animate-fade-in" style={{
-          animationDelay: "0.35s"
-        }}>
+          <div 
+            className="flex items-center justify-center gap-4 mb-8 sm:mb-12 animate-fade-in" 
+            style={{ animationDelay: "0.35s" }}
+          >
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110">
               <Facebook className="w-5 h-5" />
             </a>
@@ -71,9 +103,10 @@ const HeroSection = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 animate-fade-in" style={{
-          animationDelay: "0.4s"
-        }}>
+          <div 
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 animate-fade-in" 
+            style={{ animationDelay: "0.4s" }}
+          >
             <StatItem icon={<MapPin />} value="5+" label="Locations" />
             <StatItem icon={<Users />} value="10K+" label="Events Hosted" />
             <StatItem icon={<Clock />} value="24/7" label="Support" />
@@ -82,13 +115,23 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Floating Elements */}
-      <div className="absolute right-10 top-1/4 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-float" />
-      <div className="absolute right-1/4 bottom-1/4 w-48 h-48 bg-accent/10 rounded-full blur-3xl animate-float" style={{
-      animationDelay: "2s"
-    }} />
-    </section>;
+      {/* Floating Elements with enhanced parallax */}
+      <div 
+        className="absolute right-10 top-1/4 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-float will-change-transform"
+        style={{ transform: `translateY(${-floatingParallax}px)` }}
+      />
+      <div 
+        className="absolute right-1/4 bottom-1/4 w-48 h-48 bg-accent/10 rounded-full blur-3xl animate-float will-change-transform"
+        style={{ animationDelay: "2s", transform: `translateY(${-floatingParallax * 0.7}px)` }}
+      />
+      <div 
+        className="absolute left-10 top-1/3 w-32 h-32 bg-primary/10 rounded-full blur-2xl animate-float will-change-transform"
+        style={{ animationDelay: "1s", transform: `translateY(${-floatingParallax * 1.2}px)` }}
+      />
+    </section>
+  );
 };
+
 const StatItem = ({
   icon,
   value,
@@ -97,7 +140,8 @@ const StatItem = ({
   icon: React.ReactNode;
   value: string;
   label: string;
-}) => <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-center sm:text-left">
+}) => (
+  <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-center sm:text-left">
     <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
       {icon}
     </div>
@@ -105,5 +149,7 @@ const StatItem = ({
       <div className="font-display text-lg sm:text-xl font-bold text-foreground">{value}</div>
       <div className="text-xs sm:text-sm text-muted-foreground">{label}</div>
     </div>
-  </div>;
+  </div>
+);
+
 export default HeroSection;
