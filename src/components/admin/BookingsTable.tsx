@@ -13,7 +13,7 @@ import {
 import { useAllBookings, useUpdateBookingStatus } from "@/hooks/useAdminBookings";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
-
+import { useIsAdmin } from "@/hooks/useUserRole";
 const statusStyles = {
   pending: "bg-warning/20 text-warning border-warning/30",
   confirmed: "bg-success/20 text-success border-success/30",
@@ -24,6 +24,16 @@ export const BookingsTable = () => {
   const { data: bookings, isLoading } = useAllBookings();
   const updateStatus = useUpdateBookingStatus();
   const { toast } = useToast();
+  const { isAdmin } = useIsAdmin();
+
+  // Mask mobile number for non-admin users (managers)
+  const maskMobileNumber = (mobile: string | null) => {
+    if (!mobile) return null;
+    if (isAdmin) return mobile;
+    // Mask all but last 4 digits for managers
+    if (mobile.length <= 4) return "****";
+    return "****" + mobile.slice(-4);
+  };
 
   const handleStatusChange = async (bookingId: string, status: "confirmed" | "cancelled") => {
     try {
@@ -111,7 +121,7 @@ export const BookingsTable = () => {
                 {booking.mobile_no ? (
                   <div className="flex items-center gap-2">
                     <Phone className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-sm">{booking.mobile_no}</span>
+                    <span className="text-sm">{maskMobileNumber(booking.mobile_no)}</span>
                   </div>
                 ) : (
                   <span className="text-muted-foreground text-sm">—</span>
