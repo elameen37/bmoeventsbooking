@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar, Mail, Lock, User, Phone, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
-import ScrollToTop from "@/components/ui/scroll-to-top";
 import PageTransition from "@/components/PageTransition";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -360,7 +359,6 @@ const AuthPage = () => {
           </Tabs>
         </div>
       </div>
-      <ScrollToTop />
       </div>
     </PageTransition>
   );
