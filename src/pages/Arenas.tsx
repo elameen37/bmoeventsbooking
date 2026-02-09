@@ -1,14 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MapPin, Users, Star, Calendar, Clock, Car, Wind, Utensils, Shield, ShieldCheck, Armchair, Circle, Zap } from "lucide-react";
 import ImageMarquee from "@/components/ui/image-marquee";
 import ArenaCardSkeleton from "@/components/arenas/ArenaCardSkeleton";
-import ScrollToTop from "@/components/ui/scroll-to-top";
 import PageTransition from "@/components/PageTransition";
 import { useArenas, type Arena as DBArena } from "@/hooks/useArenas";
 
@@ -53,69 +50,64 @@ const ArenasPage = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-background">
-        <Navbar />
-        <main className="pt-20 sm:pt-24 pb-8 sm:pb-12">
-          <div className="container mx-auto px-6 sm:px-8 lg:px-12">
-            {/* Header */}
-            <div className="mb-6 sm:mb-8 text-center sm:text-left">
-              <Badge variant="premium" className="mb-4">Our Venues</Badge>
-              <h1 className="font-display text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
-                Explore Our <span className="gold-text">Event Arenas</span>
-              </h1>
-              <p className="text-muted-foreground text-sm sm:text-lg max-w-2xl mx-auto sm:mx-0">
-                Discover the perfect venue for your next event. Each arena offers unique features and world-class amenities.
-              </p>
-            </div>
-
-            {/* Filter Bar */}
-            <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8 justify-center sm:justify-start">
-              <Button 
-                variant={filter === "all" ? "premium" : "outline"} 
-                size="sm"
-                onClick={() => setFilter("all")}
-              >
-                All Venues
-              </Button>
-              <Button 
-                variant={filter === "available" ? "premium" : "outline"} 
-                size="sm"
-                onClick={() => setFilter("available")}
-              >
-                Available
-              </Button>
-              <Button 
-                variant={filter === "booked" ? "premium" : "outline"} 
-                size="sm"
-                onClick={() => setFilter("booked")}
-              >
-                Booked
-              </Button>
-            </div>
-
-            {/* Arena Cards */}
-            <div className="space-y-4 sm:space-y-6">
-              {isLoading ? (
-                [1, 2].map((i) => <ArenaCardSkeleton key={i} />)
-              ) : error ? (
-                <div className="text-center py-12">
-                  <p className="text-destructive">Failed to load venues. Please try again.</p>
-                </div>
-              ) : filteredArenas.length > 0 ? (
-                filteredArenas.map((arena, index) => (
-                  <ArenaDetailCard key={arena.id} arena={arena} index={index} />
-                ))
-              ) : (
-                <div className="text-center py-12">
-                  <p className="text-muted-foreground">No venues match the selected filter.</p>
-                </div>
-              )}
-            </div>
+      <main className="pt-20 sm:pt-24 pb-8 sm:pb-12">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
+          {/* Header */}
+          <div className="mb-6 sm:mb-8 text-center sm:text-left">
+            <Badge variant="premium" className="mb-4">Our Venues</Badge>
+            <h1 className="font-display text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
+              Explore Our <span className="gold-text">Event Arenas</span>
+            </h1>
+            <p className="text-muted-foreground text-sm sm:text-lg max-w-2xl mx-auto sm:mx-0">
+              Discover the perfect venue for your next event. Each arena offers unique features and world-class amenities.
+            </p>
           </div>
-        </main>
-        <Footer />
-        <ScrollToTop />
-      </div>
+
+          {/* Filter Bar */}
+          <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8 justify-center sm:justify-start">
+            <Button 
+              variant={filter === "all" ? "premium" : "outline"} 
+              size="sm"
+              onClick={() => setFilter("all")}
+            >
+              All Venues
+            </Button>
+            <Button 
+              variant={filter === "available" ? "premium" : "outline"} 
+              size="sm"
+              onClick={() => setFilter("available")}
+            >
+              Available
+            </Button>
+            <Button 
+              variant={filter === "booked" ? "premium" : "outline"} 
+              size="sm"
+              onClick={() => setFilter("booked")}
+            >
+              Booked
+            </Button>
+          </div>
+
+          {/* Arena Cards */}
+          <div className="space-y-4 sm:space-y-6">
+            {isLoading ? (
+              [1, 2].map((i) => <ArenaCardSkeleton key={i} />)
+            ) : error ? (
+              <div className="text-center py-12">
+                <p className="text-destructive">Failed to load venues. Please try again.</p>
+              </div>
+            ) : filteredArenas.length > 0 ? (
+              filteredArenas.map((arena, index) => (
+                <ArenaDetailCard key={arena.id} arena={arena} index={index} />
+              ))
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">No venues match the selected filter.</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </main>
     </PageTransition>
   );
 };

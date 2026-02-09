@@ -1,13 +1,9 @@
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import BookingCalendar from "@/components/calendar/BookingCalendar";
 import PageTransition from "@/components/PageTransition";
 
 const CalendarPage = () => {
   return (
     <PageTransition>
-      <div className="min-h-screen bg-background">
-      <Navbar />
       <main className="pt-24 pb-12">
         <div className="container mx-auto px-6">
           {/* Header */}
@@ -23,8 +19,6 @@ const CalendarPage = () => {
           <BookingCalendar />
         </div>
       </main>
-      <Footer />
-      </div>
     </PageTransition>
   );
 };

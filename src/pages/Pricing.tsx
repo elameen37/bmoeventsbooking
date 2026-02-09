@@ -1,11 +1,8 @@
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Check, Crown } from "lucide-react";
 import { Link } from "react-router-dom";
-import ScrollToTop from "@/components/ui/scroll-to-top";
 import PageTransition from "@/components/PageTransition";
 import PageSkeleton from "@/components/skeletons/PageSkeleton";
 import { useArenas } from "@/hooks/useArenas";
@@ -21,8 +18,6 @@ const PricingPage = () => {
   }
   return (
     <PageTransition>
-      <div className="min-h-screen bg-background">
-      <Navbar />
       <main className="pt-20 sm:pt-24 pb-8 sm:pb-12">
         <div className="container mx-auto px-6 sm:px-8 lg:px-12">
           {/* Header */}
@@ -103,9 +98,6 @@ const PricingPage = () => {
           </Card>
         </div>
       </main>
-      <Footer />
-      <ScrollToTop />
-      </div>
     </PageTransition>
   );
 };

@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -102,10 +100,8 @@ const BookPage = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-background">
-        <Navbar />
-        <main className="pt-24 pb-12">
-          <div className="container mx-auto px-6">
+      <main className="pt-24 pb-12">
+        <div className="container mx-auto px-6">
             {/* Header */}
             <div className="mb-8 text-center">
               <Badge variant="premium" className="mb-4">Book Your Event</Badge>
@@ -488,11 +484,9 @@ const BookPage = () => {
                   </CardContent>
                 </Card>
               )}
-            </div>
           </div>
-        </main>
-        <Footer />
-      </div>
+        </div>
+      </main>
     </PageTransition>
   );
 };

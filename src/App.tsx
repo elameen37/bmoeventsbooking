@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
+import Layout from "@/components/layout/Layout";
 import Index from "./pages/Index";
 import CalendarPage from "./pages/Calendar";
 import ArenasPage from "./pages/Arenas";
@@ -31,39 +32,34 @@ const App = () => (
           <NavigationProgress />
           <ScrollToTopOnNavigate />
           <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/calendar" element={<CalendarPage />} />
-            <Route path="/arenas" element={<ArenasPage />} />
-            <Route path="/book" element={<BookPage />} />
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <DashboardPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin"
-              element={
-                <ProtectedRoute>
-                  <AdminPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/admin/users"
-              element={
-                <ProtectedRoute>
-                  <UserManagementPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/pricing" element={<PricingPage />} />
-            <Route path="/contact" element={<ContactPage />} />
+            {/* Pages with full layout (Navbar + Footer + ScrollToTop) */}
+            <Route path="/" element={<Layout><Index /></Layout>} />
+            <Route path="/calendar" element={<Layout><CalendarPage /></Layout>} />
+            <Route path="/arenas" element={<Layout><ArenasPage /></Layout>} />
+            <Route path="/book" element={<Layout><BookPage /></Layout>} />
+            <Route path="/pricing" element={<Layout><PricingPage /></Layout>} />
+            <Route path="/contact" element={<Layout><ContactPage /></Layout>} />
+            <Route path="/admin" element={
+              <ProtectedRoute>
+                <Layout><AdminPage /></Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/users" element={
+              <ProtectedRoute>
+                <Layout><UserManagementPage /></Layout>
+              </ProtectedRoute>
+            } />
+            
+            {/* Pages with custom layouts (no Layout wrapper) */}
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            } />
             <Route path="/auth" element={<AuthPage />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
+            
+            {/* Catch-all */}
+            <Route path="*" element={<Layout><NotFound /></Layout>} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>

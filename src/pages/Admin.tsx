@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Calendar, Building2, LayoutDashboard, Shield, Users, Star, Menu, LogOut, Home, ImageIcon } from "lucide-react";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookingsTable } from "@/components/admin/BookingsTable";
@@ -56,21 +54,17 @@ const AdminPage = () => {
 
   if (authLoading || roleLoading) {
     return (
-      <div className="min-h-screen bg-background">
-        <Navbar />
-        <main className="pt-24 pb-16 px-6 sm:px-8 lg:px-12">
-          <div className="container mx-auto max-w-7xl">
-            <Skeleton className="h-10 w-64 mb-8" />
-            <div className="grid gap-4 md:grid-cols-3 mb-8">
-              {[...Array(3)].map((_, i) => (
-                <Skeleton key={i} className="h-32 w-full" />
-              ))}
-            </div>
-            <Skeleton className="h-96 w-full" />
+      <main className="pt-24 pb-16 px-6 sm:px-8 lg:px-12">
+        <div className="container mx-auto max-w-7xl">
+          <Skeleton className="h-10 w-64 mb-8" />
+          <div className="grid gap-4 md:grid-cols-3 mb-8">
+            {[...Array(3)].map((_, i) => (
+              <Skeleton key={i} className="h-32 w-full" />
+            ))}
           </div>
-        </main>
-        <Footer />
-      </div>
+          <Skeleton className="h-96 w-full" />
+        </div>
+      </main>
     );
   }
 
@@ -85,11 +79,8 @@ const AdminPage = () => {
     .reduce((sum, b) => sum + b.total_amount, 0) || 0;
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-
-      <main className="pt-24 pb-16 px-6 sm:px-8 lg:px-12">
-        <div className="container mx-auto max-w-7xl">
+    <main className="pt-24 pb-16 px-6 sm:px-8 lg:px-12">
+      <div className="container mx-auto max-w-7xl">
           {/* Breadcrumb */}
           <Breadcrumb className="mb-6">
             <BreadcrumbList>
@@ -283,9 +274,6 @@ const AdminPage = () => {
           </Tabs>
         </div>
       </main>
-
-      <Footer />
-    </div>
   );
 };
 
