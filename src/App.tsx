@@ -16,6 +16,7 @@ import UserManagementPage from "./pages/UserManagement";
 import PricingPage from "./pages/Pricing";
 import ContactPage from "./pages/Contact";
 import AuthPage from "./pages/Auth";
+import InvoicePage from "./pages/Invoice";
 import NotFound from "./pages/NotFound";
 import ScrollToTopOnNavigate from "./components/ScrollToTopOnNavigate";
 import NavigationProgress from "./components/NavigationProgress";
@@ -51,6 +52,11 @@ const App = () => (
             } />
             
             {/* Pages with custom layouts (no Layout wrapper) */}
+            <Route path="/invoice/:bookingId" element={
+              <ProtectedRoute>
+                <InvoicePage />
+              </ProtectedRoute>
+            } />
             <Route path="/dashboard" element={
               <ProtectedRoute>
                 <DashboardPage />
