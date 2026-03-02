@@ -66,6 +66,15 @@ const BookPage = () => {
       return;
     }
 
+    if (startTime >= endTime) {
+      toast({
+        title: "Invalid Time",
+        description: "End time must be after start time.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     try {
       await createBooking.mutateAsync({
         arena_id: selectedArena,
