@@ -329,6 +329,7 @@ const DashboardPage = () => {
                       {upcomingBookings.map((booking) => (
                         <BookingItem
                           key={booking.id}
+                          id={booking.id}
                           title={booking.event_title}
                           date={new Date(booking.event_date).toLocaleDateString('en-NG', { month: 'short', day: 'numeric', year: 'numeric' })}
                           time={`${booking.start_time.slice(0, 5)} - ${booking.end_time.slice(0, 5)}`}
@@ -455,42 +456,56 @@ const StatCard = ({
 );
 
 const BookingItem = ({
+  id,
   title,
   date,
   time,
   arena,
   status,
 }: {
+  id: string;
   title: string;
   date: string;
   time: string;
   arena: string;
   status: "confirmed" | "pending" | "cancelled";
-}) => (
-  <div className="flex items-center gap-4 p-3 rounded-lg bg-secondary/30 hover:bg-secondary/50 transition-colors">
-    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-      <Calendar className="w-6 h-6 text-primary" />
-    </div>
-    <div className="flex-1 min-w-0">
-      <div className="flex items-center gap-2 mb-1">
-        <h4 className="font-medium truncate">{title}</h4>
-        <Badge variant={status === "confirmed" ? "available" : status === "pending" ? "pending" : "booked"}>
-          {status}
-        </Badge>
+}) => {
+  const navigate = useNavigate();
+  return (
+    <div className="flex items-center gap-4 p-3 rounded-lg bg-secondary/30 hover:bg-secondary/50 transition-colors">
+      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+        <Calendar className="w-6 h-6 text-primary" />
       </div>
-      <div className="flex items-center gap-4 text-sm text-muted-foreground">
-        <span className="flex items-center gap-1">
-          <Clock className="w-3 h-3" />
-          {date} • {time}
-        </span>
-        <span className="flex items-center gap-1">
-          <MapPin className="w-3 h-3" />
-          {arena}
-        </span>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 mb-1">
+          <h4 className="font-medium truncate">{title}</h4>
+          <Badge variant={status === "confirmed" ? "available" : status === "pending" ? "pending" : "booked"}>
+            {status}
+          </Badge>
+        </div>
+        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+          <span className="flex items-center gap-1">
+            <Clock className="w-3 h-3" />
+            {date} • {time}
+          </span>
+          <span className="flex items-center gap-1">
+            <MapPin className="w-3 h-3" />
+            {arena}
+          </span>
+        </div>
       </div>
+      <Button
+        variant="ghost"
+        size="sm"
+        className="shrink-0 text-xs"
+        onClick={() => navigate(`/invoice/${id}`)}
+      >
+        <FileText className="w-4 h-4 mr-1" />
+        {status === "confirmed" ? "Receipt" : "Invoice"}
+      </Button>
     </div>
-  </div>
-);
+  );
+};
 
 const ArenaStatus = ({
   name,
