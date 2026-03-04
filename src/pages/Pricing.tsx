@@ -146,7 +146,7 @@ const PricingCard = ({
 
       <Link to="/book">
         <Button variant="premium" className="w-full">
-          Book This Venue
+          Book This Date
         </Button>
       </Link>
     </CardContent>

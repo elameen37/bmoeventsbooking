@@ -73,12 +73,12 @@ const HeroSection = () => {
             <Link to="/book">
               <Button variant="hero" size="xl" className="w-full sm:w-auto">
                 <Calendar className="w-5 h-5" />
-                Book an Arena
+                Book a Date
               </Button>
             </Link>
             <Link to="/arenas">
               <Button variant="outline" size="xl" className="w-full sm:w-auto">
-                Explore Venues
+                Explore Calendar
                 <ArrowRight className="w-5 h-5" />
               </Button>
             </Link>
