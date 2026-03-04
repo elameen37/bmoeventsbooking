@@ -54,7 +54,7 @@ const ArenasPage = () => {
         <div className="container mx-auto px-6 sm:px-8 lg:px-12">
           {/* Header */}
           <div className="mb-6 sm:mb-8 text-center sm:text-left">
-            <Badge variant="premium" className="mb-4">Our Venues</Badge>
+            <Badge variant="premium" className="mb-4">Our Venue</Badge>
             <h1 className="font-display text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
               Explore Our <span className="gold-text">Event Arena</span>
             </h1>
