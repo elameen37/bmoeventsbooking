@@ -30,13 +30,13 @@ const featureIcons: Record<string, React.ElementType> = {
   "Air Conditioning": Wind,
   "Stage Platform": Circle,
   "Bridal Suite": Armchair,
-  "Outdoor Garden": Car,
+  "Outdoor Garden": Car
 };
 
 // Arena images mapping (since images are stored locally)
 const arenaImages: Record<string, string> = {
   "B.M.O Hall": bmoHall1,
-  "B.M.O Hall - 2": bmoHall2,
+  "B.M.O Hall - 2": bmoHall2
 };
 
 const ArenasPage = () => {
@@ -56,7 +56,7 @@ const ArenasPage = () => {
           <div className="mb-6 sm:mb-8 text-center sm:text-left">
             <Badge variant="premium" className="mb-4">Our Venues</Badge>
             <h1 className="font-display text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">
-              Explore Our <span className="gold-text">Event Arenas</span>
+              Explore Our <span className="gold-text">Event Arena</span>
             </h1>
             <p className="text-muted-foreground text-sm sm:text-lg max-w-2xl mx-auto sm:mx-0">
               Discover the perfect venue for your next event. Each arena offers unique features and world-class amenities.
@@ -65,60 +65,60 @@ const ArenasPage = () => {
 
           {/* Filter Bar */}
           <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8 justify-center sm:justify-start">
-            <Button 
-              variant={filter === "all" ? "premium" : "outline"} 
+            <Button
+              variant={filter === "all" ? "premium" : "outline"}
               size="sm"
-              onClick={() => setFilter("all")}
-            >
+              onClick={() => setFilter("all")}>
+              
               All Venues
             </Button>
-            <Button 
-              variant={filter === "available" ? "premium" : "outline"} 
+            <Button
+              variant={filter === "available" ? "premium" : "outline"}
               size="sm"
-              onClick={() => setFilter("available")}
-            >
+              onClick={() => setFilter("available")}>
+              
               Available
             </Button>
-            <Button 
-              variant={filter === "booked" ? "premium" : "outline"} 
+            <Button
+              variant={filter === "booked" ? "premium" : "outline"}
               size="sm"
-              onClick={() => setFilter("booked")}
-            >
+              onClick={() => setFilter("booked")}>
+              
               Booked
             </Button>
           </div>
 
           {/* Arena Cards */}
           <div className="space-y-4 sm:space-y-6">
-            {isLoading ? (
-              [1, 2].map((i) => <ArenaCardSkeleton key={i} />)
-            ) : error ? (
-              <div className="text-center py-12">
+            {isLoading ?
+            [1, 2].map((i) => <ArenaCardSkeleton key={i} />) :
+            error ?
+            <div className="text-center py-12">
                 <p className="text-destructive">Failed to load venues. Please try again.</p>
-              </div>
-            ) : filteredArenas.length > 0 ? (
-              filteredArenas.map((arena, index) => (
-                <ArenaDetailCard key={arena.id} arena={arena} index={index} />
-              ))
-            ) : (
-              <div className="text-center py-12">
+              </div> :
+            filteredArenas.length > 0 ?
+            filteredArenas.map((arena, index) =>
+            <ArenaDetailCard key={arena.id} arena={arena} index={index} />
+            ) :
+
+            <div className="text-center py-12">
                 <p className="text-muted-foreground">No venues match the selected filter.</p>
               </div>
-            )}
+            }
           </div>
         </div>
       </main>
-    </PageTransition>
-  );
+    </PageTransition>);
+
 };
 
 const ArenaDetailCard = ({
   arena,
   index
-}: {
-  arena: DBArena;
-  index: number;
-}) => {
+
+
+
+}: {arena: DBArena;index: number;}) => {
   const navigate = useNavigate();
   const statusVariant = {
     available: "available",
@@ -128,7 +128,7 @@ const ArenaDetailCard = ({
 
   const image = arenaImages[arena.name] || bmoHall1;
   const marqueeImages = [bmoHall1, bmoHall2];
-  const features = (arena.amenities || []).map(name => ({
+  const features = (arena.amenities || []).map((name) => ({
     icon: featureIcons[name] || Shield,
     name
   }));
@@ -183,12 +183,12 @@ const ArenaDetailCard = ({
 
               {/* Features */}
               <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4 justify-center md:justify-start">
-                {features.slice(0, 7).map(feature => (
-                  <div key={feature.name} className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 bg-secondary rounded-lg">
+                {features.slice(0, 7).map((feature) =>
+                <div key={feature.name} className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 bg-secondary rounded-lg">
                     <feature.icon className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
                     <span className="text-xs sm:text-sm">{feature.name}</span>
                   </div>
-                ))}
+                )}
               </div>
 
               {/* Footer */}
@@ -209,12 +209,12 @@ const ArenaDetailCard = ({
                     <span className="text-xl sm:text-2xl font-bold text-primary">₦{arena.price_per_hour.toLocaleString()}</span>
                     <span className="text-muted-foreground text-sm"> - 8hours</span>
                   </div>
-                  <Button 
-                    variant="premium" 
-                    disabled={arena.status !== "available"} 
+                  <Button
+                    variant="premium"
+                    disabled={arena.status !== "available"}
                     className="w-full sm:w-auto"
-                    onClick={handleBookNow}
-                  >
+                    onClick={handleBookNow}>
+                    
                     <Calendar className="w-4 h-4" />
                     Book Now
                   </Button>
@@ -224,8 +224,8 @@ const ArenaDetailCard = ({
           </CardContent>
         </div>
       </div>
-    </Card>
-  );
+    </Card>);
+
 };
 
 export default ArenasPage;
