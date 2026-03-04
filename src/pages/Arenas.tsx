@@ -70,20 +70,18 @@ const ArenasPage = () => {
               size="sm"
               onClick={() => setFilter("all")}>
               
-              All Venues
+              All
             </Button>
             <Button
               variant={filter === "available" ? "premium" : "outline"}
               size="sm"
               onClick={() => setFilter("available")}>
-              
               Available
             </Button>
             <Button
               variant={filter === "booked" ? "premium" : "outline"}
               size="sm"
               onClick={() => setFilter("booked")}>
-              
               Booked
             </Button>
           </div>
