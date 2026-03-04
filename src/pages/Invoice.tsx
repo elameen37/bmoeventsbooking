@@ -8,6 +8,8 @@ import { useProfile } from "@/hooks/useProfile";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { format, parseISO } from "date-fns";
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
 
 const useBookingDetails = (bookingId: string | undefined) => {
   const { user } = useAuth();
@@ -40,6 +42,42 @@ const InvoicePage = () => {
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const handleDownload = async () => {
+    const element = document.getElementById("invoice-content");
+    if (!element) return;
+    try {
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: "#ffffff",
+      });
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const pdfWidth = 210;
+      const pdfHeight = 297;
+      const imgWidth = pdfWidth;
+      const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+      let position = 0;
+      let heightLeft = imgHeight;
+
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pdfHeight;
+
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+        heightLeft -= pdfHeight;
+      }
+
+      const filename = `${isReceipt ? "Receipt" : "Invoice"}-${invoiceNumber}.pdf`;
+      pdf.save(filename);
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+    }
   };
 
   if (isLoading) {
@@ -85,7 +123,7 @@ const InvoicePage = () => {
               <Printer className="w-4 h-4 mr-2" />
               Print
             </Button>
-            <Button variant="premium" onClick={handlePrint}>
+            <Button variant="premium" onClick={handleDownload}>
               <Download className="w-4 h-4 mr-2" />
               Download PDF
             </Button>
@@ -95,7 +133,7 @@ const InvoicePage = () => {
 
       {/* Invoice Document */}
       <div className="max-w-3xl mx-auto px-6 py-8 print:px-0 print:py-0">
-        <div className="bg-card rounded-xl border border-border p-8 lg:p-12 print:border-none print:rounded-none print:shadow-none print:bg-white print:text-black">
+        <div id="invoice-content" className="bg-card rounded-xl border border-border p-8 lg:p-12 print:border-none print:rounded-none print:shadow-none print:bg-white print:text-black">
           {/* Header */}
           <div className="flex flex-col sm:flex-row justify-between items-start gap-6 mb-10">
             <div>
