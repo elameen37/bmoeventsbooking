@@ -59,7 +59,7 @@ const ArenasPage = () => {
               Explore Our <span className="gold-text">Event Arena</span>
             </h1>
             <p className="text-muted-foreground text-sm sm:text-lg max-w-2xl mx-auto sm:mx-0">
-              Discover the perfect venue for your next event. Each arena offers unique features and world-class amenities.
+              Discover the perfect venue for your next event. We offer unique features and world-class amenities.
             </p>
           </div>
 
