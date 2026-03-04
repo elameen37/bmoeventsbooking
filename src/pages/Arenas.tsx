@@ -63,28 +63,6 @@ const ArenasPage = () => {
             </p>
           </div>
 
-          {/* Filter Bar */}
-          <div className="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8 justify-center sm:justify-start">
-            <Button
-              variant={filter === "all" ? "premium" : "outline"}
-              size="sm"
-              onClick={() => setFilter("all")}>
-              
-              All Venues
-            </Button>
-            <Button
-              variant={filter === "available" ? "premium" : "outline"}
-              size="sm"
-              onClick={() => setFilter("available")}>
-              Available
-            </Button>
-            <Button
-              variant={filter === "booked" ? "premium" : "outline"}
-              size="sm"
-              onClick={() => setFilter("booked")}>
-              Booked
-            </Button>
-          </div>
 
           {/* Arena Cards */}
           <div className="space-y-4 sm:space-y-6">
