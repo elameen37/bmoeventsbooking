@@ -32,8 +32,8 @@ const HeroSection = () => {
           alt="B.M.O Events Arena" 
           className="w-full h-[120%] object-cover" 
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/60" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/60 light:from-background/70 light:via-background/50 light:to-background/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent light:from-background/80" />
       </div>
 
       {/* Content with subtle parallax */}
