@@ -118,8 +118,9 @@ const Navbar = () => {
             className="md:hidden"
             onClick={() => setIsOpen(!isOpen)}
           >
-            {isOpen ? <X /> : <Menu />}
-          </Button>
+              {isOpen ? <X /> : <Menu />}
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
