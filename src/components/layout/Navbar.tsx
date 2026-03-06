@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Calendar, Menu, X, User, LogIn, Shield } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useIsAdmin } from "@/hooks/useUserRole";
@@ -70,6 +71,7 @@ const Navbar = () => {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center gap-2">
+            <ThemeToggle />
             {user ? (
               <>
                 {isManager && (
@@ -108,14 +110,17 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <Button
+          <div className="flex items-center gap-1 md:hidden">
+            <ThemeToggle />
+            <Button
             variant="ghost"
             size="icon"
             className="md:hidden"
             onClick={() => setIsOpen(!isOpen)}
           >
-            {isOpen ? <X /> : <Menu />}
-          </Button>
+              {isOpen ? <X /> : <Menu />}
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
