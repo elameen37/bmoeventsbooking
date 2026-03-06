@@ -119,6 +119,22 @@
     border: 1px solid var(--glass-border);
   }
 
+  .hero-gradient-overlay {
+    background: linear-gradient(to right, hsl(var(--background) / 0.95), hsl(var(--background) / 0.8), hsl(var(--background) / 0.6));
+  }
+
+  .hero-gradient-bottom {
+    background: linear-gradient(to top, hsl(var(--background)), transparent, transparent);
+  }
+
+  .light .hero-gradient-overlay {
+    background: linear-gradient(to right, hsl(var(--background) / 0.7), hsl(var(--background) / 0.5), hsl(var(--background) / 0.3));
+  }
+
+  .light .hero-gradient-bottom {
+    background: linear-gradient(to top, hsl(var(--background) / 0.8), transparent, transparent);
+  }
+
   .orange-gradient {
     background: var(--orange-gradient);
   }
