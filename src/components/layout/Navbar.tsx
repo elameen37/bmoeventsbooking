@@ -110,7 +110,9 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <Button
+          <div className="flex items-center gap-1 md:hidden">
+            <ThemeToggle />
+            <Button
             variant="ghost"
             size="icon"
             className="md:hidden"
