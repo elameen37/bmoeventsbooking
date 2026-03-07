@@ -132,31 +132,31 @@ const InvoicePage = () => {
       </div>
 
       {/* Invoice Document */}
-      <div className="max-w-3xl mx-auto px-6 py-8 print:px-0 print:py-0">
-        <div id="invoice-content" className="bg-card rounded-xl border border-border p-8 lg:p-12 print:border-none print:rounded-none print:shadow-none print:bg-white print:text-black">
+      <div className="max-w-3xl mx-auto px-6 py-8 print:px-0 print:py-0 print:max-w-none">
+        <div id="invoice-content" className="bg-card rounded-xl border border-border p-8 lg:p-12 print:border-none print:rounded-none print:shadow-none print:bg-white print:text-black print:p-6">
           {/* Header */}
-          <div className="flex flex-col sm:flex-row justify-between items-start gap-6 mb-10">
+          <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6">
             <div>
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-12 h-12 rounded-lg gold-gradient flex items-center justify-center print:bg-orange-500">
-                  <Calendar className="w-7 h-7 text-primary-foreground" />
+              <div className="flex items-center gap-2 mb-1">
+                <div className="w-9 h-9 rounded-lg gold-gradient flex items-center justify-center print:bg-orange-500">
+                  <Calendar className="w-5 h-5 text-primary-foreground" />
                 </div>
                 <div>
-                  <h1 className="font-display text-2xl font-bold">B.M.O Events Arena</h1>
-                  <p className="text-sm text-muted-foreground print:text-gray-500">Premium Event Venues</p>
+                  <h1 className="font-display text-xl font-bold leading-tight">B.M.O Events Arena</h1>
+                  <p className="text-xs text-muted-foreground print:text-gray-500">Premium Event Venues</p>
                 </div>
               </div>
             </div>
             <div className="text-right">
-              <h2 className="font-display text-3xl font-bold gold-text print:text-orange-600">
+              <h2 className="font-display text-2xl font-bold gold-text print:text-orange-600">
                 {documentTitle}
               </h2>
-              <p className="text-sm text-muted-foreground print:text-gray-500 mt-1">
+              <p className="text-xs text-muted-foreground print:text-gray-500">
                 #{invoiceNumber}
               </p>
               <Badge 
                 variant={isReceipt ? "available" : booking.status === "pending" ? "pending" : "booked"} 
-                className="mt-2"
+                className="mt-1"
               >
                 {isReceipt ? "Paid" : booking.status === "pending" ? "Pending Payment" : "Cancelled"}
               </Badge>
@@ -164,44 +164,44 @@ const InvoicePage = () => {
           </div>
 
           {/* Dates Row */}
-          <div className="grid sm:grid-cols-2 gap-6 mb-10 p-4 rounded-lg bg-secondary/30 print:bg-gray-50">
+          <div className="grid sm:grid-cols-2 gap-4 mb-5 p-3 rounded-lg bg-secondary/30 print:bg-gray-50">
             <div>
-              <p className="text-xs text-muted-foreground print:text-gray-500 uppercase tracking-wider mb-1">Issue Date</p>
-              <p className="font-medium">{format(parseISO(booking.created_at), "MMMM d, yyyy")}</p>
+              <p className="text-[10px] text-muted-foreground print:text-gray-500 uppercase tracking-wider mb-0.5">Issue Date</p>
+              <p className="text-sm font-medium">{format(parseISO(booking.created_at), "MMMM d, yyyy")}</p>
             </div>
             <div className="sm:text-right">
-              <p className="text-xs text-muted-foreground print:text-gray-500 uppercase tracking-wider mb-1">Event Date</p>
-              <p className="font-medium">{format(parseISO(booking.event_date), "MMMM d, yyyy")}</p>
+              <p className="text-[10px] text-muted-foreground print:text-gray-500 uppercase tracking-wider mb-0.5">Event Date</p>
+              <p className="text-sm font-medium">{format(parseISO(booking.event_date), "MMMM d, yyyy")}</p>
             </div>
           </div>
 
           {/* Client & Venue Info */}
-          <div className="grid sm:grid-cols-2 gap-8 mb-10">
+          <div className="grid sm:grid-cols-2 gap-5 mb-5">
             <div>
-              <h3 className="text-xs text-muted-foreground print:text-gray-500 uppercase tracking-wider mb-3">Billed To</h3>
-              <p className="font-semibold">{profile?.first_name} {profile?.last_name}</p>
-              <p className="text-sm text-muted-foreground print:text-gray-500">{user?.email}</p>
+              <h3 className="text-[10px] text-muted-foreground print:text-gray-500 uppercase tracking-wider mb-1.5">Billed To</h3>
+              <p className="text-sm font-semibold">{profile?.first_name} {profile?.last_name}</p>
+              <p className="text-xs text-muted-foreground print:text-gray-500">{user?.email}</p>
               {profile?.phone && (
-                <p className="text-sm text-muted-foreground print:text-gray-500">{profile.phone}</p>
+                <p className="text-xs text-muted-foreground print:text-gray-500">{profile.phone}</p>
               )}
               {profile?.company && (
-                <p className="text-sm text-muted-foreground print:text-gray-500">{profile.company}</p>
+                <p className="text-xs text-muted-foreground print:text-gray-500">{profile.company}</p>
               )}
             </div>
             <div>
-              <h3 className="text-xs text-muted-foreground print:text-gray-500 uppercase tracking-wider mb-3">Venue Details</h3>
-              <div className="space-y-2 text-sm">
-                <p className="flex items-center gap-2 font-semibold">
-                  <MapPin className="w-4 h-4 text-primary print:text-orange-500" />
+              <h3 className="text-[10px] text-muted-foreground print:text-gray-500 uppercase tracking-wider mb-1.5">Venue Details</h3>
+              <div className="space-y-1 text-xs">
+                <p className="flex items-center gap-1.5 text-sm font-semibold">
+                  <MapPin className="w-3.5 h-3.5 text-primary print:text-orange-500" />
                   {arena?.name}
                 </p>
-                <p className="text-muted-foreground print:text-gray-500 pl-6">{arena?.location}</p>
-                <p className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-primary print:text-orange-500" />
+                <p className="text-muted-foreground print:text-gray-500 pl-5">{arena?.location}</p>
+                <p className="flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5 text-primary print:text-orange-500" />
                   {booking.start_time.slice(0, 5)} — {booking.end_time.slice(0, 5)}
                 </p>
-                <p className="flex items-center gap-2">
-                  <Users className="w-4 h-4 text-primary print:text-orange-500" />
+                <p className="flex items-center gap-1.5">
+                  <Users className="w-3.5 h-3.5 text-primary print:text-orange-500" />
                   {booking.guest_count} guests
                 </p>
               </div>
@@ -209,29 +209,29 @@ const InvoicePage = () => {
           </div>
 
           {/* Event Details */}
-          <div className="mb-8">
-            <h3 className="text-xs text-muted-foreground print:text-gray-500 uppercase tracking-wider mb-3">Event Information</h3>
+          <div className="mb-5">
+            <h3 className="text-[10px] text-muted-foreground print:text-gray-500 uppercase tracking-wider mb-1.5">Event Information</h3>
             <div className="rounded-lg border border-border print:border-gray-200 overflow-hidden">
-              <table className="w-full text-sm">
+              <table className="w-full text-xs">
                 <tbody>
                   <tr className="border-b border-border print:border-gray-200">
-                    <td className="px-4 py-3 text-muted-foreground print:text-gray-500 w-40">Event Title</td>
-                    <td className="px-4 py-3 font-medium">{booking.event_title}</td>
+                    <td className="px-3 py-2 text-muted-foreground print:text-gray-500 w-32">Event Title</td>
+                    <td className="px-3 py-2 font-medium">{booking.event_title}</td>
                   </tr>
                   <tr className="border-b border-border print:border-gray-200">
-                    <td className="px-4 py-3 text-muted-foreground print:text-gray-500">Event Type</td>
-                    <td className="px-4 py-3 capitalize">{booking.event_type}</td>
+                    <td className="px-3 py-2 text-muted-foreground print:text-gray-500">Event Type</td>
+                    <td className="px-3 py-2 capitalize">{booking.event_type}</td>
                   </tr>
                   {booking.description && (
                     <tr className="border-b border-border print:border-gray-200">
-                      <td className="px-4 py-3 text-muted-foreground print:text-gray-500 align-top">Description</td>
-                      <td className="px-4 py-3">{booking.description}</td>
+                      <td className="px-3 py-2 text-muted-foreground print:text-gray-500 align-top">Description</td>
+                      <td className="px-3 py-2">{booking.description}</td>
                     </tr>
                   )}
                   {booking.special_requirements && (
                     <tr>
-                      <td className="px-4 py-3 text-muted-foreground print:text-gray-500 align-top">Special Req.</td>
-                      <td className="px-4 py-3">{booking.special_requirements}</td>
+                      <td className="px-3 py-2 text-muted-foreground print:text-gray-500 align-top">Special Req.</td>
+                      <td className="px-3 py-2">{booking.special_requirements}</td>
                     </tr>
                   )}
                 </tbody>
@@ -240,42 +240,42 @@ const InvoicePage = () => {
           </div>
 
           {/* Pricing Table */}
-          <div className="mb-10">
-            <h3 className="text-xs text-muted-foreground print:text-gray-500 uppercase tracking-wider mb-3">Payment Summary</h3>
+          <div className="mb-5">
+            <h3 className="text-[10px] text-muted-foreground print:text-gray-500 uppercase tracking-wider mb-1.5">Payment Summary</h3>
             <div className="rounded-lg border border-border print:border-gray-200 overflow-hidden">
-              <table className="w-full text-sm">
+              <table className="w-full text-xs">
                 <thead>
                   <tr className="bg-secondary/50 print:bg-gray-100">
-                    <th className="px-4 py-3 text-left font-medium text-muted-foreground print:text-gray-600">Description</th>
-                    <th className="px-4 py-3 text-right font-medium text-muted-foreground print:text-gray-600">Amount</th>
+                    <th className="px-3 py-2 text-left font-medium text-muted-foreground print:text-gray-600">Description</th>
+                    <th className="px-3 py-2 text-right font-medium text-muted-foreground print:text-gray-600">Amount</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr className="border-t border-border print:border-gray-200">
-                    <td className="px-4 py-3">
+                    <td className="px-3 py-2">
                       <p className="font-medium">Venue Rental — {arena?.name}</p>
-                      <p className="text-xs text-muted-foreground print:text-gray-500">
+                      <p className="text-[10px] text-muted-foreground print:text-gray-500">
                         {format(parseISO(booking.event_date), "MMM d, yyyy")} • {booking.start_time.slice(0, 5)} – {booking.end_time.slice(0, 5)}
                       </p>
                     </td>
-                    <td className="px-4 py-3 text-right">₦{venueRental.toLocaleString()}</td>
+                    <td className="px-3 py-2 text-right">₦{venueRental.toLocaleString()}</td>
                   </tr>
                   <tr className="border-t border-border print:border-gray-200">
-                    <td className="px-4 py-3">Service Fee</td>
-                    <td className="px-4 py-3 text-right">₦{serviceFee.toLocaleString()}</td>
+                    <td className="px-3 py-2">Service Fee</td>
+                    <td className="px-3 py-2 text-right">₦{serviceFee.toLocaleString()}</td>
                   </tr>
                 </tbody>
                 <tfoot>
                   <tr className="border-t-2 border-primary/30 print:border-orange-200 bg-primary/5 print:bg-orange-50">
-                    <td className="px-4 py-4 font-display font-bold text-base">Total</td>
-                    <td className="px-4 py-4 text-right font-display font-bold text-base text-primary print:text-orange-600">
+                    <td className="px-3 py-3 font-display font-bold text-sm">Total</td>
+                    <td className="px-3 py-3 text-right font-display font-bold text-sm text-primary print:text-orange-600">
                       ₦{booking.total_amount.toLocaleString()}
                     </td>
                   </tr>
                   {!isReceipt && (
                     <tr className="border-t border-border print:border-gray-200">
-                      <td className="px-4 py-3 text-muted-foreground print:text-gray-500">Deposit Required (50%)</td>
-                      <td className="px-4 py-3 text-right font-semibold">
+                      <td className="px-3 py-2 text-muted-foreground print:text-gray-500">Deposit Required (50%)</td>
+                      <td className="px-3 py-2 text-right font-semibold">
                         ₦{(booking.total_amount * 0.5).toLocaleString()}
                       </td>
                     </tr>
@@ -287,27 +287,27 @@ const InvoicePage = () => {
 
           {/* Bank Details (Invoice only) */}
           {!isReceipt && (
-            <div className="mb-10 p-5 rounded-lg border border-primary/20 bg-primary/5 print:bg-orange-50 print:border-orange-200">
-              <h3 className="font-semibold mb-3">Payment Instructions</h3>
-              <div className="grid sm:grid-cols-2 gap-4 text-sm">
+            <div className="mb-5 p-3 rounded-lg border border-primary/20 bg-primary/5 print:bg-orange-50 print:border-orange-200">
+              <h3 className="text-sm font-semibold mb-2">Payment Instructions</h3>
+              <div className="grid sm:grid-cols-2 gap-2 text-xs">
                 <div>
-                  <p className="text-muted-foreground print:text-gray-500 mb-1">Account Name</p>
+                  <p className="text-muted-foreground print:text-gray-500 mb-0.5">Account Name</p>
                   <p className="font-medium">B.M.O Events Arena</p>
                 </div>
                 <div>
-                  <p className="text-muted-foreground print:text-gray-500 mb-1">Account Number</p>
+                  <p className="text-muted-foreground print:text-gray-500 mb-0.5">Account Number</p>
                   <p className="font-mono font-medium">12-345-456-65</p>
                 </div>
                 <div>
-                  <p className="text-muted-foreground print:text-gray-500 mb-1">Bank</p>
+                  <p className="text-muted-foreground print:text-gray-500 mb-0.5">Bank</p>
                   <p className="font-medium">GTBank</p>
                 </div>
                 <div>
-                  <p className="text-muted-foreground print:text-gray-500 mb-1">Reference</p>
+                  <p className="text-muted-foreground print:text-gray-500 mb-0.5">Reference</p>
                   <p className="font-mono font-medium">{invoiceNumber}</p>
                 </div>
               </div>
-              <p className="text-xs text-muted-foreground print:text-gray-500 mt-4">
+              <p className="text-[10px] text-muted-foreground print:text-gray-500 mt-2">
                 * 50% deposit required to confirm booking. Balance of 70% due one week before event date.
               </p>
             </div>
@@ -315,20 +315,20 @@ const InvoicePage = () => {
 
           {/* Receipt confirmation */}
           {isReceipt && (
-            <div className="mb-10 p-5 rounded-lg border border-green-500/20 bg-green-500/5 print:bg-green-50 print:border-green-200 text-center">
-              <p className="font-semibold text-green-500 print:text-green-600">✓ Payment Confirmed</p>
-              <p className="text-sm text-muted-foreground print:text-gray-500 mt-1">
+            <div className="mb-5 p-3 rounded-lg border border-green-500/20 bg-green-500/5 print:bg-green-50 print:border-green-200 text-center">
+              <p className="text-sm font-semibold text-green-500 print:text-green-600">✓ Payment Confirmed</p>
+              <p className="text-xs text-muted-foreground print:text-gray-500 mt-0.5">
                 This booking has been confirmed and payment has been received.
               </p>
             </div>
           )}
 
           {/* Footer */}
-          <div className="border-t border-border print:border-gray-200 pt-6 text-center">
-            <p className="text-xs text-muted-foreground print:text-gray-500">
+          <div className="border-t border-border print:border-gray-200 pt-4 text-center">
+            <p className="text-[10px] text-muted-foreground print:text-gray-500">
               B.M.O Events Arena • Premium Event Venues
             </p>
-            <p className="text-xs text-muted-foreground print:text-gray-400 mt-1">
+            <p className="text-[10px] text-muted-foreground print:text-gray-400 mt-0.5">
               Thank you for choosing B.M.O Events Arena. For inquiries, contact us at events@bmo.com
             </p>
           </div>
