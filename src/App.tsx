@@ -17,6 +17,7 @@ import PricingPage from "./pages/Pricing";
 import ContactPage from "./pages/Contact";
 import AuthPage from "./pages/Auth";
 import InvoicePage from "./pages/Invoice";
+import FAQPage from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 import ScrollToTopOnNavigate from "./components/ScrollToTopOnNavigate";
 import NavigationProgress from "./components/NavigationProgress";
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="/book" element={<Layout><BookPage /></Layout>} />
             <Route path="/pricing" element={<Layout><PricingPage /></Layout>} />
             <Route path="/contact" element={<Layout><ContactPage /></Layout>} />
+            <Route path="/faq" element={<Layout><FAQPage /></Layout>} />
             <Route path="/admin" element={
               <ProtectedRoute>
                 <Layout><AdminPage /></Layout>
