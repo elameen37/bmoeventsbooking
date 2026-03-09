@@ -1,6 +1,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import PageTransition from "@/components/PageTransition";
 import { HelpCircle } from "lucide-react";
+import { motion } from "framer-motion";
 
 const faqs = [
   {
@@ -45,13 +46,30 @@ const faqs = [
   },
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.07 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" as const } },
+};
+
 const FAQ = () => {
   return (
     <PageTransition>
       <div className="min-h-screen pt-24 pb-16">
         <div className="container mx-auto px-4 sm:px-6 max-w-3xl">
           {/* Header */}
-          <div className="text-center mb-12">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
               <HelpCircle className="w-4 h-4" />
               Got Questions?
@@ -62,33 +80,45 @@ const FAQ = () => {
             <p className="text-muted-foreground max-w-xl mx-auto">
               Find answers to common questions about our venues, booking process, and event services.
             </p>
-          </div>
+          </motion.div>
 
           {/* FAQ Accordion */}
-          <Accordion type="single" collapsible className="space-y-3">
-            {faqs.map((faq, index) => (
-              <AccordionItem
-                key={index}
-                value={`item-${index}`}
-                className="border border-border rounded-lg px-5 data-[state=open]:bg-secondary/30"
-              >
-                <AccordionTrigger className="text-left font-medium text-sm sm:text-base hover:no-underline py-4">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground text-sm pb-4">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <Accordion type="single" collapsible className="space-y-3">
+              {faqs.map((faq, index) => (
+                <motion.div key={index} variants={itemVariants}>
+                  <AccordionItem
+                    value={`item-${index}`}
+                    className="border border-border rounded-lg px-5 data-[state=open]:bg-secondary/30 transition-colors duration-200"
+                  >
+                    <AccordionTrigger className="text-left font-medium text-sm sm:text-base hover:no-underline py-4">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground text-sm pb-4">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                </motion.div>
+              ))}
+            </Accordion>
+          </motion.div>
 
           {/* CTA */}
-          <div className="mt-12 text-center p-6 rounded-xl bg-secondary/30 border border-border">
+          <motion.div
+            className="mt-12 text-center p-6 rounded-xl bg-secondary/30 border border-border"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: 0.8 }}
+          >
             <p className="text-muted-foreground mb-1 text-sm">Still have questions?</p>
             <a href="/contact" className="text-primary font-medium hover:underline text-sm">
               Contact our team →
             </a>
-          </div>
+          </motion.div>
         </div>
       </div>
     </PageTransition>
