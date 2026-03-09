@@ -32,7 +32,7 @@ const HeroSection = () => {
           alt="B.M.O Events Arena" 
           className="w-full h-[120%] object-cover" 
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/60 light:from-background/80 light:via-background/60 light:to-background/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/60 hero-overlay" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
       </div>
 
