@@ -9,8 +9,8 @@ const faqs = [
     answer: "We accommodate a wide range of events including weddings, corporate conferences, birthday parties, product launches, seminars, concerts, and private celebrations. Our versatile arena can be customized to suit your specific event needs.",
   },
   {
-    question: "How do I book an arena?",
-    answer: "You can book an arena by visiting our Arenas page, selecting your preferred venue, choosing your date and time, and completing the booking form. You'll receive a confirmation email once your booking is processed.",
+    question: "How do I book the arena?",
+    answer: "You can book the arena by visiting our Arena page, selecting your preferred date and time, and completing the booking form. You'll receive a confirmation email once your booking is processed.",
   },
   {
     question: "What is the deposit policy?",
