@@ -17,6 +17,7 @@ import PricingPage from "./pages/Pricing";
 import ContactPage from "./pages/Contact";
 import AuthPage from "./pages/Auth";
 import InvoicePage from "./pages/Invoice";
+import FAQPage from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 import ScrollToTopOnNavigate from "./components/ScrollToTopOnNavigate";
 import NavigationProgress from "./components/NavigationProgress";
