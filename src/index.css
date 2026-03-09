@@ -153,6 +153,15 @@
     box-shadow: var(--shadow-card);
   }
 
+  .hero-overlay {
+    background: linear-gradient(to right, hsl(var(--background) / 0.95), hsl(var(--background) / 0.8), hsl(var(--background) / 0.6));
+  }
+
+  .light .hero-overlay {
+    background: linear-gradient(to right, hsl(var(--background) / 0.7), hsl(var(--background) / 0.5), hsl(var(--background) / 0.3));
+  }
+
+
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
