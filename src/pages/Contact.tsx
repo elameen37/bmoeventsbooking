@@ -195,7 +195,7 @@ const ContactPage = () => {
             <div className="grid sm:grid-cols-2 gap-3 sm:gap-4 max-w-4xl mx-auto">
               <FAQCard
                 question="How do I make a booking?"
-                answer="You can book online through our website, call us directly, or visit our office. A 50% deposit is required to confirm your booking."
+                answer="You can book online through our website, call us directly, or visit our office. A 70% deposit is required to be settled one week before your event date."
               />
               <FAQCard
                 question="What is your cancellation policy?"

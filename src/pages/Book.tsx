@@ -451,8 +451,7 @@ const BookPage = () => {
                       </div>
 
                       <div className="text-xs text-muted-foreground space-y-2">
-                        <p>* 50% deposit required to confirm booking.</p>
-                        <p>* 70% payment a week before event date.</p>
+                        <p>* 70% deposit required to be settled one week before event date.</p>
                         <div className="mt-3 p-3 rounded-md bg-primary/10 border border-primary/20">
                           <p className="font-semibold text-foreground mb-1">Bank Details</p>
                           <p>B.M.O Events Arena</p>
