@@ -6,11 +6,11 @@ import { motion } from "framer-motion";
 const faqs = [
   {
     question: "What types of events can I host at B.M.O Events Arena?",
-    answer: "We accommodate a wide range of events including weddings, corporate conferences, birthday parties, product launches, seminars, concerts, and private celebrations. Our versatile arenas can be customized to suit your specific event needs.",
+    answer: "We accommodate a wide range of events including weddings, corporate conferences, birthday parties, product launches, seminars, concerts, and private celebrations. Our versatile arena can be customized to suit your specific event needs.",
   },
   {
-    question: "How do I book an arena?",
-    answer: "You can book an arena by visiting our Arenas page, selecting your preferred venue, choosing your date and time, and completing the booking form. You'll receive a confirmation email once your booking is processed.",
+    question: "How do I book the arena?",
+    answer: "You can book the arena by visiting our Arena page, selecting your preferred date and time, and completing the booking form. You'll receive a confirmation email once your booking is processed.",
   },
   {
     question: "What is the deposit policy?",
@@ -21,24 +21,24 @@ const faqs = [
     answer: "Yes, bookings can be cancelled or rescheduled. Please contact us at least 48 hours before your event date. Cancellation and rescheduling policies may vary depending on the timing and type of event.",
   },
   {
-    question: "What amenities are included with the venue?",
-    answer: "Each arena comes with standard amenities including chairs, tables, sound system, lighting, air conditioning, and parking space. Additional amenities such as projectors, decorations, and catering services can be arranged at extra cost.",
+    question: "What amenities are included with the arena?",
+    answer: "The arena comes with standard amenities including chairs, tables, sound system, lighting, air conditioning, and parking space. Additional amenities such as projectors, decorations, and catering services can be arranged at extra cost.",
   },
   {
-    question: "What is the capacity of your arenas?",
-    answer: "Our arenas vary in capacity. Please visit the Arenas page to see detailed information about each venue including maximum guest capacity, layout options, and available configurations.",
+    question: "What is the capacity of your arena?",
+    answer: "Our arena offers flexible capacity options. Please visit the Arena page to see detailed information including maximum guest capacity, layout options, and available configurations.",
   },
   {
     question: "Do you provide catering services?",
     answer: "We partner with trusted catering vendors who can provide a range of menu options for your event. You are also welcome to bring your own caterer, subject to our venue guidelines.",
   },
   {
-    question: "What are your operating hours?",
-    answer: "Our venues are available from 8:00 AM to 11:00 PM daily. Extended hours can be arranged for special events — please contact us to discuss your needs.",
+    question: "What are the operating hours?",
+    answer: "The venue is available from 8:00 AM to 11:00 PM daily. Extended hours can be arranged for special events — please contact us to discuss your needs.",
   },
   {
     question: "Is parking available?",
-    answer: "Yes, we provide ample parking space for guests at all our venues. VIP and reserved parking can be arranged upon request.",
+    answer: "Yes, we provide ample parking space for guests at our venue. VIP and reserved parking can be arranged upon request.",
   },
   {
     question: "How can I contact support?",
