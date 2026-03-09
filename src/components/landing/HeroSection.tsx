@@ -104,7 +104,7 @@ const HeroSection = () => {
 
           {/* Stats */}
           <div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 animate-fade-in" 
+            className="grid grid-cols-3 gap-4 sm:gap-6 animate-fade-in" 
             style={{ animationDelay: "0.4s" }}
           >
             <StatItem icon={<Users />} value="10K+" label="Events Hosted" />
