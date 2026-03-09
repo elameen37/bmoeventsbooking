@@ -33,8 +33,8 @@ const faqs = [
     answer: "We partner with trusted catering vendors who can provide a range of menu options for your event. You are also welcome to bring your own caterer, subject to our venue guidelines.",
   },
   {
-    question: "What are your operating hours?",
-    answer: "Our venues are available from 8:00 AM to 11:00 PM daily. Extended hours can be arranged for special events — please contact us to discuss your needs.",
+    question: "What are the operating hours?",
+    answer: "The venue is available from 8:00 AM to 11:00 PM daily. Extended hours can be arranged for special events — please contact us to discuss your needs.",
   },
   {
     question: "Is parking available?",
