@@ -308,7 +308,7 @@ const InvoicePage = () => {
                 </div>
               </div>
               <p className="text-[10px] text-muted-foreground print:text-gray-500 mt-2">
-                * 50% deposit required to confirm booking. Balance of 70% due one week before event date.
+                * 70% deposit required to be settled one week before event date.
               </p>
             </div>
           )}
