@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 const faqs = [
   {
     question: "What types of events can I host at B.M.O Events Arena?",
-    answer: "We accommodate a wide range of events including weddings, corporate conferences, birthday parties, product launches, seminars, concerts, and private celebrations. Our versatile arenas can be customized to suit your specific event needs.",
+    answer: "We accommodate a wide range of events including weddings, corporate conferences, birthday parties, product launches, seminars, concerts, and private celebrations. Our versatile arena can be customized to suit your specific event needs.",
   },
   {
     question: "How do I book an arena?",
