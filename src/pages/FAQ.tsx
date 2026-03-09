@@ -38,7 +38,7 @@ const faqs = [
   },
   {
     question: "Is parking available?",
-    answer: "Yes, we provide ample parking space for guests at all our venues. VIP and reserved parking can be arranged upon request.",
+    answer: "Yes, we provide ample parking space for guests at our venue. VIP and reserved parking can be arranged upon request.",
   },
   {
     question: "How can I contact support?",
