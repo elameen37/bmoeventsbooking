@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Calendar, MapPin, Users, Clock, CheckCircle, Star, ArrowRight, Facebook, Instagram } from "lucide-react";
+import { Calendar, Users, Clock, CheckCircle, Star, ArrowRight, Facebook, Instagram } from "lucide-react";
 import { useState, useEffect } from "react";
 import heroArena from "@/assets/hero-arena.jpg";
 
@@ -104,10 +104,9 @@ const HeroSection = () => {
 
           {/* Stats */}
           <div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 animate-fade-in" 
+            className="grid grid-cols-3 gap-4 sm:gap-6 animate-fade-in" 
             style={{ animationDelay: "0.4s" }}
           >
-            <StatItem icon={<MapPin />} value="5+" label="Locations" />
             <StatItem icon={<Users />} value="10K+" label="Events Hosted" />
             <StatItem icon={<Clock />} value="24/7" label="Support" />
             <StatItem icon={<CheckCircle />} value="99%" label="Satisfaction" />
