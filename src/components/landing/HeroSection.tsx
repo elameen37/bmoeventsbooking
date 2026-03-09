@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Calendar, MapPin, Users, Clock, CheckCircle, Star, ArrowRight, Facebook, Instagram } from "lucide-react";
+import { Calendar, Users, Clock, CheckCircle, Star, ArrowRight, Facebook, Instagram } from "lucide-react";
 import { useState, useEffect } from "react";
 import heroArena from "@/assets/hero-arena.jpg";
 
