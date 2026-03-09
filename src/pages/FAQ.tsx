@@ -25,8 +25,8 @@ const faqs = [
     answer: "Each arena comes with standard amenities including chairs, tables, sound system, lighting, air conditioning, and parking space. Additional amenities such as projectors, decorations, and catering services can be arranged at extra cost.",
   },
   {
-    question: "What is the capacity of your arenas?",
-    answer: "Our arenas vary in capacity. Please visit the Arenas page to see detailed information about each venue including maximum guest capacity, layout options, and available configurations.",
+    question: "What is the capacity of your arena?",
+    answer: "Our arena offers flexible capacity options. Please visit the Arena page to see detailed information including maximum guest capacity, layout options, and available configurations.",
   },
   {
     question: "Do you provide catering services?",
