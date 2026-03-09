@@ -107,7 +107,6 @@ const HeroSection = () => {
             className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 animate-fade-in" 
             style={{ animationDelay: "0.4s" }}
           >
-            <StatItem icon={<MapPin />} value="5+" label="Locations" />
             <StatItem icon={<Users />} value="10K+" label="Events Hosted" />
             <StatItem icon={<Clock />} value="24/7" label="Support" />
             <StatItem icon={<CheckCircle />} value="99%" label="Satisfaction" />
