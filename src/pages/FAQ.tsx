@@ -21,8 +21,8 @@ const faqs = [
     answer: "Yes, bookings can be cancelled or rescheduled. Please contact us at least 48 hours before your event date. Cancellation and rescheduling policies may vary depending on the timing and type of event.",
   },
   {
-    question: "What amenities are included with the venue?",
-    answer: "Each arena comes with standard amenities including chairs, tables, sound system, lighting, air conditioning, and parking space. Additional amenities such as projectors, decorations, and catering services can be arranged at extra cost.",
+    question: "What amenities are included with the arena?",
+    answer: "The arena comes with standard amenities including chairs, tables, sound system, lighting, air conditioning, and parking space. Additional amenities such as projectors, decorations, and catering services can be arranged at extra cost.",
   },
   {
     question: "What is the capacity of your arena?",
