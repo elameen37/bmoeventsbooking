@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Calendar, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import { AboutUsModal, TermsModal, PrivacyModal } from "@/components/modals/PolicyModals";
+
 const Footer = () => {
   return <footer className="bg-secondary/30 border-t border-border">
     <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
@@ -36,7 +37,7 @@ const Footer = () => {
             <FooterLink to="/pricing">Pricing</FooterLink>
             <li>
               <AboutUsModal>
-                <button className="text-sm text-muted-foreground hover:text-primary transition-colors text-left">About Us</button>
+                <span role="button" className="text-sm text-muted-foreground hover:text-primary transition-colors text-left cursor-pointer">About Us</span>
               </AboutUsModal>
             </li>
           </ul>
@@ -93,6 +94,7 @@ const Footer = () => {
     </div>
   </footer>;
 };
+
 const SocialIcon = ({
   Icon,
   href
@@ -102,6 +104,7 @@ const SocialIcon = ({
 }) => <a href={href} className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors">
     <Icon className="w-4 h-4" />
   </a>;
+
 const FooterLink = ({
   to,
   children
@@ -113,4 +116,5 @@ const FooterLink = ({
       {children}
     </Link>
   </li>;
+
 export default Footer;
