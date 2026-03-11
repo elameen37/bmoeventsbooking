@@ -49,12 +49,12 @@ const Footer = () => {
             <FooterLink to="/faq">FAQ</FooterLink>
             <li>
               <TermsModal>
-                <button className="text-sm text-muted-foreground hover:text-primary transition-colors text-left">Terms of Service</button>
+                <span role="button" className="text-sm text-muted-foreground hover:text-primary transition-colors text-left cursor-pointer">Terms of Service</span>
               </TermsModal>
             </li>
             <li>
               <PrivacyModal>
-                <button className="text-sm text-muted-foreground hover:text-primary transition-colors text-left">Privacy Policy</button>
+                <span role="button" className="text-sm text-muted-foreground hover:text-primary transition-colors text-left cursor-pointer">Privacy Policy</span>
               </PrivacyModal>
             </li>
             <FooterLink to="/contact">Contact Us</FooterLink>
