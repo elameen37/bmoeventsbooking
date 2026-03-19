@@ -350,12 +350,12 @@ const AuthPage = () => {
                       <p className="text-xs text-muted-foreground text-center">
                         By signing up, you agree to our{" "}
                         <TermsModal>
-                          <span role="button" className="text-primary hover:underline cursor-pointer">Terms of Service</span>
-                        </TermsModal>
-                        {" "}and{" "}
-                        <PrivacyModal>
-                          <span role="button" className="text-primary hover:underline cursor-pointer">Privacy Policy</span>
-                        </PrivacyModal>
+                        <button type="button" className="text-primary hover:underline font-medium">Terms of Service</button>
+                      </TermsModal>
+                      {" "}and{" "}
+                      <PrivacyModal>
+                        <button type="button" className="text-primary hover:underline font-medium">Privacy Policy</button>
+                      </PrivacyModal>
                       </p>
                     </form>
                   </CardContent>

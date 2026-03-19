@@ -37,7 +37,7 @@ const Footer = () => {
             <FooterLink to="/pricing">Pricing</FooterLink>
             <li>
               <AboutUsModal>
-                <span role="button" className="text-sm text-muted-foreground hover:text-primary transition-colors text-left cursor-pointer">About Us</span>
+                <button type="button" className="text-sm text-left text-muted-foreground hover:text-primary transition-colors py-1">About Us</button>
               </AboutUsModal>
             </li>
           </ul>
@@ -50,12 +50,12 @@ const Footer = () => {
             <FooterLink to="/faq">FAQ</FooterLink>
             <li>
               <TermsModal>
-                <span role="button" className="text-sm text-muted-foreground hover:text-primary transition-colors text-left cursor-pointer">Terms of Service</span>
+                <button type="button" className="text-sm text-left text-muted-foreground hover:text-primary transition-colors py-1">Terms of Service</button>
               </TermsModal>
             </li>
             <li>
               <PrivacyModal>
-                <span role="button" className="text-sm text-muted-foreground hover:text-primary transition-colors text-left cursor-pointer">Privacy Policy</span>
+                <button type="button" className="text-sm text-left text-muted-foreground hover:text-primary transition-colors py-1">Privacy Policy</button>
               </PrivacyModal>
             </li>
             <FooterLink to="/contact">Contact Us</FooterLink>
@@ -101,7 +101,7 @@ const SocialIcon = ({
 }: {
   Icon: React.ElementType;
   href: string;
-}) => <a href={href} className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors">
+}) => <a href={href} aria-label="Social Link" className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors">
     <Icon className="w-4 h-4" />
   </a>;
 
@@ -112,7 +112,7 @@ const FooterLink = ({
   to: string;
   children: React.ReactNode;
 }) => <li>
-    <Link to={to} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+    <Link to={to} className="text-sm text-muted-foreground hover:text-primary transition-colors py-1 inline-block">
       {children}
     </Link>
   </li>;
