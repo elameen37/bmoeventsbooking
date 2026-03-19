@@ -35,8 +35,11 @@ const Navbar = () => {
   return (
     <nav className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-      isScrolled 
-        ? "bg-background/95 backdrop-blur-xl border-b border-border shadow-lg shadow-black/5" 
+      (isScrolled || isOpen)
+        ? cn(
+            "backdrop-blur-xl border-b border-border shadow-lg shadow-black/5",
+            isOpen ? "bg-background/10" : "bg-background/95"
+          )
         : "bg-transparent border-b border-transparent"
     )}>
       <div className="container mx-auto px-4 sm:px-6">
@@ -125,7 +128,7 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-4 border-t border-border animate-fade-in">
+          <div className="md:hidden py-4 border-t border-border animate-fade-in bg-background/10 backdrop-blur-md rounded-b-2xl shadow-xl shadow-black/20">
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
                 <Link key={link.path} to={link.path} onClick={() => setIsOpen(false)}>
