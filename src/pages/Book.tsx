@@ -86,7 +86,7 @@ const BookPage = () => {
         description: eventDescription || null,
         special_requirements: specialRequirements || null,
         guest_count: parseInt(guestCount),
-        total_amount: (selectedArenaData?.price_per_hour || 0) + 50000,
+        total_amount: Math.round((selectedArenaData?.price_per_hour || 0) * 1.075),
         status: "pending",
         deposit_paid: false,
         mobile_no: mobileNo.trim(),
@@ -436,17 +436,17 @@ const BookPage = () => {
                       <div className="grid gap-2 text-sm">
                         <div className="flex justify-between">
                           <span className="text-muted-foreground">
-                            Venue Rental
+                            Subtotal (Venue Rental)
                           </span>
                           <span>₦{(selectedArenaData?.price_per_hour || 0).toLocaleString()}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-muted-foreground">Service Fee</span>
-                          <span>₦50,000</span>
+                          <span className="text-muted-foreground">VAT (7.5%)</span>
+                          <span>₦{Math.round((selectedArenaData?.price_per_hour || 0) * 0.075).toLocaleString()}</span>
                         </div>
                         <div className="border-t border-border pt-2 mt-2 flex justify-between font-semibold">
-                          <span>Total</span>
-                          <span className="text-primary">₦{((selectedArenaData?.price_per_hour || 0) + 50000).toLocaleString()}</span>
+                          <span>Total Amount Due</span>
+                          <span className="text-primary font-bold">₦{Math.round((selectedArenaData?.price_per_hour || 0) * 1.075).toLocaleString()}</span>
                         </div>
                       </div>
 

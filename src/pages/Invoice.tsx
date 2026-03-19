@@ -106,8 +106,8 @@ const InvoicePage = () => {
   }
 
   const arena = booking.arenas as any;
-  const venueRental = booking.total_amount - 50000;
-  const serviceFee = 50000;
+  const subtotal = Math.round(booking.total_amount / 1.075);
+  const vatAmount = booking.total_amount - subtotal;
 
   return (
     <div className="min-h-screen bg-background">
@@ -251,18 +251,18 @@ const InvoicePage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border-t border-border print:border-gray-200">
+                   <tr className="border-t border-border print:border-gray-200">
                     <td className="px-3 py-2">
-                      <p className="font-medium">Venue Rental — {arena?.name}</p>
+                      <p className="font-medium">Subtotal (Venue Rental)</p>
                       <p className="text-[10px] text-muted-foreground print:text-gray-500">
                         {format(parseISO(booking.event_date), "MMM d, yyyy")} • {booking.start_time.slice(0, 5)} – {booking.end_time.slice(0, 5)}
                       </p>
                     </td>
-                    <td className="px-3 py-2 text-right">₦{venueRental.toLocaleString()}</td>
+                    <td className="px-3 py-2 text-right">₦{subtotal.toLocaleString()}</td>
                   </tr>
                   <tr className="border-t border-border print:border-gray-200">
-                    <td className="px-3 py-2">Service Fee</td>
-                    <td className="px-3 py-2 text-right">₦{serviceFee.toLocaleString()}</td>
+                    <td className="px-3 py-2">VAT (7.5%)</td>
+                    <td className="px-3 py-2 text-right">₦{vatAmount.toLocaleString()}</td>
                   </tr>
                 </tbody>
                 <tfoot>
