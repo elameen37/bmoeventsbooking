@@ -15,7 +15,8 @@ import {
   AlertDialogDescription, 
   AlertDialogFooter, 
   AlertDialogHeader, 
-  AlertDialogTitle 
+  AlertDialogTitle,
+  AlertDialogCancel 
 } from "@/components/ui/alert-dialog";
 import { toast } from "@/hooks/use-toast";
 import PageTransition from "@/components/PageTransition";
