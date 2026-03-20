@@ -274,9 +274,9 @@ const InvoicePage = () => {
                   </tr>
                   {!isReceipt && (
                     <tr className="border-t border-border print:border-gray-200">
-                      <td className="px-3 py-2 text-muted-foreground print:text-gray-500">Deposit Required (50%)</td>
+                      <td className="px-3 py-2 text-muted-foreground print:text-gray-500">Deposit Required (70%)</td>
                       <td className="px-3 py-2 text-right font-semibold">
-                        ₦{(booking.total_amount * 0.5).toLocaleString()}
+                        ₦{(booking.total_amount * 0.7).toLocaleString()}
                       </td>
                     </tr>
                   )}
