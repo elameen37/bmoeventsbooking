@@ -64,6 +64,7 @@ export const useCreateBooking = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["bookings"] });
       queryClient.invalidateQueries({ queryKey: ["user-bookings"] });
+      queryClient.invalidateQueries({ queryKey: ["upcoming-bookings"] });
     },
   });
 };

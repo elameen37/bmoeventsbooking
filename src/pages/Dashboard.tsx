@@ -165,7 +165,12 @@ const DashboardPage = () => {
               <NavItem icon={LayoutDashboard} label="Dashboard" active />
               <NavItem icon={CalendarDays} label="Calendar" onClick={() => navigate("/calendar")} />
               <NavItem icon={Building} label="Arenas" onClick={() => navigate("/arenas")} />
-              <NavItem icon={FileText} label="My Bookings" badge={pendingBookings > 0 ? pendingBookings : undefined} />
+              <NavItem 
+                icon={FileText} 
+                label="My Bookings" 
+                badge={pendingBookings > 0 ? pendingBookings : undefined} 
+                onClick={() => navigate("/bookings")}
+              />
               <NavItem icon={Bell} label="Notifications" />
               <NavItem icon={Settings} label="Settings" />
               {isManager && (
@@ -230,7 +235,12 @@ const DashboardPage = () => {
                       <NavItem icon={LayoutDashboard} label="Dashboard" active onClick={() => setMobileNavOpen(false)} />
                       <NavItem icon={CalendarDays} label="Calendar" onClick={() => { navigate("/calendar"); setMobileNavOpen(false); }} />
                       <NavItem icon={Building} label="Arenas" onClick={() => { navigate("/arenas"); setMobileNavOpen(false); }} />
-                      <NavItem icon={FileText} label="My Bookings" badge={pendingBookings > 0 ? pendingBookings : undefined} onClick={() => setMobileNavOpen(false)} />
+                      <NavItem 
+                        icon={FileText} 
+                        label="My Bookings" 
+                        badge={pendingBookings > 0 ? pendingBookings : undefined} 
+                        onClick={() => { navigate("/bookings"); setMobileNavOpen(false); }} 
+                      />
                       <NavItem icon={Bell} label="Notifications" onClick={() => setMobileNavOpen(false)} />
                       <NavItem icon={Settings} label="Settings" onClick={() => setMobileNavOpen(false)} />
                       {isManager && (

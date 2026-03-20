@@ -18,6 +18,7 @@ import ContactPage from "./pages/Contact";
 import AuthPage from "./pages/Auth";
 import InvoicePage from "./pages/Invoice";
 import FAQPage from "./pages/FAQ";
+import BookingsPage from "./pages/Bookings";
 import NotFound from "./pages/NotFound";
 import ScrollToTopOnNavigate from "./components/ScrollToTopOnNavigate";
 import NavigationProgress from "./components/NavigationProgress";
@@ -57,6 +58,11 @@ const App = () => (
             <Route path="/invoice/:bookingId" element={
               <ProtectedRoute>
                 <InvoicePage />
+              </ProtectedRoute>
+            } />
+            <Route path="/bookings" element={
+              <ProtectedRoute>
+                <BookingsPage />
               </ProtectedRoute>
             } />
             <Route path="/dashboard" element={
