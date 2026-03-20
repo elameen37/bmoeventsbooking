@@ -8,6 +8,15 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calendar, Clock, Users, MapPin, CreditCard, CheckCircle, LogIn, Copy } from "lucide-react";
+import { 
+  AlertDialog, 
+  AlertDialogAction, 
+  AlertDialogContent, 
+  AlertDialogDescription, 
+  AlertDialogFooter, 
+  AlertDialogHeader, 
+  AlertDialogTitle 
+} from "@/components/ui/alert-dialog";
 import { toast } from "@/hooks/use-toast";
 import PageTransition from "@/components/PageTransition";
 import { useAuth } from "@/contexts/AuthContext";
@@ -36,6 +45,8 @@ const BookPage = () => {
   const [eventDescription, setEventDescription] = useState("");
   const [specialRequirements, setSpecialRequirements] = useState("");
   const [mobileNo, setMobileNo] = useState("");
+  const [depositAmount, setDepositAmount] = useState<number>(0);
+  const [showDepositError, setShowDepositError] = useState(false);
 
   // Pre-select arena from URL param
   useEffect(() => {
@@ -46,6 +57,16 @@ const BookPage = () => {
   }, [searchParams, arenas]);
 
   const selectedArenaData = arenas?.find(a => a.id === selectedArena);
+  const basePrice = selectedArenaData?.price_per_hour || 0;
+  const totalWithVat = Math.round(basePrice * 1.075);
+  const minDepositRequired = Math.round(totalWithVat * 0.7);
+
+  // Initialize deposit amount when moving to review step
+  useEffect(() => {
+    if (step === 4 && depositAmount === 0) {
+      setDepositAmount(minDepositRequired);
+    }
+  }, [step, minDepositRequired]);
 
   const handleSubmitBooking = async () => {
     if (!user) {
@@ -75,6 +96,11 @@ const BookPage = () => {
       return;
     }
 
+    if (depositAmount < minDepositRequired) {
+      setShowDepositError(true);
+      return;
+    }
+
     try {
       await createBooking.mutateAsync({
         arena_id: selectedArena,
@@ -86,7 +112,7 @@ const BookPage = () => {
         description: eventDescription || null,
         special_requirements: specialRequirements || null,
         guest_count: parseInt(guestCount),
-        total_amount: Math.round((selectedArenaData?.price_per_hour || 0) * 1.075),
+        total_amount: totalWithVat,
         status: "pending",
         deposit_paid: false,
         mobile_no: mobileNo.trim(),
@@ -446,11 +472,31 @@ const BookPage = () => {
                         </div>
                         <div className="border-t border-border pt-2 mt-2 flex justify-between font-semibold">
                           <span>Total Amount Due</span>
-                          <span className="text-primary font-bold">₦{Math.round((selectedArenaData?.price_per_hour || 0) * 1.075).toLocaleString()}</span>
+                          <span className="text-primary font-bold">₦{totalWithVat.toLocaleString()}</span>
                         </div>
-                        <div className="flex justify-between text-xs font-medium pt-1 text-muted-foreground border-t border-dashed border-border/50">
-                          <span>Deposit Required (70%)</span>
-                          <span>₦{Math.round((selectedArenaData?.price_per_hour || 0) * 1.075 * 0.7).toLocaleString()}</span>
+                      </div>
+
+                      <div className="space-y-3 p-4 rounded-lg bg-primary/5 border border-primary/20">
+                        <div className="space-y-1.5">
+                          <Label htmlFor="deposit" className="text-xs font-semibold uppercase tracking-wider text-primary">
+                            Deposit to Pay (Min 70%)
+                          </Label>
+                          <div className="relative">
+                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">₦</span>
+                            <Input
+                              id="deposit"
+                              type="number"
+                              className="pl-7 bg-background"
+                              value={depositAmount || ''}
+                              onChange={(e) => setDepositAmount(Number(e.target.value))}
+                              placeholder={minDepositRequired.toString()}
+                            />
+                          </div>
+                        </div>
+                        
+                        <div className="flex justify-between text-sm pt-2 border-t border-primary/10">
+                          <span className="text-muted-foreground">Remaining Balance</span>
+                          <span className="font-semibold">₦{Math.max(0, totalWithVat - depositAmount).toLocaleString()}</span>
                         </div>
                       </div>
 
@@ -498,6 +544,30 @@ const BookPage = () => {
               )}
           </div>
         </div>
+
+        {/* Deposit Warning Dialog */}
+        <AlertDialog open={showDepositError} onOpenChange={setShowDepositError}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle className="flex items-center gap-2">
+                <CreditCard className="w-5 h-5 text-destructive" />
+                Minimum Deposit Required
+              </AlertDialogTitle>
+              <AlertDialogDescription>
+                To secure your booking, a minimum deposit of 70% (₦{minDepositRequired.toLocaleString()}) is required. 
+                Please adjust your deposit amount to proceed.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel onClick={() => setDepositAmount(minDepositRequired)}>
+                Set to 70%
+              </AlertDialogCancel>
+              <AlertDialogAction className="gold-gradient">
+                Adjust Manually
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </main>
     </PageTransition>
   );
