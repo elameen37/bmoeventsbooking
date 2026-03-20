@@ -448,6 +448,10 @@ const BookPage = () => {
                           <span>Total Amount Due</span>
                           <span className="text-primary font-bold">₦{Math.round((selectedArenaData?.price_per_hour || 0) * 1.075).toLocaleString()}</span>
                         </div>
+                        <div className="flex justify-between text-xs font-medium pt-1 text-muted-foreground border-t border-dashed border-border/50">
+                          <span>Deposit Required (70%)</span>
+                          <span>₦{Math.round((selectedArenaData?.price_per_hour || 0) * 1.075 * 0.7).toLocaleString()}</span>
+                        </div>
                       </div>
 
                       <div className="text-xs text-muted-foreground space-y-2">
