@@ -60,6 +60,7 @@ export type Database = {
         Row: {
           arena_id: string
           created_at: string
+          deposit_amount: number
           deposit_paid: boolean
           description: string | null
           end_time: string
@@ -79,6 +80,7 @@ export type Database = {
         Insert: {
           arena_id: string
           created_at?: string
+          deposit_amount: number
           deposit_paid?: boolean
           description?: string | null
           end_time: string
@@ -98,6 +100,7 @@ export type Database = {
         Update: {
           arena_id?: string
           created_at?: string
+          deposit_amount?: number
           deposit_paid?: boolean
           description?: string | null
           end_time?: string

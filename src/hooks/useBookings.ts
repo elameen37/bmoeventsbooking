@@ -83,7 +83,7 @@ export const useUpcomingBookings = () => {
         .eq("user_id", user.id)
         .gte("event_date", today)
         .order("event_date", { ascending: true })
-        .limit(5);
+        .limit(10);
 
       if (error) throw error;
       return data;

@@ -81,6 +81,7 @@ export const BookingsTable = () => {
             <TableHead>Guests</TableHead>
             <TableHead>Mobile</TableHead>
             <TableHead>Amount</TableHead>
+            <TableHead>Deposit</TableHead>
             <TableHead>Status</TableHead>
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
@@ -129,6 +130,9 @@ export const BookingsTable = () => {
               </TableCell>
               <TableCell>
                 <span className="font-medium">₦{booking.total_amount.toLocaleString()}</span>
+              </TableCell>
+              <TableCell>
+                <span className="text-sm">₦{(booking.deposit_amount || 0).toLocaleString()}</span>
               </TableCell>
               <TableCell>
                 <Badge className={statusStyles[booking.status]} variant="outline">

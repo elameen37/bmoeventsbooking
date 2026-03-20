@@ -114,6 +114,7 @@ const BookPage = () => {
         special_requirements: specialRequirements || null,
         guest_count: parseInt(guestCount),
         total_amount: totalWithVat,
+        deposit_amount: depositAmount,
         status: "pending",
         deposit_paid: false,
         mobile_no: mobileNo.trim(),

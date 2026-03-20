@@ -329,7 +329,7 @@ const DashboardPage = () => {
               <Card variant="glass" className="lg:col-span-2">
                 <CardHeader className="flex flex-row items-center justify-between">
                   <CardTitle className="text-lg">Your Upcoming Bookings</CardTitle>
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" onClick={() => navigate("/bookings")}>
                     View All <ChevronRight className="w-4 h-4 ml-1" />
                   </Button>
                 </CardHeader>
