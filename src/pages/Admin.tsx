@@ -232,32 +232,32 @@ const AdminPage = () => {
 
           {/* Tabs */}
           <Tabs defaultValue="bookings" className="space-y-6">
-            <TabsList className="bg-muted/50 p-1 flex-wrap h-auto">
-              <TabsTrigger value="bookings" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+            <TabsList className="bg-muted/50 p-1 flex w-full overflow-x-auto overflow-y-hidden scrollbar-hide shrink-0 justify-start h-auto min-h-[44px]">
+              <TabsTrigger value="bookings" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground shrink-0">
                 <Calendar className="w-4 h-4 mr-2" />
                 Bookings
               </TabsTrigger>
-              <TabsTrigger value="arenas" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <TabsTrigger value="arenas" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground shrink-0">
                 <Building2 className="w-4 h-4 mr-2" />
                 Arenas
               </TabsTrigger>
-              <TabsTrigger value="featured" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <TabsTrigger value="featured" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground shrink-0">
                 <Star className="w-4 h-4 mr-2" />
                 Featured Events
               </TabsTrigger>
-              <TabsTrigger value="gallery" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <TabsTrigger value="gallery" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground shrink-0">
                 <ImageIcon className="w-4 h-4 mr-2" />
                 Gallery
               </TabsTrigger>
-              <TabsTrigger value="pricing" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <TabsTrigger value="pricing" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground shrink-0">
                 <DollarSign className="w-4 h-4 mr-2" />
                 Pricing
               </TabsTrigger>
-              <TabsTrigger value="signature" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <TabsTrigger value="signature" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground shrink-0">
                 <PenTool className="w-4 h-4 mr-2" />
                 Signature
               </TabsTrigger>
-              <TabsTrigger value="hero" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <TabsTrigger value="hero" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground shrink-0">
                 <Layout className="w-4 h-4 mr-2" />
                 Hero
               </TabsTrigger>

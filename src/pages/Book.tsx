@@ -171,21 +171,21 @@ const BookPage = () => {
             )}
 
             {/* Progress Steps */}
-            <div className="flex justify-center mb-12">
-              <div className="flex items-center gap-2">
+            <div className="flex justify-center mb-8 sm:mb-12 overflow-x-auto pb-2 scrollbar-hide">
+              <div className="flex items-center gap-1 sm:gap-2 min-w-max px-4">
                 {[1, 2, 3, 4].map((s) => (
                   <div key={s} className="flex items-center">
                     <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${
+                      className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-semibold transition-all text-xs sm:text-base ${
                         step >= s
                           ? "gold-gradient text-primary-foreground"
                           : "bg-secondary text-muted-foreground"
                       }`}
                     >
-                      {step > s ? <CheckCircle className="w-5 h-5" /> : s}
+                      {step > s ? <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" /> : s}
                     </div>
                     {s < 4 && (
-                      <div className={`w-16 h-1 mx-2 rounded ${step > s ? "bg-primary" : "bg-secondary"}`} />
+                      <div className={`w-8 sm:w-16 h-0.5 sm:h-1 mx-1 sm:mx-2 rounded ${step > s ? "bg-primary" : "bg-secondary"}`} />
                     )}
                   </div>
                 ))}

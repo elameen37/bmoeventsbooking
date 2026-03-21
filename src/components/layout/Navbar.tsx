@@ -128,7 +128,7 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-4 border-t border-border animate-fade-in bg-background/10 backdrop-blur-md rounded-b-2xl shadow-xl shadow-black/20">
+          <div className="md:hidden py-4 border-t border-border animate-fade-in bg-background/95 backdrop-blur-xl rounded-b-2xl shadow-2xl shadow-black/40">
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
                 <Link key={link.path} to={link.path} onClick={() => setIsOpen(false)}>
