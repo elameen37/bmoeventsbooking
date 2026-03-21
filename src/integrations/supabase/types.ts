@@ -127,6 +127,86 @@ export type Database = {
           },
         ]
       }
+      notifications: {
+        Row: {
+          id: string
+          user_id: string
+          title: string
+          message: string
+          type: string
+          is_read: boolean
+          link: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          title: string
+          message: string
+          type?: string
+          is_read?: boolean
+          link?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          title?: string
+          message?: string
+          type?: string
+          is_read?: boolean
+          link?: string | null
+          created_at?: string
+        }
+        Relationships: []
+      }
+      price_change_requests: {
+        Row: {
+          id: string
+          arena_id: string
+          requested_by: string
+          current_price: number
+          proposed_price: number
+          status: string
+          reason: string | null
+          reviewed_by: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          arena_id: string
+          requested_by: string
+          current_price: number
+          proposed_price: number
+          status?: string
+          reason?: string | null
+          reviewed_by?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          arena_id?: string
+          requested_by?: string
+          current_price?: number
+          proposed_price?: number
+          status?: string
+          reason?: string | null
+          reviewed_by?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "price_change_requests_arena_id_fkey"
+            columns: ["arena_id"]
+            isOneToOne: false
+            referencedRelation: "arenas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       featured_events: {
         Row: {
           attendees: number

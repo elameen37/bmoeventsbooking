@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Calendar, Building2, LayoutDashboard, Shield, Users, Star, Menu, LogOut, Home, ImageIcon } from "lucide-react";
+import { Calendar, Building2, LayoutDashboard, Shield, Users, Star, Menu, LogOut, Home, ImageIcon, DollarSign } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookingsTable } from "@/components/admin/BookingsTable";
 import { ArenaManagement } from "@/components/admin/ArenaManagement";
 import FeaturedEventsManagement from "@/components/admin/FeaturedEventsManagement";
 import GalleryManagement from "@/components/admin/GalleryManagement";
+import PriceControl from "@/components/admin/PriceControl";
+import NotificationBell from "@/components/NotificationBell";
 import { useIsAdmin } from "@/hooks/useUserRole";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAllBookings } from "@/hooks/useAdminBookings";
@@ -177,6 +179,9 @@ const AdminPage = () => {
                 Manage Users
               </Link>
             </Button>
+            <div className="hidden sm:block">
+              <NotificationBell />
+            </div>
           </div>
 
           {/* Stats Cards */}
@@ -242,6 +247,10 @@ const AdminPage = () => {
                 <ImageIcon className="w-4 h-4 mr-2" />
                 Gallery
               </TabsTrigger>
+              <TabsTrigger value="pricing" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                <DollarSign className="w-4 h-4 mr-2" />
+                Pricing
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="bookings" className="space-y-4">
@@ -270,6 +279,13 @@ const AdminPage = () => {
                 <h2 className="text-xl font-display font-semibold">Gallery Management</h2>
               </div>
               <GalleryManagement />
+            </TabsContent>
+
+            <TabsContent value="pricing" className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-display font-semibold">Price Control</h2>
+              </div>
+              <PriceControl />
             </TabsContent>
           </Tabs>
         </div>

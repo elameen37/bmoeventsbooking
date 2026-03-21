@@ -35,6 +35,7 @@ import { useProfile } from "@/hooks/useProfile";
 import { useUserBookings, useUpcomingBookings } from "@/hooks/useBookings";
 import { useArenas } from "@/hooks/useArenas";
 import { useIsAdmin } from "@/hooks/useUserRole";
+import NotificationBell from "@/components/NotificationBell";
 
 const DashboardSkeleton = () => (
   <div className="min-h-screen bg-background flex">
@@ -280,7 +281,8 @@ const DashboardPage = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 items-center">
+                <NotificationBell />
                 <Button variant="outline" onClick={() => navigate("/calendar")}>
                   <Calendar className="w-4 h-4 mr-2" />
                   View Calendar
