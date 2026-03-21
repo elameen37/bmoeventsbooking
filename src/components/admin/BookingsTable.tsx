@@ -32,6 +32,7 @@ import { useAllBookings, useUpdateBookingStatus, useUpdateDepositAmount } from "
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
 import { useIsAdmin } from "@/hooks/useUserRole";
+import { cn } from "@/lib/utils";
 
 const statusStyles = {
   pending: "bg-warning/20 text-warning border-warning/30",
