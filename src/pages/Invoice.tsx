@@ -36,7 +36,10 @@ const InvoicePage = () => {
   const { data: profile } = useProfile();
   const { data: booking, isLoading } = useBookingDetails(bookingId);
 
-  const isReceipt = booking?.status === "confirmed";
+  const depositAmount = booking?.deposit_amount || 0;
+  const totalAmount = booking?.total_amount || 0;
+  const isFullyPaid = depositAmount >= totalAmount && totalAmount > 0;
+  const isReceipt = isFullyPaid;
   const documentTitle = isReceipt ? "Receipt" : "Invoice";
   const invoiceNumber = booking ? `BMO-${booking.id.slice(0, 8).toUpperCase()}` : "";
 
@@ -108,6 +111,7 @@ const InvoicePage = () => {
   const arena = booking.arenas as any;
   const subtotal = Math.round(booking.total_amount / 1.075);
   const vatAmount = booking.total_amount - subtotal;
+  const outstandingBalance = Math.max(0, totalAmount - depositAmount);
 
   return (
     <div className="min-h-screen bg-background">
@@ -154,12 +158,15 @@ const InvoicePage = () => {
               <p className="text-xs text-muted-foreground print:text-gray-500">
                 #{invoiceNumber}
               </p>
-              <Badge 
-                variant={isReceipt ? "available" : booking.status === "pending" ? "pending" : "booked"} 
-                className="mt-1"
-              >
-                {isReceipt ? "Paid" : booking.status === "pending" ? "Pending Payment" : "Cancelled"}
-              </Badge>
+              {isReceipt ? (
+                <Badge variant="available" className="mt-1">Paid in Full</Badge>
+              ) : depositAmount > 0 ? (
+                <Badge variant="pending" className="mt-1">Partial Payment</Badge>
+              ) : booking.status === "pending" ? (
+                <Badge variant="pending" className="mt-1">Pending Payment</Badge>
+              ) : (
+                <Badge variant="booked" className="mt-1">Cancelled</Badge>
+              )}
             </div>
           </div>
 
@@ -272,13 +279,17 @@ const InvoicePage = () => {
                       ₦{booking.total_amount.toLocaleString()}
                     </td>
                   </tr>
+                  <tr className="border-t border-border print:border-gray-200">
+                    <td className="px-3 py-2 text-muted-foreground print:text-gray-500">Amount Paid</td>
+                    <td className="px-3 py-2 text-right font-semibold text-success">
+                      ₦{depositAmount.toLocaleString()}
+                    </td>
+                  </tr>
                   {!isReceipt && (
-                    <tr className="border-t border-border print:border-gray-200">
-                      <td className="px-3 py-2 text-muted-foreground print:text-gray-500">
-                        {booking.deposit_amount ? "Deposit Recorded" : "Deposit Required (70%)"}
-                      </td>
-                      <td className="px-3 py-2 text-right font-semibold">
-                        ₦{(booking.deposit_amount || (booking.total_amount * 0.7)).toLocaleString()}
+                    <tr className="border-t border-border print:border-gray-200 bg-destructive/5">
+                      <td className="px-3 py-2 font-semibold text-destructive">Outstanding Balance</td>
+                      <td className="px-3 py-2 text-right font-bold text-destructive">
+                        ₦{outstandingBalance.toLocaleString()}
                       </td>
                     </tr>
                   )}
@@ -310,7 +321,7 @@ const InvoicePage = () => {
                 </div>
               </div>
               <p className="text-[10px] text-muted-foreground print:text-gray-500 mt-2">
-                * 70% deposit required to be settled one week before event date.
+                * 70% deposit required to be settled one week before event date. Installment payments are accepted.
               </p>
             </div>
           )}
@@ -318,9 +329,21 @@ const InvoicePage = () => {
           {/* Receipt confirmation */}
           {isReceipt && (
             <div className="mb-5 p-3 rounded-lg border border-green-500/20 bg-green-500/5 print:bg-green-50 print:border-green-200 text-center">
-              <p className="text-sm font-semibold text-green-500 print:text-green-600">✓ Payment Confirmed</p>
+              <p className="text-sm font-semibold text-green-500 print:text-green-600">✓ Payment Complete</p>
               <p className="text-xs text-muted-foreground print:text-gray-500 mt-0.5">
-                This booking has been confirmed and payment has been received.
+                Full payment of ₦{totalAmount.toLocaleString()} has been received. This serves as your official receipt.
+              </p>
+            </div>
+          )}
+
+          {/* Partial Payment Notice */}
+          {!isReceipt && depositAmount > 0 && (
+            <div className="mb-5 p-3 rounded-lg border border-warning/20 bg-warning/5 print:bg-yellow-50 print:border-yellow-200 text-center">
+              <p className="text-sm font-semibold text-warning print:text-yellow-600">⏳ Partial Payment</p>
+              <p className="text-xs text-muted-foreground print:text-gray-500 mt-0.5">
+                ₦{depositAmount.toLocaleString()} of ₦{totalAmount.toLocaleString()} received. 
+                Outstanding balance: ₦{outstandingBalance.toLocaleString()}. 
+                A receipt will be issued once full payment is completed.
               </p>
             </div>
           )}

@@ -1,4 +1,4 @@
-import { Building2, Users, MapPin } from "lucide-react";
+import { Building2, Users, MapPin, Filter } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -16,6 +16,8 @@ import { ArenaFormDialog } from "./ArenaFormDialog";
 import { DeleteArenaDialog } from "./DeleteArenaDialog";
 import type { Database } from "@/integrations/supabase/types";
 
+import { useState } from "react";
+
 type ArenaStatus = Database["public"]["Enums"]["arena_status"];
 
 const statusStyles = {
@@ -28,6 +30,11 @@ export const ArenaManagement = () => {
   const { data: arenas, isLoading } = useArenas();
   const updateStatus = useUpdateArenaStatus();
   const { toast } = useToast();
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+
+  const filteredArenas = arenas?.filter((arena) =>
+    statusFilter === "all" || arena.status === statusFilter
+  );
 
   const handleStatusChange = async (arenaId: string, status: ArenaStatus) => {
     try {
@@ -62,12 +69,24 @@ export const ArenaManagement = () => {
 
   return (
     <div className="space-y-4">
-      {/* Add Venue Button */}
-      <div className="flex justify-end">
+      {/* Filter + Add Venue */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <Select value={statusFilter} onValueChange={setStatusFilter}>
+          <SelectTrigger className="w-full sm:w-44">
+            <Filter className="w-4 h-4 mr-2" />
+            <SelectValue placeholder="Filter status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Statuses</SelectItem>
+            <SelectItem value="available">Available</SelectItem>
+            <SelectItem value="booked">Booked</SelectItem>
+            <SelectItem value="maintenance">Maintenance</SelectItem>
+          </SelectContent>
+        </Select>
         <ArenaFormDialog mode="create" />
       </div>
 
-      {!arenas?.length ? (
+      {!filteredArenas?.length ? (
         <div className="text-center py-12 text-muted-foreground">
           <Building2 className="w-12 h-12 mx-auto mb-4 opacity-50" />
           <p>No venues found</p>
@@ -75,7 +94,7 @@ export const ArenaManagement = () => {
         </div>
       ) : (
         <div className="grid gap-4 md:grid-cols-2">
-          {arenas.map((arena) => (
+          {filteredArenas.map((arena) => (
             <Card key={arena.id} className="bg-card border-border">
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between">

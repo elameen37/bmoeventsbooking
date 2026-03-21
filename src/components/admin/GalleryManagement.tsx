@@ -20,6 +20,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Pencil, Trash2, ImageIcon, GripVertical } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useAdminGalleryImages, GalleryImage } from "@/hooks/useGalleryImages";
 import { GalleryImageFormDialog } from "./GalleryImageFormDialog";
 import {
@@ -120,6 +127,11 @@ const GalleryManagement = () => {
   const [editingImage, setEditingImage] = useState<GalleryImage | null>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [imageToDelete, setImageToDelete] = useState<GalleryImage | null>(null);
+  const [visibilityFilter, setVisibilityFilter] = useState<string>("all");
+
+  const filteredImages = images.filter((img) =>
+    visibilityFilter === "all" || (visibilityFilter === "active" ? img.is_active : !img.is_active)
+  );
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -198,10 +210,22 @@ const GalleryManagement = () => {
               Drag images to reorder. Images appear on the landing page.
             </p>
           </div>
-          <Button onClick={() => setFormOpen(true)}>
-            <Plus className="h-4 w-4 mr-2" />
-            Add Image
-          </Button>
+          <div className="flex flex-wrap items-center gap-2">
+            <Select value={visibilityFilter} onValueChange={setVisibilityFilter}>
+              <SelectTrigger className="w-36">
+                <SelectValue placeholder="Filter" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All</SelectItem>
+                <SelectItem value="active">Active</SelectItem>
+                <SelectItem value="inactive">Hidden</SelectItem>
+              </SelectContent>
+            </Select>
+            <Button onClick={() => setFormOpen(true)}>
+              <Plus className="h-4 w-4 mr-2" />
+              Add Image
+            </Button>
+          </div>
         </CardHeader>
         <CardContent>
           {images.length === 0 ? (
@@ -221,7 +245,7 @@ const GalleryManagement = () => {
                 strategy={rectSortingStrategy}
               >
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {images.map((image) => (
+                  {filteredImages.map((image) => (
                     <SortableImageCard
                       key={image.id}
                       image={image}

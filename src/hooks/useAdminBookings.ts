@@ -44,6 +44,50 @@ export const useUpdateBookingStatus = () => {
       queryClient.invalidateQueries({ queryKey: ["admin-bookings"] });
       queryClient.invalidateQueries({ queryKey: ["bookings"] });
       queryClient.invalidateQueries({ queryKey: ["calendar-bookings"] });
+      queryClient.invalidateQueries({ queryKey: ["user-bookings"] });
+      queryClient.invalidateQueries({ queryKey: ["upcoming-bookings"] });
+    },
+  });
+};
+
+export const useUpdateDepositAmount = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({
+      bookingId,
+      newDepositAmount,
+      totalAmount,
+    }: {
+      bookingId: string;
+      newDepositAmount: number;
+      totalAmount: number;
+    }) => {
+      const isFullyPaid = newDepositAmount >= totalAmount;
+
+      const updateData: Record<string, unknown> = {
+        deposit_amount: newDepositAmount,
+      };
+
+      if (isFullyPaid) {
+        updateData.deposit_paid = true;
+      }
+
+      const { data, error } = await supabase
+        .from("bookings")
+        .update(updateData)
+        .eq("id", bookingId)
+        .select()
+        .single();
+
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-bookings"] });
+      queryClient.invalidateQueries({ queryKey: ["bookings"] });
+      queryClient.invalidateQueries({ queryKey: ["user-bookings"] });
+      queryClient.invalidateQueries({ queryKey: ["upcoming-bookings"] });
     },
   });
 };

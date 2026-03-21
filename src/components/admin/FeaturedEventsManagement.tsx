@@ -28,6 +28,13 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Pencil, Trash2, Star, Users, Calendar, GripVertical } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useAdminFeaturedEvents, FeaturedEvent } from "@/hooks/useFeaturedEvents";
 import { FeaturedEventFormDialog } from "./FeaturedEventFormDialog";
 import {
@@ -130,6 +137,7 @@ const FeaturedEventsManagement = () => {
   const [editingEvent, setEditingEvent] = useState<FeaturedEvent | null>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [eventToDelete, setEventToDelete] = useState<FeaturedEvent | null>(null);
+  const [visibilityFilter, setVisibilityFilter] = useState<string>("all");
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -208,10 +216,22 @@ const FeaturedEventsManagement = () => {
               Drag rows to reorder display on the landing page
             </p>
           </div>
-          <Button onClick={() => setFormOpen(true)}>
-            <Plus className="h-4 w-4 mr-2" />
-            Add Event
-          </Button>
+          <div className="flex flex-wrap items-center gap-2">
+            <Select value={visibilityFilter} onValueChange={setVisibilityFilter}>
+              <SelectTrigger className="w-36">
+                <SelectValue placeholder="Filter" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All</SelectItem>
+                <SelectItem value="active">Active</SelectItem>
+                <SelectItem value="inactive">Hidden</SelectItem>
+              </SelectContent>
+            </Select>
+            <Button onClick={() => setFormOpen(true)}>
+              <Plus className="h-4 w-4 mr-2" />
+              Add Event
+            </Button>
+          </div>
         </CardHeader>
         <CardContent>
           {events.length === 0 ? (
@@ -242,10 +262,14 @@ const FeaturedEventsManagement = () => {
                   </TableHeader>
                   <TableBody>
                     <SortableContext
-                      items={events.map((e) => e.id)}
+                      items={events
+                        .filter((e) => visibilityFilter === "all" || (visibilityFilter === "active" ? e.is_active : !e.is_active))
+                        .map((e) => e.id)}
                       strategy={verticalListSortingStrategy}
                     >
-                      {events.map((event) => (
+                      {events
+                        .filter((e) => visibilityFilter === "all" || (visibilityFilter === "active" ? e.is_active : !e.is_active))
+                        .map((event) => (
                         <SortableRow
                           key={event.id}
                           event={event}
