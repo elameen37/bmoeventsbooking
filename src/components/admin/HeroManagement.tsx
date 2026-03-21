@@ -32,6 +32,11 @@ import { Plus, Trash2, GripVertical, Save, Upload, X, ImageIcon, Settings2 } fro
 import { useAdminSettings, useUpdateAdminSetting } from "@/hooks/useAdminSettings";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import hero1 from "@/assets/hero/hero-slide-1.png";
+import hero2 from "@/assets/hero/hero-slide-2.png";
+import hero3 from "@/assets/hero/hero-slide-3.png";
+import hero4 from "@/assets/hero/hero-slide-4.png";
+import hero5 from "@/assets/hero/hero-slide-5.png";
 
 interface HeroSlide {
   id: string;
@@ -49,10 +54,46 @@ interface HeroConfig {
 }
 
 const DEFAULT_CONFIG: HeroConfig = {
-  slides: [],
-  transition: "fade",
-  duration: 5,
-  auto_play: true,
+  slides: [
+    {
+      id: "seed-1",
+      image_url: hero1,
+      title: "Perfect Event Space",
+      subtitle: "Discover and book your premium events at B.M.O Events Arena, Abuja. From corporate conferences to grand celebrations.",
+      active: true
+    },
+    {
+      id: "seed-2",
+      image_url: hero2,
+      title: "Corporate Excellence",
+      subtitle: "Executive conference rooms with state-of-the-art technology for your professional business needs.",
+      active: true
+    },
+    {
+      id: "seed-3",
+      image_url: hero3,
+      title: "Grand Celebrations",
+      subtitle: "Beautiful outdoor marquee settings for unforgettable gala nights and garden parties.",
+      active: true
+    },
+    {
+      id: "seed-4",
+      image_url: hero4,
+      title: "Royal Weddings",
+      subtitle: "Transform your dream wedding into reality in our majestic, crystal-adorned ballrooms.",
+      active: true
+    },
+    {
+      id: "seed-5",
+      image_url: hero5,
+      title: "Premium Networking",
+      subtitle: "The ideal atmosphere for high-profile gala dinners and sophisticated networking events.",
+      active: true
+    }
+  ],
+  transition: "zoom",
+  duration: 6,
+  auto_play: true
 };
 
 const SortableSlideCard = ({ 

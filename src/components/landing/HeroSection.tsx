@@ -4,6 +4,11 @@ import { Calendar, Users, Clock, CheckCircle, Star, ArrowRight, Facebook, Instag
 import { useState, useEffect, useCallback } from "react";
 import { useAdminSettings } from "@/hooks/useAdminSettings";
 import heroArena from "@/assets/hero-arena.jpg";
+import hero1 from "@/assets/hero/hero-slide-1.png";
+import hero2 from "@/assets/hero/hero-slide-2.png";
+import hero3 from "@/assets/hero/hero-slide-3.png";
+import hero4 from "@/assets/hero/hero-slide-4.png";
+import hero5 from "@/assets/hero/hero-slide-5.png";
 
 interface HeroSlide {
   id: string;
@@ -23,15 +28,43 @@ interface HeroConfig {
 const DEFAULT_CONFIG: HeroConfig = {
   slides: [
     {
-      id: "default-1",
-      image_url: heroArena,
+      id: "seed-1",
+      image_url: hero1,
       title: "Perfect Event Space",
-      subtitle: "Discover and book your premium events at B.M.O Events Arena, Abuja. From corporate conferences to grand celebrations, find the ideal venue for your unforgettable moments.",
+      subtitle: "Discover and book your premium events at B.M.O Events Arena, Abuja. From corporate conferences to grand celebrations.",
+      active: true
+    },
+    {
+      id: "seed-2",
+      image_url: hero2,
+      title: "Corporate Excellence",
+      subtitle: "Executive conference rooms with state-of-the-art technology for your professional business needs.",
+      active: true
+    },
+    {
+      id: "seed-3",
+      image_url: hero3,
+      title: "Grand Celebrations",
+      subtitle: "Beautiful outdoor marquee settings for unforgettable gala nights and garden parties.",
+      active: true
+    },
+    {
+      id: "seed-4",
+      image_url: hero4,
+      title: "Royal Weddings",
+      subtitle: "Transform your dream wedding into reality in our majestic, crystal-adorned ballrooms.",
+      active: true
+    },
+    {
+      id: "seed-5",
+      image_url: hero5,
+      title: "Premium Networking",
+      subtitle: "The ideal atmosphere for high-profile gala dinners and sophisticated networking events.",
       active: true
     }
   ],
-  transition: "fade",
-  duration: 5,
+  transition: "zoom",
+  duration: 6,
   auto_play: true
 };
 
