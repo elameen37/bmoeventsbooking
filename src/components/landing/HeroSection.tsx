@@ -125,7 +125,7 @@ const HeroSection = () => {
           let transitionClasses = "opacity-0 scale-100";
           
           if (isActive) {
-            transitionClasses = "opacity-100 [.light_&]:opacity-30 scale-100 z-10";
+            transitionClasses = "opacity-100 [.light_&]:opacity-90 scale-100 z-10";
           } else if (config.transition === "zoom" && !isActive) {
             transitionClasses = "opacity-0 scale-110 z-0";
           } else if (config.transition === "slide" && !isActive) {
