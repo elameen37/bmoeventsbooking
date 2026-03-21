@@ -59,7 +59,7 @@ const HeroSection = () => {
 
           {/* Description */}
           <p 
-            className="text-base sm:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-xl mx-auto animate-fade-in" 
+            className="text-base sm:text-xl text-foreground/80 mb-6 sm:mb-8 max-w-xl mx-auto animate-fade-in" 
             style={{ animationDelay: "0.2s" }}
           >
             Discover and book your premium events at B.M.O Events Arena, Abuja. From corporate conferences to grand celebrations, find the ideal venue for your unforgettable moments.
