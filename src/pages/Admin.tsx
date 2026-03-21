@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Calendar, Building2, LayoutDashboard, Shield, Users, Star, Menu, LogOut, Home, ImageIcon, DollarSign } from "lucide-react";
+import { Calendar, Building2, LayoutDashboard, Shield, Users, Star, Menu, LogOut, Home, ImageIcon, DollarSign, PenTool } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookingsTable } from "@/components/admin/BookingsTable";
@@ -8,6 +8,7 @@ import { ArenaManagement } from "@/components/admin/ArenaManagement";
 import FeaturedEventsManagement from "@/components/admin/FeaturedEventsManagement";
 import GalleryManagement from "@/components/admin/GalleryManagement";
 import PriceControl from "@/components/admin/PriceControl";
+import SignatureManagement from "@/components/admin/SignatureManagement";
 import NotificationBell from "@/components/NotificationBell";
 import { useIsAdmin } from "@/hooks/useUserRole";
 import { useAuth } from "@/contexts/AuthContext";
@@ -251,6 +252,10 @@ const AdminPage = () => {
                 <DollarSign className="w-4 h-4 mr-2" />
                 Pricing
               </TabsTrigger>
+              <TabsTrigger value="signature" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                <PenTool className="w-4 h-4 mr-2" />
+                Signature
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="bookings" className="space-y-4">
@@ -286,6 +291,13 @@ const AdminPage = () => {
                 <h2 className="text-xl font-display font-semibold">Price Control</h2>
               </div>
               <PriceControl />
+            </TabsContent>
+
+            <TabsContent value="signature" className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-display font-semibold">Invoice Signature</h2>
+              </div>
+              <SignatureManagement />
             </TabsContent>
           </Tabs>
         </div>

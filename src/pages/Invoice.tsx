@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { format, parseISO } from "date-fns";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
+import { useAdminSettings } from "@/hooks/useAdminSettings";
 
 const useBookingDetails = (bookingId: string | undefined) => {
   const { user } = useAuth();
@@ -35,7 +36,9 @@ const InvoicePage = () => {
   const { user } = useAuth();
   const { data: profile } = useProfile();
   const { data: booking, isLoading } = useBookingDetails(bookingId);
+  const { data: signatureSetting } = useAdminSettings("admin_signature");
 
+  const adminSignature = signatureSetting?.setting_value || null;
   const depositAmount = booking?.deposit_amount || 0;
   const totalAmount = booking?.total_amount || 0;
   const isFullyPaid = depositAmount >= totalAmount && totalAmount > 0;
@@ -345,6 +348,22 @@ const InvoicePage = () => {
                 Outstanding balance: ₦{outstandingBalance.toLocaleString()}. 
                 A receipt will be issued once full payment is completed.
               </p>
+            </div>
+          )}
+
+          {/* Authorized Signature */}
+          {adminSignature && (
+            <div className="mb-5 flex justify-end">
+              <div className="text-center">
+                <img
+                  src={adminSignature}
+                  alt="Authorized Signature"
+                  className="h-16 object-contain mx-auto mb-1"
+                />
+                <div className="w-40 border-t border-border print:border-gray-300 pt-1">
+                  <p className="text-[10px] text-muted-foreground print:text-gray-500">Authorized Signature</p>
+                </div>
+              </div>
             </div>
           )}
 
