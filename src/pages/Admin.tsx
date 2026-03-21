@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Calendar, Building2, LayoutDashboard, Shield, Users, Star, Menu, LogOut, Home, ImageIcon, DollarSign, PenTool } from "lucide-react";
+import { Calendar, Building2, LayoutDashboard, Shield, Users, Star, Menu, LogOut, Home, ImageIcon, DollarSign, PenTool, Layout } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookingsTable } from "@/components/admin/BookingsTable";
@@ -9,6 +9,7 @@ import FeaturedEventsManagement from "@/components/admin/FeaturedEventsManagemen
 import GalleryManagement from "@/components/admin/GalleryManagement";
 import PriceControl from "@/components/admin/PriceControl";
 import SignatureManagement from "@/components/admin/SignatureManagement";
+import HeroManagement from "@/components/admin/HeroManagement";
 import NotificationBell from "@/components/NotificationBell";
 import { useIsAdmin } from "@/hooks/useUserRole";
 import { useAuth } from "@/contexts/AuthContext";
@@ -256,6 +257,10 @@ const AdminPage = () => {
                 <PenTool className="w-4 h-4 mr-2" />
                 Signature
               </TabsTrigger>
+              <TabsTrigger value="hero" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                <Layout className="w-4 h-4 mr-2" />
+                Hero
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="bookings" className="space-y-4">
@@ -298,6 +303,13 @@ const AdminPage = () => {
                 <h2 className="text-xl font-display font-semibold">Invoice Signature</h2>
               </div>
               <SignatureManagement />
+            </TabsContent>
+
+            <TabsContent value="hero" className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-display font-semibold">Hero Section Manager</h2>
+              </div>
+              <HeroManagement />
             </TabsContent>
           </Tabs>
         </div>
